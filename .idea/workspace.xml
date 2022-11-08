@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="CMakePresetLoader">{
   &quot;useNewFormat&quot;: true
 }</component>
   <component name="CMakeReloadState">
     <option name="reloaded" value="true" />
   </component>
+=======
+  <component name="CMakePresetLoader"><![CDATA[{
+  "useNewFormat": true
+}]]></component>
+>>>>>>> origin/main
   <component name="CMakeSettings">
     <configurations>
       <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
     </configurations>
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="a39745db-66e8-458c-92ed-e642b064782f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
     </list>
+=======
+    <list default="true" id="a39745db-66e8-458c-92ed-e642b064782f" name="Changes" comment="" />
+>>>>>>> origin/main
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,11 +40,14 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
     <option name="majorVersion" value="2022" />
     <option name="minorVersion" value="2.1" />
   </component>
+=======
+>>>>>>> origin/main
   <component name="ProjectId" id="2HGpT6CbVutq44QdGZebSieYALe" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -48,6 +61,7 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
+<<<<<<< HEAD
     "last_opened_file_path": "C:/Users/fanig/Documents/GitHub/projet-IF2"
   }
 }]]></component>
@@ -63,6 +77,11 @@
       </method>
     </configuration>
   </component>
+=======
+    "last_opened_file_path": "D:/UTBM/IF/projet-IF2"
+  }
+}]]></component>
+>>>>>>> origin/main
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -72,7 +91,10 @@
       <option name="presentableId" value="Default" />
       <updated>1667921279151</updated>
       <workItem from="1667921280614" duration="1000" />
+<<<<<<< HEAD
       <workItem from="1667921565368" duration="141000" />
+=======
+>>>>>>> origin/main
     </task>
     <servers />
   </component>
