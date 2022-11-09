@@ -1,5 +1,5 @@
-CMakeFiles/projet_IF2.dir/src/main.c.obj: \
- C:\Users\fanig\Documents\GitHub\projet_IF2\src\main.c \
+CMakeFiles/projet_IF2.dir/src/window.c.obj: \
+ C:\Users\fanig\Documents\GitHub\projet_IF2\src\window.c \
  C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
  C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
  C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/x86_64-w64-mingw32/include/corecrt.h \
