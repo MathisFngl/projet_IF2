@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/fanig/Documents/GitHub/projet-IF2/main.c" "CMakeFiles/projet_IF2.dir/main.c.obj" "gcc" "CMakeFiles/projet_IF2.dir/main.c.obj.d"
+  "C:/Users/fanig/Documents/GitHub/projet_IF2/main.c" "CMakeFiles/projet_IF2.dir/main.c.obj" "gcc" "CMakeFiles/projet_IF2.dir/main.c.obj.d"
   )
 
 # Targets to which this target links.
