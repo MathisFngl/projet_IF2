@@ -128,6 +128,30 @@ projet_IF2/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/build
 .PHONY : projet_IF2/fast
 
+src/init_Plateau.obj: src/init_Plateau.c.obj
+.PHONY : src/init_Plateau.obj
+
+# target to build an object file
+src/init_Plateau.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/init_Plateau.c.obj
+.PHONY : src/init_Plateau.c.obj
+
+src/init_Plateau.i: src/init_Plateau.c.i
+.PHONY : src/init_Plateau.i
+
+# target to preprocess a source file
+src/init_Plateau.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/init_Plateau.c.i
+.PHONY : src/init_Plateau.c.i
+
+src/init_Plateau.s: src/init_Plateau.c.s
+.PHONY : src/init_Plateau.s
+
+# target to generate assembly for a file
+src/init_Plateau.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/init_Plateau.c.s
+.PHONY : src/init_Plateau.c.s
+
 src/main.obj: src/main.c.obj
 .PHONY : src/main.obj
 
@@ -161,6 +185,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... projet_IF2
+	@echo ... src/init_Plateau.obj
+	@echo ... src/init_Plateau.i
+	@echo ... src/init_Plateau.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
