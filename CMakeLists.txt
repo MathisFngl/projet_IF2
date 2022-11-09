@@ -9,6 +9,6 @@ set(SDL2_LIB_DIR SDL/lib/x64)
 include_directories(${SDL2_INCLUDE_DIR})
 link_directories(${SDL2_LIB_DIR})
 
-add_executable(projet_IF2 main.c main.h)
+add_executable(projet_IF2 src/main.c src/main.h)
 
-target_link_libraries(projet_IF2 SDL2main SDL2)
+target_link_libraries(projet_IF2 SDL2main SDL2 SDL2test)

@@ -2,5 +2,3 @@
 #define PROJET_IF2_MAIN_H
 
 #endif //PROJET_IF2_MAIN_H
-
-int main();

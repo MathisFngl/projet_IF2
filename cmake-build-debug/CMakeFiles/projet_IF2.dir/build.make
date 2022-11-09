@@ -68,29 +68,29 @@ include CMakeFiles/projet_IF2.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/projet_IF2.dir/flags.make
 
-CMakeFiles/projet_IF2.dir/main.c.obj: CMakeFiles/projet_IF2.dir/flags.make
-CMakeFiles/projet_IF2.dir/main.c.obj: CMakeFiles/projet_IF2.dir/includes_C.rsp
-CMakeFiles/projet_IF2.dir/main.c.obj: ../main.c
-CMakeFiles/projet_IF2.dir/main.c.obj: CMakeFiles/projet_IF2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\fanig\Documents\GitHub\projet_IF2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/projet_IF2.dir/main.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/projet_IF2.dir/main.c.obj -MF CMakeFiles\projet_IF2.dir\main.c.obj.d -o CMakeFiles\projet_IF2.dir\main.c.obj -c C:\Users\fanig\Documents\GitHub\projet_IF2\main.c
+CMakeFiles/projet_IF2.dir/src/main.c.obj: CMakeFiles/projet_IF2.dir/flags.make
+CMakeFiles/projet_IF2.dir/src/main.c.obj: CMakeFiles/projet_IF2.dir/includes_C.rsp
+CMakeFiles/projet_IF2.dir/src/main.c.obj: ../src/main.c
+CMakeFiles/projet_IF2.dir/src/main.c.obj: CMakeFiles/projet_IF2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\fanig\Documents\GitHub\projet_IF2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/projet_IF2.dir/src/main.c.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/projet_IF2.dir/src/main.c.obj -MF CMakeFiles\projet_IF2.dir\src\main.c.obj.d -o CMakeFiles\projet_IF2.dir\src\main.c.obj -c C:\Users\fanig\Documents\GitHub\projet_IF2\src\main.c
 
-CMakeFiles/projet_IF2.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/projet_IF2.dir/main.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\fanig\Documents\GitHub\projet_IF2\main.c > CMakeFiles\projet_IF2.dir\main.c.i
+CMakeFiles/projet_IF2.dir/src/main.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/projet_IF2.dir/src/main.c.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\fanig\Documents\GitHub\projet_IF2\src\main.c > CMakeFiles\projet_IF2.dir\src\main.c.i
 
-CMakeFiles/projet_IF2.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/projet_IF2.dir/main.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\fanig\Documents\GitHub\projet_IF2\main.c -o CMakeFiles\projet_IF2.dir\main.c.s
+CMakeFiles/projet_IF2.dir/src/main.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/projet_IF2.dir/src/main.c.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\fanig\Documents\GitHub\projet_IF2\src\main.c -o CMakeFiles\projet_IF2.dir\src\main.c.s
 
 # Object files for target projet_IF2
 projet_IF2_OBJECTS = \
-"CMakeFiles/projet_IF2.dir/main.c.obj"
+"CMakeFiles/projet_IF2.dir/src/main.c.obj"
 
 # External object files for target projet_IF2
 projet_IF2_EXTERNAL_OBJECTS =
 
-projet_IF2.exe: CMakeFiles/projet_IF2.dir/main.c.obj
+projet_IF2.exe: CMakeFiles/projet_IF2.dir/src/main.c.obj
 projet_IF2.exe: CMakeFiles/projet_IF2.dir/build.make
 projet_IF2.exe: CMakeFiles/projet_IF2.dir/linklibs.rsp
 projet_IF2.exe: CMakeFiles/projet_IF2.dir/objects1.rsp

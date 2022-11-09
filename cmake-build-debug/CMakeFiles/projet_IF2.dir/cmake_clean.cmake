@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/projet_IF2.dir/main.c.obj"
-  "CMakeFiles/projet_IF2.dir/main.c.obj.d"
+  "CMakeFiles/projet_IF2.dir/src/main.c.obj"
+  "CMakeFiles/projet_IF2.dir/src/main.c.obj.d"
   "libprojet_IF2.dll.a"
   "projet_IF2.exe"
   "projet_IF2.exe.manifest"

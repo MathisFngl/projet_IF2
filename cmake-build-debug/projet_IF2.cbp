@@ -78,10 +78,10 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/main.c">
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/main.c">
 			<Option target="projet_IF2"/>
 		</Unit>
-		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/main.h">
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/main.h">
 			<Option target="projet_IF2"/>
 		</Unit>
 		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/CMakeLists.txt">
