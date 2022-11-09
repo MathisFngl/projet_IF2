@@ -6,4 +6,4 @@ set(CMAKE_C_STANDARD 11)
 include_directories(.)
 
 add_executable(projet_IF2
-        main.c)
+        main.c main.h)

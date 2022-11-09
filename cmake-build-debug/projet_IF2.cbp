@@ -81,6 +81,9 @@
 		<Unit filename="C:/Users/fanig/Documents/GitHub/projet-IF2/main.c">
 			<Option target="projet_IF2"/>
 		</Unit>
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet-IF2/main.h">
+			<Option target="projet_IF2"/>
+		</Unit>
 		<Unit filename="C:/Users/fanig/Documents/GitHub/projet-IF2/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
