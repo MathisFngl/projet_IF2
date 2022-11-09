@@ -176,6 +176,30 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/window.obj: src/window.c.obj
+.PHONY : src/window.obj
+
+# target to build an object file
+src/window.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/window.c.obj
+.PHONY : src/window.c.obj
+
+src/window.i: src/window.c.i
+.PHONY : src/window.i
+
+# target to preprocess a source file
+src/window.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/window.c.i
+.PHONY : src/window.c.i
+
+src/window.s: src/window.c.s
+.PHONY : src/window.s
+
+# target to generate assembly for a file
+src/window.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/window.c.s
+.PHONY : src/window.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -191,6 +215,9 @@ help:
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/window.obj
+	@echo ... src/window.i
+	@echo ... src/window.s
 .PHONY : help
 
 
