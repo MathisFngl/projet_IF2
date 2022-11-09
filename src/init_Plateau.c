@@ -1,3 +1,7 @@
+//
+// Created by Utilisateur on 09/11/2022.
+//
+
 #include "init_Plateau.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -10,7 +14,7 @@ int init_Plateau(){
     king=N/2+(N/2)*9;
     // création plateau
     int nbCase = N*N;
-    int* plateau = (int) malloc(sizeof (int)*nbCase );
+    int* plateau = (int*) malloc(sizeof (int)*nbCase );
     for (i=0; i<nbCase; i++)
     {
         plateau[i] = i;
@@ -50,9 +54,13 @@ int init_Plateau(){
     }
 
     //création coordonné piece noire
-    /*int pieceNoire = (int) malloc(sizeof (int)nbPieceNoire );
+    /*int* pieceNoire = (int*) malloc(sizeof (int)*nbPieceNoire );
     for (i=0; i<nbPieceNoire; i++)
     {
-        pieceNoire[i] = (int) malloc (2 *sizeof (int) );
+        pieceNoire[i] = (int*) malloc (2 * sizeof (int) );
     }*/
+
+
+
+
 }
