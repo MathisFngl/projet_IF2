@@ -3,4 +3,4 @@
 
 #endif //PROJET_IF2_MAIN_H
 
-void main();
+int main();

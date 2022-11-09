@@ -14,6 +14,8 @@
 		"commands" : 
 		[
 			"add_executable",
+			"link_directories",
+			"target_link_libraries",
 			"include_directories"
 		],
 		"files" : 
@@ -28,13 +30,25 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 10,
+				"line" : 12,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 8,
+				"line" : 10,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 15,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 9,
 				"parent" : 0
 			}
 		]
@@ -54,8 +68,8 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 2,
-					"path" : "C:/Users/fanig/Documents/GitHub/projet_IF2/."
+					"backtrace" : 4,
+					"path" : "C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include"
 				}
 			],
 			"language" : "C",
@@ -85,6 +99,21 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-LC:\\Users\\fanig\\Documents\\GitHub\\projet_IF2\\SDL\\lib\\x64",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-lSDL2main",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-lSDL2",
+				"role" : "libraries"
 			},
 			{
 				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
