@@ -200,7 +200,6 @@ CMakeFiles/projet_IF2.dir/src/main.c.obj: ../src/main.c \
   ../SDL/include/SDL_version.h \
   ../SDL/include/SDL_locale.h \
   ../SDL/include/SDL_misc.h \
-  C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h \
   ../src/window.h \
   ../SDL/include/SDL_render.h
 
@@ -738,8 +737,8 @@ C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32
 
 ../SDL/include/SDL_misc.h:
 
-C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h:
-
 ../src/window.h:
 
 ../src/window.c:
+
+C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h:

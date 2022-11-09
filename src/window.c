@@ -3,23 +3,30 @@
 #include <stdbool.h>
 #include "window.h"
 
-#define WIDTH 600
-#define HEIGHT 600
-
-SDL_Rect renduRectangle(){
-    SDL_Rect squareRect;
-    squareRect.w = (WIDTH, HEIGHT) / 1.1;
-    squareRect.h = (WIDTH, HEIGHT) / 1.1;
-    squareRect.x = WIDTH / 2 - squareRect.w / 2;
-    squareRect.y = HEIGHT / 2 - squareRect.h / 2;
-    return squareRect;
-}
+#define WIN_SIZE 800
 
 int update(SDL_Renderer* renderer) {
-    SDL_SetRenderDrawColor(renderer, 0x0F, 0xFF, 0xFF, 0xFF);
+
+    SDL_SetRenderDrawColor(renderer, 84, 44, 12, 255);
     SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
+
+    int taille = 9;
+    int nb_cases = taille*taille;
+    SDL_Rect cases[nb_cases];
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+    for(int i=0; i<taille; i++){
+        for(int j=0; j<taille; j++){
+            cases[(taille*i)+j].y = i*(WIN_SIZE/taille);
+            cases[(taille*i)+j].x = j*(WIN_SIZE/taille);
+            cases[(taille*i)+j].w = cases[(taille*i)+j].h = WIN_SIZE/taille;
+            if((i+j)%2 == 0){
+                SDL_RenderFillRects(renderer,&cases[(taille*i)+j],1);
+            }
+        }
+    }
     SDL_RenderPresent(renderer);
+    SDL_RenderClear(renderer);
     return 0;
 }
 
@@ -29,23 +36,19 @@ int windowCreation() {
                "SDL_Error: %s\n", SDL_GetError());
         return 0;
     }
-
-    SDL_Window *window = SDL_CreateWindow("Tablut", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
+    SDL_Window *window = SDL_CreateWindow("Tablut", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIN_SIZE, WIN_SIZE, SDL_WINDOW_SHOWN);
 
     if (!window) {
         printf("La fenêtre ne peut pas être créé !\n"
                "SDL_Error: %s\n", SDL_GetError());
     }
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
     if (!renderer) {
         printf("Le moteur de rendu ne peut pes être initialisé\n"
                "SDL_Error: %s\n", SDL_GetError());
     }
 
     bool quit = false;
-    SDL_SetRenderDrawColor(renderer,0,0,0,255);
-    SDL_RenderPresent(renderer);
 
     while (!quit) {
         SDL_Event e;
