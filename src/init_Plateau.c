@@ -1,7 +1,3 @@
-//
-// Created by Utilisateur on 09/11/2022.
-//
-
 #include "init_Plateau.h"
 #include <stdlib.h>
 #include <stdio.h>

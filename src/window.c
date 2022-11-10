@@ -3,25 +3,19 @@
 #include <stdbool.h>
 #include "window.h"
 
-#define WIN_SIZE 800
+#define WIN_SIZE 700
 
-int update(SDL_Renderer* renderer) {
-
-    SDL_SetRenderDrawColor(renderer, 84, 44, 12, 255);
+int InitUpdate(SDL_Renderer *renderer, int taille, SDL_Rect cases[]) {
+    SDL_SetRenderDrawColor(renderer, 224, 156, 110, 255);
     SDL_RenderClear(renderer);
-
-    int taille = 9;
-    int nb_cases = taille*taille;
-    SDL_Rect cases[nb_cases];
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
+    SDL_SetRenderDrawColor(renderer, 176, 95, 40, 255);
     for(int i=0; i<taille; i++){
         for(int j=0; j<taille; j++){
             cases[(taille*i)+j].y = i*(WIN_SIZE/taille);
             cases[(taille*i)+j].x = j*(WIN_SIZE/taille);
             cases[(taille*i)+j].w = cases[(taille*i)+j].h = WIN_SIZE/taille;
             if((i+j)%2 == 0){
-                SDL_RenderFillRects(renderer,&cases[(taille*i)+j],1);
+                SDL_RenderFillRect(renderer,&cases[(taille*i)+j]);
             }
         }
     }
@@ -30,7 +24,25 @@ int update(SDL_Renderer* renderer) {
     return 0;
 }
 
+int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect cases[]){
+    SDL_Point mousePosition;
+    mousePosition.x = e.motion.x;
+    mousePosition.y = e.motion.y;
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 1);
+    for (int i=0; i<nb_cases; i++) {
+        if (SDL_PointInRect(&mousePosition, &cases[i])) {
+            SDL_RenderFillRect(renderer, &cases[i]);
+            SDL_RenderPresent(renderer);
+            SDL_RenderClear(renderer);
+        }
+    }
+}
+
 int windowCreation() {
+    int taille = 9;
+    int nb_cases = taille*taille;
+    SDL_Rect cases[nb_cases];
+
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("SDL n'est pas reconnu !\n"
                "SDL_Error: %s\n", SDL_GetError());
@@ -50,16 +62,41 @@ int windowCreation() {
 
     bool quit = false;
 
-    while (!quit) {
+    while(quit != true) {
+        InitUpdate(renderer, taille, cases);
         SDL_Event e;
         SDL_WaitEvent(&e);
-        if (e.type == SDL_QUIT) {
-            quit = 1;
+        switch (e.type) {
+            case SDL_QUIT: QuitEvent(renderer, window); quit = true; break;
+            case SDL_MOUSEBUTTONDOWN: OnButtonClick(cases, nb_cases);
         }
-        update(renderer);
+        FrameUpdate(e, renderer, nb_cases, cases);
     }
+    return 0;
+}
+
+void QuitEvent(SDL_Renderer *renderer, SDL_Window *window) {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    printf("[DEBUG] : Closed Window");
     SDL_Quit();
-    return 0;
+}
+
+void OnButtonClick(SDL_Rect cases[], int nb_cases){
+    int x, y, quadrant = -1;
+    SDL_GetMouseState(&x,&y);
+    SDL_Point mouse_point;
+    mouse_point.x = x;
+    mouse_point.y = y;
+    for(int i = 0; i<nb_cases; i++){
+        if(SDL_PointInRect(&mouse_point, &cases[i])){
+            quadrant = i;
+        }
+    }
+    if(quadrant != -1){
+        printf("[DEBUG] : Left Mouse Button clicked at x = %d, y = %d in the %d th quadrant\n", x, y, quadrant);
+    }
+    else{
+        printf("[DEBUG] : Left Mouse Button clicked at x = %d, y = %d and was outside the grid\n", x, y);
+    }
 }
