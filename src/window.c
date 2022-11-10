@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include "window.h"
 
-#define WIN_SIZE 700
+#define WIN_SIZE 684
 
 int InitUpdate(SDL_Renderer *renderer, int taille, SDL_Rect cases[]) {
     SDL_SetRenderDrawColor(renderer, 224, 156, 110, 255);
@@ -25,15 +25,29 @@ int InitUpdate(SDL_Renderer *renderer, int taille, SDL_Rect cases[]) {
 }
 
 int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect cases[]){
-    SDL_Point mousePosition;
-    mousePosition.x = e.motion.x;
-    mousePosition.y = e.motion.y;
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 1);
+    int x, y;
+    SDL_GetMouseState(&x,&y);
+    SDL_Point mouse_point;
+    mouse_point.x = x;
+    mouse_point.y = y;
     for (int i=0; i<nb_cases; i++) {
-        if (SDL_PointInRect(&mousePosition, &cases[i])) {
+        if (SDL_PointInRect(&mouse_point, &cases[i]) == true) {
+            SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 15);
             SDL_RenderFillRect(renderer, &cases[i]);
             SDL_RenderPresent(renderer);
-            SDL_RenderClear(renderer);
+        }
+        else{
+            if((i)%2 == 0){
+                SDL_SetRenderDrawColor(renderer, 176, 95, 40, 255);
+                SDL_RenderFillRect(renderer,&cases[i]);
+                SDL_RenderPresent(renderer);
+            }
+            else{
+                SDL_SetRenderDrawColor(renderer, 224, 156, 110, 255);
+                SDL_RenderFillRect(renderer,&cases[i]);
+                SDL_RenderPresent(renderer);
+            }
         }
     }
 }
@@ -62,8 +76,10 @@ int windowCreation() {
 
     bool quit = false;
 
+    SDL_RenderCopy(renderer,InitUpdate(renderer, taille, cases), NULL, NULL);
+    SDL_RenderPresent(renderer);
     while(quit != true) {
-        InitUpdate(renderer, taille, cases);
+
         SDL_Event e;
         SDL_WaitEvent(&e);
         switch (e.type) {
@@ -82,7 +98,7 @@ void QuitEvent(SDL_Renderer *renderer, SDL_Window *window) {
     SDL_Quit();
 }
 
-void OnButtonClick(SDL_Rect cases[], int nb_cases){
+int OnButtonClick(SDL_Rect cases[], int nb_cases){
     int x, y, quadrant = -1;
     SDL_GetMouseState(&x,&y);
     SDL_Point mouse_point;
@@ -95,6 +111,7 @@ void OnButtonClick(SDL_Rect cases[], int nb_cases){
     }
     if(quadrant != -1){
         printf("[DEBUG] : Left Mouse Button clicked at x = %d, y = %d in the %d th quadrant\n", x, y, quadrant);
+        return quadrant;
     }
     else{
         printf("[DEBUG] : Left Mouse Button clicked at x = %d, y = %d and was outside the grid\n", x, y);
