@@ -53,7 +53,7 @@ int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect case
 }
 
 int windowCreation() {
-    int taille = 9;
+    int taille = 13;
     int nb_cases = taille*taille;
     SDL_Rect cases[nb_cases];
 
@@ -75,7 +75,6 @@ int windowCreation() {
     }
 
     bool quit = false;
-
     SDL_RenderCopy(renderer,InitUpdate(renderer, taille, cases), NULL, NULL);
     SDL_RenderPresent(renderer);
     while(quit != true) {
