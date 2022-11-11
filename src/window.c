@@ -21,7 +21,6 @@ int InitUpdate(SDL_Renderer *renderer, int taille, SDL_Rect cases[]) {
     }
     SDL_RenderPresent(renderer);
     SDL_RenderClear(renderer);
-    return 0;
 }
 
 int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect cases[]){
@@ -30,26 +29,7 @@ int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect case
     SDL_Point mouse_point;
     mouse_point.x = x;
     mouse_point.y = y;
-    for (int i=0; i<nb_cases; i++) {
-        if (SDL_PointInRect(&mouse_point, &cases[i]) == true) {
-            SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
-            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 15);
-            SDL_RenderFillRect(renderer, &cases[i]);
-            SDL_RenderPresent(renderer);
-        }
-        else{
-            if((i)%2 == 0){
-                SDL_SetRenderDrawColor(renderer, 176, 95, 40, 255);
-                SDL_RenderFillRect(renderer,&cases[i]);
-                SDL_RenderPresent(renderer);
-            }
-            else{
-                SDL_SetRenderDrawColor(renderer, 224, 156, 110, 255);
-                SDL_RenderFillRect(renderer,&cases[i]);
-                SDL_RenderPresent(renderer);
-            }
-        }
-    }
+    HoverEffect(renderer, mouse_point, cases,nb_cases);
 }
 
 int windowCreation() {
@@ -88,6 +68,35 @@ int windowCreation() {
         FrameUpdate(e, renderer, nb_cases, cases);
     }
     return 0;
+}
+
+void HoverEffect(SDL_Renderer* renderer, SDL_Point mouse_point, SDL_Rect cases[], int nb_cases){
+    for (int i=0; i<nb_cases; i++) {
+        if (SDL_PointInRect(&mouse_point, &cases[i]) == true) {
+            if((i)%2 == 0){
+                SDL_SetRenderDrawColor(renderer, 196, 115, 60, 255);
+                SDL_RenderFillRect(renderer,&cases[i]);
+                SDL_RenderPresent(renderer);
+            }
+            else{
+                SDL_SetRenderDrawColor(renderer, 244, 176, 130, 255);
+                SDL_RenderFillRect(renderer,&cases[i]);
+                SDL_RenderPresent(renderer);
+            }
+        }
+        else{
+            if((i)%2 == 0){
+                SDL_SetRenderDrawColor(renderer, 176, 95, 40, 255);
+                SDL_RenderFillRect(renderer,&cases[i]);
+                SDL_RenderPresent(renderer);
+            }
+            else{
+                SDL_SetRenderDrawColor(renderer, 224, 156, 110, 255);
+                SDL_RenderFillRect(renderer,&cases[i]);
+                SDL_RenderPresent(renderer);
+            }
+        }
+    }
 }
 
 void QuitEvent(SDL_Renderer *renderer, SDL_Window *window) {
