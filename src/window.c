@@ -21,8 +21,6 @@ int InitUpdate(SDL_Renderer *renderer, int taille, SDL_Rect cases[]) {
     }
     SDL_RenderPresent(renderer);
     SDL_RenderClear(renderer);
-
-
 }
 
 int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect cases[], SDL_Surface* King, SDL_Surface* WhitePawn, SDL_Surface* BlackPawn){
@@ -31,17 +29,26 @@ int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect case
     SDL_Point mouse_point;
     mouse_point.x = x;
     mouse_point.y = y;
-
     HoverEffect(renderer, mouse_point, cases, nb_cases);
 }
 
-void PlacePieces(SDL_Renderer *renderer, int nb_cases, SDL_Rect rect, SDL_Surface *King, SDL_Surface *WhitePawn, SDL_Surface *BlackPawn){
-    SDL_Texture *texture = NULL;
-    texture = SDL_CreateTextureFromSurface(renderer, King);
+void PlacePieces(SDL_Renderer *renderer, int nb_cases, SDL_Rect rect, SDL_Texture *texture){
     SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
 
     SDL_RenderPresent(renderer);
-    printf("[DEBUG] : Roi Place \n");
+    printf("[DEBUG] : Surface placed \n");
+}
+
+void LoadTextures(SDL_Surface *White, SDL_Surface *Black, SDL_Surface *King){
+
+    King = SDL_LoadBMP("assets/textures/king.bmp");
+    if(King == NULL){ printf("[DEBUG] : King failed to load : %s\n",  SDL_GetError());}
+
+    White = SDL_LoadBMP("assets/textures/whitepawn.bmp");
+    if(King == NULL){ printf("[DEBUG] : White failed to load : %s\n",  SDL_GetError());}
+
+    White = SDL_LoadBMP("src/assets/textures/blackpawn.bmp");
+    if(King == NULL){ printf("[DEBUG] : Black failed to load : %s\n",  SDL_GetError());}
 }
 
 int windowCreation() {
@@ -49,46 +56,30 @@ int windowCreation() {
     int nb_cases = taille*taille;
     SDL_Rect cases[nb_cases];
 
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        printf("SDL n'est pas reconnu !\n"
-               "SDL_Error: %s\n", SDL_GetError());
-        return 0;
-    }
+    SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window *window = SDL_CreateWindow("Tablut", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIN_SIZE, WIN_SIZE, SDL_WINDOW_SHOWN);
-
-    if (!window) {
-        printf("La fenêtre ne peut pas être créé !\n"
-               "SDL_Error: %s\n", SDL_GetError());
-    }
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    if (!renderer) {
-        printf("Le moteur de rendu ne peut pes être initialisé\n"
-               "SDL_Error: %s\n", SDL_GetError());
-    }
 
-    // Chargement des images
-
+    SDL_Surface *White = NULL;
+    SDL_Texture *KingTexture = NULL;
+    SDL_Surface *Black = NULL;
+    SDL_Texture *WhiteTexture = NULL;
     SDL_Surface *King = NULL;
-    SDL_Surface *WhitePawn = NULL;
-    SDL_Surface *BlackPawn = NULL;
-
-    King = SDL_LoadBMP("assets/textures/King.bmp");
-    WhitePawn = SDL_LoadBMP("assets/textures/WhitePawn.bmp");
-    BlackPawn = SDL_LoadBMP("assets/textures/BlackPawn.bmp");
+    SDL_Texture *BlackTexture = NULL;
+    LoadTextures(White, Black, King);
 
     //Boucle principale
-
     bool quit = false;
     SDL_RenderCopy(renderer,InitUpdate(renderer, taille, cases), NULL, NULL);
     SDL_RenderPresent(renderer);
     while(quit != true) {
         SDL_Event e;
         SDL_WaitEvent(&e);
+        FrameUpdate(e, renderer, nb_cases, cases, King, White, Black);
         switch (e.type) {
             case SDL_QUIT: QuitEvent(renderer, window); quit = true; break;
-            case SDL_MOUSEBUTTONDOWN: OnButtonClick(cases, nb_cases, King, WhitePawn, BlackPawn, renderer);
+            case SDL_MOUSEBUTTONDOWN: OnButtonClick(cases, nb_cases, King, White, Black, renderer);
         }
-        FrameUpdate(e, renderer, nb_cases, cases, King, WhitePawn, BlackPawn);
     }
     return 0;
 }
@@ -142,7 +133,7 @@ int OnButtonClick(SDL_Rect cases[], int nb_cases, SDL_Surface *King, SDL_Surface
     }
     if(quadrant != -1){
         printf("[DEBUG] : Left Mouse Button clicked at x = %d, y = %d in the %d th quadrant\n", x, y, quadrant);
-        PlacePieces(renderer, nb_cases, cases[quadrant], King, WhitePawn, BlackPawn);
+        PlacePieces(renderer, nb_cases, cases[quadrant], King);
         return quadrant;
     }
     else{
