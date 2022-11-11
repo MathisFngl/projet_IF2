@@ -21,19 +21,31 @@ int InitUpdate(SDL_Renderer *renderer, int taille, SDL_Rect cases[]) {
     }
     SDL_RenderPresent(renderer);
     SDL_RenderClear(renderer);
+
+
 }
 
-int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect cases[]){
+int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect cases[], SDL_Surface* King, SDL_Surface* WhitePawn, SDL_Surface* BlackPawn){
     int x, y;
     SDL_GetMouseState(&x,&y);
     SDL_Point mouse_point;
     mouse_point.x = x;
     mouse_point.y = y;
-    HoverEffect(renderer, mouse_point, cases,nb_cases);
+
+    HoverEffect(renderer, mouse_point, cases, nb_cases);
+}
+
+void PlacePieces(SDL_Renderer *renderer, int nb_cases, SDL_Rect rect, SDL_Surface *King, SDL_Surface *WhitePawn, SDL_Surface *BlackPawn){
+    SDL_Texture *texture = NULL;
+    texture = SDL_CreateTextureFromSurface(renderer, King);
+    SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+
+    SDL_RenderPresent(renderer);
+    printf("[DEBUG] : Roi Place \n");
 }
 
 int windowCreation() {
-    int taille = 13;
+    int taille = 9;
     int nb_cases = taille*taille;
     SDL_Rect cases[nb_cases];
 
@@ -54,18 +66,29 @@ int windowCreation() {
                "SDL_Error: %s\n", SDL_GetError());
     }
 
+    // Chargement des images
+
+    SDL_Surface *King = NULL;
+    SDL_Surface *WhitePawn = NULL;
+    SDL_Surface *BlackPawn = NULL;
+
+    King = SDL_LoadBMP("assets/textures/King.bmp");
+    WhitePawn = SDL_LoadBMP("assets/textures/WhitePawn.bmp");
+    BlackPawn = SDL_LoadBMP("assets/textures/BlackPawn.bmp");
+
+    //Boucle principale
+
     bool quit = false;
     SDL_RenderCopy(renderer,InitUpdate(renderer, taille, cases), NULL, NULL);
     SDL_RenderPresent(renderer);
     while(quit != true) {
-
         SDL_Event e;
         SDL_WaitEvent(&e);
         switch (e.type) {
             case SDL_QUIT: QuitEvent(renderer, window); quit = true; break;
-            case SDL_MOUSEBUTTONDOWN: OnButtonClick(cases, nb_cases);
+            case SDL_MOUSEBUTTONDOWN: OnButtonClick(cases, nb_cases, King, WhitePawn, BlackPawn, renderer);
         }
-        FrameUpdate(e, renderer, nb_cases, cases);
+        FrameUpdate(e, renderer, nb_cases, cases, King, WhitePawn, BlackPawn);
     }
     return 0;
 }
@@ -106,7 +129,7 @@ void QuitEvent(SDL_Renderer *renderer, SDL_Window *window) {
     SDL_Quit();
 }
 
-int OnButtonClick(SDL_Rect cases[], int nb_cases){
+int OnButtonClick(SDL_Rect cases[], int nb_cases, SDL_Surface *King, SDL_Surface *WhitePawn, SDL_Surface *BlackPawn, SDL_Renderer *renderer){
     int x, y, quadrant = -1;
     SDL_GetMouseState(&x,&y);
     SDL_Point mouse_point;
@@ -119,6 +142,7 @@ int OnButtonClick(SDL_Rect cases[], int nb_cases){
     }
     if(quadrant != -1){
         printf("[DEBUG] : Left Mouse Button clicked at x = %d, y = %d in the %d th quadrant\n", x, y, quadrant);
+        PlacePieces(renderer, nb_cases, cases[quadrant], King, WhitePawn, BlackPawn);
         return quadrant;
     }
     else{

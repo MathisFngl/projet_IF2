@@ -48,6 +48,7 @@ int* init_Plateau(){
                 pieceBlanche[i] = king-k;
                 i++;
                 }
+                break;
             default:
                 printf("erreur positionnement des pieces blanches");
                 break;
@@ -192,4 +193,8 @@ int* init_Plateau(){
     forteresse[1] = N-1;
     forteresse[2] = (N-1)+(N-1)*N;
     forteresse[3] = (N-1)*N;
+
+    for(int i=0; i<nbCase; i++){
+        printf("%d", plateau[i]);
+    }
 }
