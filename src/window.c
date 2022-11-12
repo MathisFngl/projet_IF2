@@ -34,7 +34,6 @@ int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect case
 
 void PlacePieces(SDL_Renderer *renderer, int nb_cases, SDL_Rect rect, SDL_Texture *texture){
     SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
-
     SDL_RenderPresent(renderer);
     printf("[DEBUG] : Surface placed \n");
 }
@@ -45,10 +44,10 @@ void LoadTextures(SDL_Surface *White, SDL_Surface *Black, SDL_Surface *King){
     if(King == NULL){ printf("[DEBUG] : King failed to load : %s\n",  SDL_GetError());}
 
     White = SDL_LoadBMP("assets/textures/whitepawn.bmp");
-    if(King == NULL){ printf("[DEBUG] : White failed to load : %s\n",  SDL_GetError());}
+    if(White == NULL){ printf("[DEBUG] : White failed to load : %s\n",  SDL_GetError());}
 
-    White = SDL_LoadBMP("src/assets/textures/blackpawn.bmp");
-    if(King == NULL){ printf("[DEBUG] : Black failed to load : %s\n",  SDL_GetError());}
+    Black = SDL_LoadBMP("src/assets/textures/blackpawn.bmp");
+    if(Black == NULL){ printf("[DEBUG] : Black failed to load : %s\n",  SDL_GetError());}
 }
 
 int windowCreation() {
@@ -61,25 +60,38 @@ int windowCreation() {
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     SDL_Surface *White = NULL;
-    SDL_Texture *KingTexture = NULL;
     SDL_Surface *Black = NULL;
-    SDL_Texture *WhiteTexture = NULL;
     SDL_Surface *King = NULL;
-    SDL_Texture *BlackTexture = NULL;
+
     LoadTextures(White, Black, King);
+
+    SDL_Texture *KingTexture = SDL_CreateTextureFromSurface(renderer, King);
+    SDL_Texture *WhiteTexture = SDL_CreateTextureFromSurface(renderer, White);
+    SDL_Texture *BlackTexture =SDL_CreateTextureFromSurface(renderer, Black);
+
+
 
     //Boucle principale
     bool quit = false;
     SDL_RenderCopy(renderer,InitUpdate(renderer, taille, cases), NULL, NULL);
     SDL_RenderPresent(renderer);
+    int DepartQuad = -1;
     while(quit != true) {
         SDL_Event e;
         SDL_WaitEvent(&e);
-        FrameUpdate(e, renderer, nb_cases, cases, King, White, Black);
+
         switch (e.type) {
-            case SDL_QUIT: QuitEvent(renderer, window); quit = true; break;
-            case SDL_MOUSEBUTTONDOWN: OnButtonClick(cases, nb_cases, King, White, Black, renderer);
+            case SDL_QUIT:
+                QuitEvent(renderer, window); quit = true;
+                break;
+            case SDL_MOUSEBUTTONDOWN:
+                DepartQuad = GetQuadrant(cases, nb_cases);
+                break;
+            case SDL_MOUSEBUTTONUP:
+                MouseInteraction(DepartQuad, cases, nb_cases, King, White, Black, renderer);
+                break;
         }
+        FrameUpdate(e, renderer, nb_cases, cases, King, White, Black);
     }
     return 0;
 }
@@ -120,7 +132,15 @@ void QuitEvent(SDL_Renderer *renderer, SDL_Window *window) {
     SDL_Quit();
 }
 
-int OnButtonClick(SDL_Rect cases[], int nb_cases, SDL_Surface *King, SDL_Surface *WhitePawn, SDL_Surface *BlackPawn, SDL_Renderer *renderer){
+void OnButtonClick(SDL_Rect cases[], int nb_cases, SDL_Surface *King, SDL_Surface *WhitePawn, SDL_Surface *BlackPawn, SDL_Renderer *renderer){
+    int quadrant = GetQuadrant(cases, nb_cases);
+    if(quadrant != -1){
+        printf("[DEBUG] : Clicked on the %dth Quadrant\n", quadrant);
+        PlacePieces(renderer, nb_cases, cases[quadrant], King);
+    }
+}
+
+int GetQuadrant(SDL_Rect cases[], int nb_cases){
     int x, y, quadrant = -1;
     SDL_GetMouseState(&x,&y);
     SDL_Point mouse_point;
@@ -131,12 +151,20 @@ int OnButtonClick(SDL_Rect cases[], int nb_cases, SDL_Surface *King, SDL_Surface
             quadrant = i;
         }
     }
-    if(quadrant != -1){
-        printf("[DEBUG] : Left Mouse Button clicked at x = %d, y = %d in the %d th quadrant\n", x, y, quadrant);
-        PlacePieces(renderer, nb_cases, cases[quadrant], King);
-        return quadrant;
+    return quadrant;
+}
+
+void MouseInteraction(int IndexDepart, SDL_Rect cases[], int nb_cases, SDL_Surface *King, SDL_Surface *WhitePawn, SDL_Surface *BlackPawn, SDL_Renderer *renderer){
+    int IndexArrive;
+    IndexArrive = GetQuadrant(cases, nb_cases);
+    if(IndexDepart != IndexArrive){
+        DragPiece(IndexDepart, IndexArrive);
     }
     else{
-        printf("[DEBUG] : Left Mouse Button clicked at x = %d, y = %d and was outside the grid\n", x, y);
+        OnButtonClick(cases, nb_cases, King, WhitePawn, BlackPawn, renderer);
     }
+}
+
+int DragPiece(int IndexDepart, int IndexArrive) {
+    printf("[DEBUG] : Dragged From %d to %d th quadrant\n", IndexDepart, IndexArrive);
 }
