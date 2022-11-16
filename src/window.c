@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <SDL.h>
 #include <stdbool.h>
+#include "init_Plateau.h"
 #include "window.h"
 
-#define WIN_SIZE 684
+#define WIN_SIZE 700
 
-int InitUpdate(SDL_Renderer *renderer, int taille, SDL_Rect cases[]) {
+int Update(SDL_Renderer *renderer, int taille, SDL_Rect cases[]) {
 
     int reste = WIN_SIZE%taille; // ajoute un padding si il y a un reste vide
     SDL_SetRenderDrawColor(renderer, 224, 156, 110, 255);
@@ -36,25 +37,24 @@ int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect case
 */
 
 void PlacePieces(SDL_Renderer *renderer, int nb_cases, SDL_Rect rect, SDL_Texture *texture){
-    SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+    //int *pieceBlanche = malloc(nb_cases* (int) );
+    for(int i=0; i<nb_cases; i++){
+
+    }
     SDL_RenderPresent(renderer);
-    printf("[DEBUG] : Surface placed \n");
 }
 
 void LoadTextures(SDL_Surface *White, SDL_Surface *Black, SDL_Surface *King){
-
     King = SDL_LoadBMP("assets/textures/king.bmp");
     if(King == NULL){ printf("[DEBUG] : King failed to load : %s\n",  SDL_GetError());}
-
     White = SDL_LoadBMP("assets/textures/whitepawn.bmp");
     if(White == NULL){ printf("[DEBUG] : White failed to load : %s\n",  SDL_GetError());}
-
     Black = SDL_LoadBMP("src/assets/textures/blackpawn.bmp");
     if(Black == NULL){ printf("[DEBUG] : Black failed to load : %s\n",  SDL_GetError());}
 }
 
 int windowCreation() {
-    int taille = 111;
+    int taille = 9;
     int nb_cases = taille*taille;
     SDL_Rect cases[nb_cases];
 
@@ -74,7 +74,7 @@ int windowCreation() {
 
     //Boucle principale
     bool quit = false;
-    InitUpdate(renderer, taille, cases);
+    Update(renderer, taille, cases);
     int DepartQuad = -1;
     while(quit != true) {
         SDL_Event e;

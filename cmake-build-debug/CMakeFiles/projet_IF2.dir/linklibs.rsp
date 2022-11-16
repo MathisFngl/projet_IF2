@@ -1,1 +1,1 @@
-  -LC:/Users/fanig/Documents/GitHub/projet_IF2/SDL/lib/x64  -lSDL2main -lSDL2 -lSDL2test -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
+  -LC:/Users/fanig/Documents/GitHub/projet_IF2/SDL/lib/x64  -lSDL2main -lSDL2 -lSDL2test -llibSDL2_ttf -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

@@ -176,6 +176,30 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/main_menu.obj: src/main_menu.c.obj
+.PHONY : src/main_menu.obj
+
+# target to build an object file
+src/main_menu.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/main_menu.c.obj
+.PHONY : src/main_menu.c.obj
+
+src/main_menu.i: src/main_menu.c.i
+.PHONY : src/main_menu.i
+
+# target to preprocess a source file
+src/main_menu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/main_menu.c.i
+.PHONY : src/main_menu.c.i
+
+src/main_menu.s: src/main_menu.c.s
+.PHONY : src/main_menu.s
+
+# target to generate assembly for a file
+src/main_menu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/main_menu.c.s
+.PHONY : src/main_menu.c.s
+
 src/window.obj: src/window.c.obj
 .PHONY : src/window.obj
 
@@ -215,6 +239,9 @@ help:
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/main_menu.obj
+	@echo ... src/main_menu.i
+	@echo ... src/main_menu.s
 	@echo ... src/window.obj
 	@echo ... src/window.i
 	@echo ... src/window.s

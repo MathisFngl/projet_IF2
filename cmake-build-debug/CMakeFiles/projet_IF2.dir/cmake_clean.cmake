@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/projet_IF2.dir/src/init_Plateau.c.obj.d"
   "CMakeFiles/projet_IF2.dir/src/main.c.obj"
   "CMakeFiles/projet_IF2.dir/src/main.c.obj.d"
+  "CMakeFiles/projet_IF2.dir/src/main_menu.c.obj"
+  "CMakeFiles/projet_IF2.dir/src/main_menu.c.obj.d"
   "CMakeFiles/projet_IF2.dir/src/window.c.obj"
   "CMakeFiles/projet_IF2.dir/src/window.c.obj.d"
   "libprojet_IF2.dll.a"
