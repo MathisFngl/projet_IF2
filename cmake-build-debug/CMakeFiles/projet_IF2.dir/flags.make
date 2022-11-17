@@ -6,5 +6,5 @@ C_DEFINES =
 
 C_INCLUDES = @CMakeFiles/projet_IF2.dir/includes_C.rsp
 
-C_FLAGS = -g
+C_FLAGS = -g -std=gnu11
 

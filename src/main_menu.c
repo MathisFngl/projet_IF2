@@ -1,10 +1,10 @@
 // MAIN MENU OF TABLUT
 #include <stdio.h>
-#include <SDL.h>
-#include <SDL_ttf.h>
 #include <stdbool.h>
 #include "init_Plateau.h"
 #include "window.h"
+#include <SDL.h>
+#include <SDL_ttf.h>
 
 int showMenu(SDL_Surface* screen, TTF_Font* font){
     Uint32 time;

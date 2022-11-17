@@ -143,6 +143,8 @@ projet_IF2.exe: CMakeFiles/projet_IF2.dir/src/init_Plateau.c.obj
 projet_IF2.exe: CMakeFiles/projet_IF2.dir/src/window.c.obj
 projet_IF2.exe: CMakeFiles/projet_IF2.dir/src/main_menu.c.obj
 projet_IF2.exe: CMakeFiles/projet_IF2.dir/build.make
+projet_IF2.exe: SDL/sdl2-ttf-lib/libSDL2_ttf.dll.a
+projet_IF2.exe: SDL/sdl2-ttf-lib/libSDL2_ttf.a
 projet_IF2.exe: CMakeFiles/projet_IF2.dir/linklibs.rsp
 projet_IF2.exe: CMakeFiles/projet_IF2.dir/objects1.rsp
 projet_IF2.exe: CMakeFiles/projet_IF2.dir/link.txt
