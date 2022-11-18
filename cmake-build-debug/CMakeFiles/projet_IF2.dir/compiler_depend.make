@@ -372,7 +372,8 @@ CMakeFiles/projet_IF2.dir/src/window.c.obj: ../src/window.c \
   ../SDL/include/SDL_misc.h \
   C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h \
   ../src/window.h \
-  ../SDL/include/SDL_render.h
+  ../SDL/include/SDL_render.h \
+  ../src/init_Plateau.h
 
 
 C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/adxintrin.h:

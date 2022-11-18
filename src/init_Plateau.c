@@ -1,10 +1,8 @@
 #include "init_Plateau.h"
 #include <stdio.h>
 
-int init_Plateau(){
-    int N,i,k;
-    printf("Dimension:");
-    scanf("%d",&N);
+int init_Plateau(int N, int *tableauBlancs[], int *tableauNoir[], int *tableauForteresse[]){
+    int i,k;
     int king;
     king=N/2+(N/2)*N;
     // création plateau
@@ -144,16 +142,20 @@ int init_Plateau(){
     forteresse[1] = N-1;
     forteresse[2] = (N-1)+(N-1)*N;
     forteresse[3] = (N-1)*N;
+
     for (i=0;i<nbPieceBlanche;i++){
-        printf("%d\t",pieceBlanche[i]);
+        //printf("%d\t",pieceBlanche[i]);
+        tableauBlancs[i] = pieceBlanche[i];
     }
-    printf("\n");
     for (i=0;i<nbPieceNoire;i++){
-        printf("%d\t",pieceNoire[i]);
+        //printf("%d\t",pieceNoire[i]);
+        tableauNoir[i] = pieceNoire[i];
+        //printf("%d\n", tableauNoir[i]);
+    }
+    for (i=0;i<4;i++){
+        //printf("%d\t",forteresse[i]);
+        tableauForteresse[i] = forteresse[i];
     }
     printf("\n");
-    for (i=0;i<4;i++){
-        printf("%d\t",forteresse[i]);
-    }
     return king;
 }

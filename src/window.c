@@ -2,26 +2,33 @@
 #include <SDL.h>
 #include <stdbool.h>
 #include "window.h"
+#include "init_Plateau.h"
 
 #define WIN_SIZE 684
+#define TAILLE 9
 
-int InitUpdate(SDL_Renderer *renderer, int taille, SDL_Rect cases[]) {
+int Update(SDL_Renderer *renderer, int taille, SDL_Rect cases[]) {
     int reste = WIN_SIZE%taille;
-    SDL_SetRenderDrawColor(renderer, 224, 156, 110, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
     SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 176, 95, 40, 255);
     for(int i=0; i<taille; i++){
         for(int j=0; j<taille; j++){
             cases[(taille*i)+j].y = i*(WIN_SIZE/taille)+reste/2;
             cases[(taille*i)+j].x = j*(WIN_SIZE/taille)+reste/2;
             cases[(taille*i)+j].w = cases[(taille*i)+j].h = WIN_SIZE/taille;
             if((i+j)%2 == 0){
+                SDL_SetRenderDrawColor(renderer, 176, 95, 40, 255);
+                SDL_RenderFillRect(renderer,&cases[(taille*i)+j]);
+            }
+            else{
+                SDL_SetRenderDrawColor(renderer, 224, 156, 110, 255);
                 SDL_RenderFillRect(renderer,&cases[(taille*i)+j]);
             }
         }
     }
     SDL_RenderPresent(renderer);
 }
+
 /*
 int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect cases[], SDL_Surface* King, SDL_Surface* WhitePawn, SDL_Surface* BlackPawn){
     int x, y;
@@ -32,26 +39,52 @@ int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect case
     HoverEffect(renderer, mouse_point, cases, nb_cases);
 }
 */
-void PlacePieces(SDL_Renderer *renderer, int nb_cases, SDL_Rect rect, SDL_Texture *texture){
-    SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+
+void PlacePieces(SDL_Renderer *renderer, SDL_Rect cases[], int TableauNoir[], int TableauBlanc[], int TableauForteresses[], int Roi){
+    int nbPieceBlanche = TAILLE-1;
+    int nbPieceNoire = (TAILLE-1)*2;
+    int nb_cases = TAILLE*TAILLE;
+    SDL_Color color;
+
+    for(int i=0; i<nb_cases; i++){
+        color.r = 255; color.g = 255; color.b = 255;
+        for(int j=0; j<nbPieceBlanche; j++) {
+            if(i==TableauBlanc[j]){
+                DrawPiece(renderer, cases[i], color);
+            }
+        }
+        color.r = 0; color.g = 0; color.b =0;
+        for(int k=0; k<nbPieceNoire; k++){
+            if(i==TableauNoir[k]){
+                DrawPiece(renderer, cases[i], color);
+                printf("%d\n", TableauNoir[k]);
+            }
+        }
+        color.r = 150; color.g = 150; color.b = 150;
+        for(int l=0; l<4; l++){
+            if(i==TableauForteresses[l]){
+                DrawPiece(renderer, cases[i], color);
+            }
+        }
+        color.r = 255; color.g = 220; color.b = 125;
+        if(i==Roi){
+            DrawPiece(renderer, cases[i], color);
+        }
+    }
     SDL_RenderPresent(renderer);
-    printf("[DEBUG] : Surface placed \n");
 }
 
-void LoadTextures(SDL_Surface *White, SDL_Surface *Black, SDL_Surface *King){
-
-    King = SDL_LoadBMP("assets/textures/king.bmp");
-    if(King == NULL){ printf("[DEBUG] : King failed to load : %s\n",  SDL_GetError());}
-
-    White = SDL_LoadBMP("assets/textures/whitepawn.bmp");
-    if(White == NULL){ printf("[DEBUG] : White failed to load : %s\n",  SDL_GetError());}
-
-    Black = SDL_LoadBMP("src/assets/textures/blackpawn.bmp");
-    if(Black == NULL){ printf("[DEBUG] : Black failed to load : %s\n",  SDL_GetError());}
+void DrawPiece(SDL_Renderer *renderer, SDL_Rect rect, SDL_Color color){
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
+    SDL_Rect fillRect;
+    fillRect.x = rect.x + (WIN_SIZE/TAILLE)*0.1;
+    fillRect.y = rect.y + (WIN_SIZE/TAILLE)*0.1;
+    fillRect.w = fillRect.h = (WIN_SIZE/TAILLE)*0.8;
+    SDL_RenderFillRect(renderer,&fillRect);
 }
 
 int windowCreation() {
-    int taille = 57;
+    int taille = TAILLE;
     int nb_cases = taille*taille;
     SDL_Rect cases[nb_cases];
 
@@ -59,19 +92,15 @@ int windowCreation() {
     SDL_Window *window = SDL_CreateWindow("Tablut", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIN_SIZE, WIN_SIZE, SDL_WINDOW_SHOWN);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    SDL_Surface *White = NULL;
-    SDL_Surface *Black = NULL;
-    SDL_Surface *King = NULL;
-
-    LoadTextures(White, Black, King);
-
-    SDL_Texture *KingTexture = SDL_CreateTextureFromSurface(renderer, King);
-    SDL_Texture *WhiteTexture = SDL_CreateTextureFromSurface(renderer, White);
-    SDL_Texture *BlackTexture =SDL_CreateTextureFromSurface(renderer, Black);
+    int *TableauNoir[(TAILLE-1)*2];
+    int *TableauBlanc[TAILLE-1];
+    int *TableauForteresses[4];
+    int Roi = init_Plateau(TAILLE, TableauBlanc, TableauNoir, TableauForteresses);
 
     //Boucle principale
     bool quit = false;
-    InitUpdate(renderer, taille, cases);
+    Update(renderer, taille, cases);
+    PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi);
     SDL_RenderPresent(renderer);
     int DepartQuad = -1;
     while(quit != true) {
@@ -79,13 +108,16 @@ int windowCreation() {
         SDL_WaitEvent(&e);
         switch (e.type) {
             case SDL_QUIT:
-                QuitEvent(renderer, window); quit = true;
+                QuitEvent(renderer, window);
+                quit = true;
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 DepartQuad = GetQuadrant(cases, nb_cases);
                 break;
             case SDL_MOUSEBUTTONUP:
-                MouseInteraction(DepartQuad, cases, nb_cases, King, White, Black, renderer);
+                Update(renderer, taille, cases);
+                PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi);
+                MouseInteraction(DepartQuad, cases, nb_cases, renderer);
                 break;
         }
         //FrameUpdate(e, renderer, nb_cases, cases, King, White, Black);
@@ -129,11 +161,10 @@ void QuitEvent(SDL_Renderer *renderer, SDL_Window *window) {
     SDL_Quit();
 }
 
-void OnButtonClick(SDL_Rect cases[], int nb_cases, SDL_Surface *King, SDL_Surface *WhitePawn, SDL_Surface *BlackPawn, SDL_Renderer *renderer){
+void OnButtonClick(SDL_Rect cases[], int nb_cases, SDL_Renderer *renderer){
     int quadrant = GetQuadrant(cases, nb_cases);
     if(quadrant != -1){
         printf("[DEBUG] : Clicked on the %dth Quadrant\n", quadrant);
-        PlacePieces(renderer, nb_cases, cases[quadrant], King);
     }
 }
 
@@ -151,14 +182,14 @@ int GetQuadrant(SDL_Rect cases[], int nb_cases){
     return quadrant;
 }
 
-void MouseInteraction(int IndexDepart, SDL_Rect cases[], int nb_cases, SDL_Surface *King, SDL_Surface *WhitePawn, SDL_Surface *BlackPawn, SDL_Renderer *renderer){
+void MouseInteraction(int IndexDepart, SDL_Rect cases[], int nb_cases, SDL_Renderer *renderer){
     int IndexArrive;
     IndexArrive = GetQuadrant(cases, nb_cases);
     if(IndexDepart != IndexArrive){
         DragPiece(IndexDepart, IndexArrive);
     }
     else{
-        OnButtonClick(cases, nb_cases, King, WhitePawn, BlackPawn, renderer);
+        OnButtonClick(cases, nb_cases, renderer);
     }
 }
 
