@@ -1,5 +1,10 @@
-"C:\Program Files\JetBrains\CLion 2022.2.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S C:\Users\fanig\Documents\GitHub\projet_IF2 -B C:\Users\fanig\Documents\GitHub\projet_IF2\cmake-build-debug
-CMake Error: Parse error in cache file C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/CMakeCache.txt on line 218. Offending entry: <<<<<<< HEAD
-CMake Error: Parse error in cache file C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/CMakeCache.txt on line 223. Offending entry: >>>>>>> parent of 02dd369 (+ release)
--- Configuring incomplete, errors occurred!
-See also "C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+"C:\Program Files\JetBrains\CLion 2022.2.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S D:\UTBM\IF\projet_IF2 -B D:\UTBM\IF\projet_IF2\cmake-build-debug
+-- The C compiler identification is GNU 11.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/UTBM/IF/projet_IF2/cmake-build-debug
