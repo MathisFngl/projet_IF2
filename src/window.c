@@ -6,13 +6,14 @@
 #define WIN_SIZE 684
 
 int InitUpdate(SDL_Renderer *renderer, int taille, SDL_Rect cases[]) {
+    int reste = WIN_SIZE%taille;
     SDL_SetRenderDrawColor(renderer, 224, 156, 110, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 176, 95, 40, 255);
     for(int i=0; i<taille; i++){
         for(int j=0; j<taille; j++){
-            cases[(taille*i)+j].y = i*(WIN_SIZE/taille);
-            cases[(taille*i)+j].x = j*(WIN_SIZE/taille);
+            cases[(taille*i)+j].y = i*(WIN_SIZE/taille)+reste/2;
+            cases[(taille*i)+j].x = j*(WIN_SIZE/taille)+reste/2;
             cases[(taille*i)+j].w = cases[(taille*i)+j].h = WIN_SIZE/taille;
             if((i+j)%2 == 0){
                 SDL_RenderFillRect(renderer,&cases[(taille*i)+j]);
@@ -20,9 +21,8 @@ int InitUpdate(SDL_Renderer *renderer, int taille, SDL_Rect cases[]) {
         }
     }
     SDL_RenderPresent(renderer);
-    SDL_RenderClear(renderer);
 }
-
+/*
 int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect cases[], SDL_Surface* King, SDL_Surface* WhitePawn, SDL_Surface* BlackPawn){
     int x, y;
     SDL_GetMouseState(&x,&y);
@@ -31,7 +31,7 @@ int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect case
     mouse_point.y = y;
     HoverEffect(renderer, mouse_point, cases, nb_cases);
 }
-
+*/
 void PlacePieces(SDL_Renderer *renderer, int nb_cases, SDL_Rect rect, SDL_Texture *texture){
     SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
     SDL_RenderPresent(renderer);
@@ -51,7 +51,7 @@ void LoadTextures(SDL_Surface *White, SDL_Surface *Black, SDL_Surface *King){
 }
 
 int windowCreation() {
-    int taille = 9;
+    int taille = 57;
     int nb_cases = taille*taille;
     SDL_Rect cases[nb_cases];
 
@@ -69,17 +69,14 @@ int windowCreation() {
     SDL_Texture *WhiteTexture = SDL_CreateTextureFromSurface(renderer, White);
     SDL_Texture *BlackTexture =SDL_CreateTextureFromSurface(renderer, Black);
 
-
-
     //Boucle principale
     bool quit = false;
-    SDL_RenderCopy(renderer,InitUpdate(renderer, taille, cases), NULL, NULL);
+    InitUpdate(renderer, taille, cases);
     SDL_RenderPresent(renderer);
     int DepartQuad = -1;
     while(quit != true) {
         SDL_Event e;
         SDL_WaitEvent(&e);
-
         switch (e.type) {
             case SDL_QUIT:
                 QuitEvent(renderer, window); quit = true;
@@ -91,11 +88,11 @@ int windowCreation() {
                 MouseInteraction(DepartQuad, cases, nb_cases, King, White, Black, renderer);
                 break;
         }
-        FrameUpdate(e, renderer, nb_cases, cases, King, White, Black);
+        //FrameUpdate(e, renderer, nb_cases, cases, King, White, Black);
     }
     return 0;
 }
-
+/*
 void HoverEffect(SDL_Renderer* renderer, SDL_Point mouse_point, SDL_Rect cases[], int nb_cases){
     for (int i=0; i<nb_cases; i++) {
         if (SDL_PointInRect(&mouse_point, &cases[i]) == true) {
@@ -123,7 +120,7 @@ void HoverEffect(SDL_Renderer* renderer, SDL_Point mouse_point, SDL_Rect cases[]
             }
         }
     }
-}
+}*/
 
 void QuitEvent(SDL_Renderer *renderer, SDL_Window *window) {
     SDL_DestroyRenderer(renderer);
