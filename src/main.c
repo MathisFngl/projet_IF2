@@ -1,8 +1,9 @@
 #include <stdio.h>
-#include "init_Plateau.h"
+#include <SDL.h>
 #include "window.h"
+#include "init_Plateau.h"
 
 int main(int argc, char* argv[]) {
     windowCreation();
-    TTF_Init();
+
 }

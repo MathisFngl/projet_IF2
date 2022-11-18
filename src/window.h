@@ -1,6 +1,5 @@
+#include "SDL_render.h"
 #include <stdbool.h>
-#include <SDL.h>
-#include <SDL_ttf.h>
 
 //int FrameUpdate(SDL_Event, SDL_Renderer*, int, SDL_Rect[], SDL_Surface*, SDL_Surface*, SDL_Surface*);
 int windowCreation();

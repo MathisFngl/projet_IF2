@@ -26,6 +26,7 @@
 				<Compiler>
 					<Add directory="C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include"/>
 					<Add directory="C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/sdl2-ttf-include"/>
+					<Add directory="C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/sdl2-ttf-lib"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
@@ -47,6 +48,7 @@
 				<Compiler>
 					<Add directory="C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include"/>
 					<Add directory="C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/sdl2-ttf-include"/>
+					<Add directory="C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/sdl2-ttf-lib"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>

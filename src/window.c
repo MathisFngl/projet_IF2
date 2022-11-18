@@ -1,9 +1,8 @@
 #include <stdio.h>
+#include <SDL.h>
 #include <stdbool.h>
 #include "init_Plateau.h"
 #include "window.h"
-#include <SDL.h>
-#include <SDL_ttf.h>
 
 #define WIN_SIZE 700
 

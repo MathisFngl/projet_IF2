@@ -11,9 +11,6 @@ CMakeFiles/projet_IF2.dir/src/main_menu.c.obj: \
  C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/x86_64-w64-mingw32/include/_mingw_off_t.h \
  C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/x86_64-w64-mingw32/include/swprintf.inl \
  C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
- C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h \
- C:\Users\fanig\Documents\GitHub\projet_IF2\src\init_Plateau.h \
- C:\Users\fanig\Documents\GitHub\projet_IF2\src\window.h \
  C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL.h \
  C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_main.h \
  C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_stdinc.h \
@@ -178,4 +175,8 @@ CMakeFiles/projet_IF2.dir/src/main_menu.c.obj: \
  C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_locale.h \
  C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_misc.h \
  C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_ttf.h \
- C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL.h
+ C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL.h \
+ C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h \
+ C:\Users\fanig\Documents\GitHub\projet_IF2\src\init_Plateau.h \
+ C:\Users\fanig\Documents\GitHub\projet_IF2\src\window.h \
+ C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_render.h
