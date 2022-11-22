@@ -1,7 +1,7 @@
 #include "init_Plateau.h"
 #include <stdio.h>
 
-int init_Plateau(int N, int* tableauBlancs, int* tableauNoir, int* tableauForteresse){
+int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *tableauForteresse){
     int i,k;
     int king;
     king=N/2+(N/2)*N;
@@ -141,5 +141,15 @@ int init_Plateau(int N, int* tableauBlancs, int* tableauNoir, int* tableauForter
     tableauForteresse[2] = (N-1)+(N-1)*N;
     tableauForteresse[3] = (N-1)*N;
 
+    for (i=0;i<nbPieceBlanche;i++){
+        //printf("%d\t",pieceBlanche[i]);
+    }
+    for (i=0;i<nbPieceNoire;i++){
+        //printf("%d\t",pieceNoire[i]);
+    }
+    for (i=0;i<4;i++){
+        //printf("%d\t",forteresse[i]);
+    }
+    printf("\n");
     return king;
 }
