@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include "window.h"
 #include "init_Plateau.h"
+#include "play.h"
 
 #define WIN_SIZE 684
 #define TAILLE 9
@@ -195,4 +196,5 @@ void MouseInteraction(int IndexDepart, SDL_Rect cases[], int nb_cases, SDL_Rende
 
 int DragPiece(int IndexDepart, int IndexArrive) {
     printf("[DEBUG] : Dragged From %d to %d th quadrant\n", IndexDepart, IndexArrive);
+    play(IndexArrive,IndexDepart);
 }
