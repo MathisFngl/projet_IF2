@@ -90,6 +90,12 @@
 		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/main.h">
 			<Option target="projet_IF2"/>
 		</Unit>
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/menu.c">
+			<Option target="projet_IF2"/>
+		</Unit>
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/menu.h">
+			<Option target="projet_IF2"/>
+		</Unit>
 		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/play.c">
 			<Option target="projet_IF2"/>
 		</Unit>

@@ -5,8 +5,7 @@
 #include "init_Plateau.h"
 //#include "play.h"
 
-#define WIN_SIZE 700
-#define TAILLE 9
+#define WIN_SIZE 800
 
 int Update(SDL_Renderer *renderer, int taille, SDL_Rect cases[]) {
     int reste = WIN_SIZE%taille;
@@ -41,61 +40,59 @@ int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect case
 }
 */
 
-void PlacePieces(SDL_Renderer *renderer, SDL_Rect cases[], int TableauNoir[], int TableauBlanc[], int TableauForteresses[], int Roi){
-    int nbPieceBlanche = TAILLE-1;
-    int nbPieceNoire = (TAILLE-1)*2;
-    int nb_cases = TAILLE*TAILLE;
+void PlacePieces(SDL_Renderer *renderer, SDL_Rect cases[], int TableauNoir[], int TableauBlanc[], int TableauForteresses[], int Roi, int taille){
+    int nbPieceBlanche = taille-1;
+    int nbPieceNoire = (taille-1)*2;
+    int nb_cases = taille*taille;
     SDL_Color color;
 
     for(int i=0; i<nb_cases; i++){
         color.r = 255; color.g = 255; color.b = 255;
         for(int j=0; j<nbPieceBlanche; j++) {
             if(i==TableauBlanc[j]){
-                DrawPiece(renderer, cases[i], color);
+                DrawPiece(renderer, cases[i], color, taille);
             }
         }
         color.r = 0; color.g = 0; color.b =0;
         for(int k=0; k<nbPieceNoire; k++){
             if(i==TableauNoir[k]){
-                DrawPiece(renderer, cases[i], color);
-                printf("%d - ", TableauNoir[k]);
+                DrawPiece(renderer, cases[i], color, taille);
             }
         }
         color.r = 150; color.g = 150; color.b = 150;
         for(int l=0; l<4; l++){
             if(i==TableauForteresses[l]){
-                DrawPiece(renderer, cases[i], color);
+                DrawPiece(renderer, cases[i], color, taille);
             }
         }
         color.r = 255; color.g = 220; color.b = 125;
         if(i==Roi){
-            DrawPiece(renderer, cases[i], color);
+            DrawPiece(renderer, cases[i], color, taille);
         }
     }
     SDL_RenderPresent(renderer);
 }
 
-void DrawPiece(SDL_Renderer *renderer, SDL_Rect rect, SDL_Color color){
+void DrawPiece(SDL_Renderer *renderer, SDL_Rect rect, SDL_Color color, int taille){
     if(color.r == 150){
         SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
         SDL_Rect fillRect;
         fillRect.x = rect.x;
         fillRect.y = rect.y;
-        fillRect.w = fillRect.h = (WIN_SIZE/TAILLE);
+        fillRect.w = fillRect.h = (WIN_SIZE/taille);
         SDL_RenderFillRect(renderer,&fillRect);
     }
     else{
         SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
         SDL_Rect fillRect;
-        fillRect.x = rect.x + (WIN_SIZE/TAILLE)*0.1;
-        fillRect.y = rect.y + (WIN_SIZE/TAILLE)*0.1;
-        fillRect.w = fillRect.h = (WIN_SIZE/TAILLE)*0.8;
+        fillRect.x = rect.x + (WIN_SIZE/taille)*0.1;
+        fillRect.y = rect.y + (WIN_SIZE/taille)*0.1;
+        fillRect.w = fillRect.h = (WIN_SIZE/taille)*0.8;
         SDL_RenderFillRect(renderer,&fillRect);
     }
 }
 
-int windowCreation() {
-    int taille = TAILLE;
+int windowCreation(int taille) {
     int nb_cases = taille*taille;
     SDL_Rect cases[nb_cases];
 
@@ -103,18 +100,15 @@ int windowCreation() {
     SDL_Window *window = SDL_CreateWindow("Tablut", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIN_SIZE, WIN_SIZE, SDL_WINDOW_SHOWN);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    int *TableauNoir[(TAILLE-1)*2];
-    int *TableauBlanc[TAILLE-1];
-    int *TableauForteresses[4];
-    int Roi = init_Plateau(TAILLE, TableauBlanc, TableauNoir, TableauForteresses);
-
-    for(int k=0; k<(TAILLE-1)*2; k++){printf("%d - ", TableauNoir[k]);}
-    printf("\n");
+    int *TableauNoir = (int*) malloc(((taille-1)*2)*sizeof(int));
+    int *TableauBlanc = (int*) malloc((taille-1)*sizeof(int));
+    int TableauForteresses[4];
+    int Roi = init_Plateau(taille, TableauBlanc, TableauNoir, TableauForteresses);
 
     //Boucle principale
     bool quit = false;
     Update(renderer, taille, cases);
-    PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi);
+    PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
     SDL_RenderPresent(renderer);
     int DepartQuad = -1;
     while(quit != true) {
@@ -130,7 +124,7 @@ int windowCreation() {
                 break;
             case SDL_MOUSEBUTTONUP:
                 Update(renderer, taille, cases);
-                PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi);
+                PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
                 MouseInteraction(DepartQuad, cases, nb_cases, renderer);
                 break;
         }

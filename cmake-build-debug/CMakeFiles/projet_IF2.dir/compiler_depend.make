@@ -193,11 +193,10 @@ CMakeFiles/projet_IF2.dir/src/main.c.obj: ../src/main.c \
   ../src/window.h \
   ../SDL/include/SDL_render.h \
   C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h \
-  ../src/init_Plateau.h
+  ../src/init_Plateau.h \
+  ../src/menu.h
 
-CMakeFiles/projet_IF2.dir/src/play.c.obj: ../src/play.c \
-  ../src/play.h \
-  C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h \
+CMakeFiles/projet_IF2.dir/src/menu.c.obj: ../src/menu.c \
   C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
   C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
   C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/x86_64-w64-mingw32/include/corecrt.h \
@@ -234,7 +233,10 @@ CMakeFiles/projet_IF2.dir/src/play.c.obj: ../src/play.c \
   ../SDL/include/SDL_rwops.h \
   ../SDL/include/SDL_video.h \
   ../SDL/include/SDL_surface.h \
-  ../SDL/include/SDL_blendmode.h
+  ../SDL/include/SDL_blendmode.h \
+  C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h
+
+CMakeFiles/projet_IF2.dir/src/play.c.obj: ../src/play.c
 
 CMakeFiles/projet_IF2.dir/src/window.c.obj: ../src/window.c \
   C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
@@ -418,6 +420,8 @@ CMakeFiles/projet_IF2.dir/src/window.c.obj: ../src/window.c \
 
 
 C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/adxintrin.h:
+
+../src/menu.c:
 
 C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/x86_64-w64-mingw32/include/malloc.h:
 
@@ -675,6 +679,8 @@ C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32
 
 C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/avx512vlbwintrin.h:
 
+../src/menu.h:
+
 C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/avx512vldqintrin.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/avx512ifmavlintrin.h:
@@ -736,8 +742,6 @@ C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32
 ../SDL/include/SDL_blendmode.h:
 
 ../SDL/include/SDL_keyboard.h:
-
-../src/play.h:
 
 ../SDL/include/SDL_keycode.h:
 

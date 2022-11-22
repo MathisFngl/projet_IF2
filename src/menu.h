@@ -1,0 +1,2 @@
+void MainMenu();
+void GameMenu();

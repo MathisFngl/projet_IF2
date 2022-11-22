@@ -196,11 +196,10 @@ CMakeFiles/projet_IF2.dir/src/main.c.obj
  C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_render.h
  C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h
  C:/Users/fanig/Documents/GitHub/projet_IF2/src/init_Plateau.h
+ C:/Users/fanig/Documents/GitHub/projet_IF2/src/menu.h
 
-CMakeFiles/projet_IF2.dir/src/play.c.obj
- C:/Users/fanig/Documents/GitHub/projet_IF2/src/play.c
- C:/Users/fanig/Documents/GitHub/projet_IF2/src/play.h
- C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h
+CMakeFiles/projet_IF2.dir/src/menu.c.obj
+ C:/Users/fanig/Documents/GitHub/projet_IF2/src/menu.c
  C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/x86_64-w64-mingw32/include/stdio.h
  C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h
  C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/x86_64-w64-mingw32/include/corecrt.h
@@ -238,6 +237,10 @@ CMakeFiles/projet_IF2.dir/src/play.c.obj
  C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_video.h
  C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_surface.h
  C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_blendmode.h
+ C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/stdbool.h
+
+CMakeFiles/projet_IF2.dir/src/play.c.obj
+ C:/Users/fanig/Documents/GitHub/projet_IF2/src/play.c
 
 CMakeFiles/projet_IF2.dir/src/window.c.obj
  C:/Users/fanig/Documents/GitHub/projet_IF2/src/window.c

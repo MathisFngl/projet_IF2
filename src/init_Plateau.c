@@ -1,7 +1,7 @@
 #include "init_Plateau.h"
 #include <stdio.h>
 
-int init_Plateau(int N, int *tableauBlancs[], int *tableauNoir[], int *tableauForteresse[]){
+int init_Plateau(int N, int* tableauBlancs, int* tableauNoir, int* tableauForteresse){
     int i,k;
     int king;
     king=N/2+(N/2)*N;
@@ -113,11 +113,11 @@ int init_Plateau(int N, int *tableauBlancs[], int *tableauNoir[], int *tableauFo
                 i++;
             }
             for (j=1; j<=nbNoireRest/2;j++){
-                tableauNoir[i] = (king-nbBlancheCote-l-1)+(N*j); // -j donc vers la gauche
+                tableauNoir[i] = (king-nbBlancheCote-l+1)+(N*j); // -j donc vers la gauche
                 i++;
             }
             for (j=1; j<=nbNoireRest/2;j++){
-                tableauNoir[i] = (king-nbBlancheCote-l-1)-(N*j); //+j donc vers la droite
+                tableauNoir[i] = (king-nbBlancheCote-l+1)-(N*j); //+j donc vers la droite
                 i++;
             }
         }
@@ -141,15 +141,5 @@ int init_Plateau(int N, int *tableauBlancs[], int *tableauNoir[], int *tableauFo
     tableauForteresse[2] = (N-1)+(N-1)*N;
     tableauForteresse[3] = (N-1)*N;
 
-    for (i=0;i<nbPieceBlanche;i++){
-        //printf("%d\t",pieceBlanche[i]);
-    }
-    for (i=0;i<nbPieceNoire;i++){
-        //printf("%d\t",pieceNoire[i]);
-    }
-    for (i=0;i<4;i++){
-        //printf("%d\t",forteresse[i]);
-    }
-    printf("\n");
     return king;
 }

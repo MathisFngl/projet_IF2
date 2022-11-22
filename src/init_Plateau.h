@@ -1,1 +1,1 @@
-int init_Plateau(int, int*[], int*[], int*[]);
+int init_Plateau(int, int*, int*, int*);
