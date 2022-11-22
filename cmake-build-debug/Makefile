@@ -200,6 +200,30 @@ src/menu.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/menu.c.s
 .PHONY : src/menu.c.s
 
+src/parsing.obj: src/parsing.c.obj
+.PHONY : src/parsing.obj
+
+# target to build an object file
+src/parsing.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/parsing.c.obj
+.PHONY : src/parsing.c.obj
+
+src/parsing.i: src/parsing.c.i
+.PHONY : src/parsing.i
+
+# target to preprocess a source file
+src/parsing.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/parsing.c.i
+.PHONY : src/parsing.c.i
+
+src/parsing.s: src/parsing.c.s
+.PHONY : src/parsing.s
+
+# target to generate assembly for a file
+src/parsing.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/parsing.c.s
+.PHONY : src/parsing.c.s
+
 src/play.obj: src/play.c.obj
 .PHONY : src/play.obj
 
@@ -266,6 +290,9 @@ help:
 	@echo ... src/menu.obj
 	@echo ... src/menu.i
 	@echo ... src/menu.s
+	@echo ... src/parsing.obj
+	@echo ... src/parsing.i
+	@echo ... src/parsing.s
 	@echo ... src/play.obj
 	@echo ... src/play.i
 	@echo ... src/play.s

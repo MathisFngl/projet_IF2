@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/projet_IF2.dir/src/main.c.obj.d"
   "CMakeFiles/projet_IF2.dir/src/menu.c.obj"
   "CMakeFiles/projet_IF2.dir/src/menu.c.obj.d"
+  "CMakeFiles/projet_IF2.dir/src/parsing.c.obj"
+  "CMakeFiles/projet_IF2.dir/src/parsing.c.obj.d"
   "CMakeFiles/projet_IF2.dir/src/play.c.obj"
   "CMakeFiles/projet_IF2.dir/src/play.c.obj.d"
   "CMakeFiles/projet_IF2.dir/src/window.c.obj"
