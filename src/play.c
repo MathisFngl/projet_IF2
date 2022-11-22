@@ -1,4 +1,4 @@
-
+/*
 #include "play.h"
 #include <stdbool.h>
 #include <stdio.h>
@@ -33,7 +33,7 @@ bool sameCase(int king, int *pieceBlanche, int *pieceNoire, int *forteresse,int 
         if (piege[i]==quadrant){
             pieceBlanche[piece]=Null}
     }
-     */
+
     return same;
 }
 
@@ -118,6 +118,4 @@ int play(int IndexArrive,int IndexDepart){
             pionMange(IndexArrive, couleur, *pieceBlanche, *pieceNoire, nbPieceBlanche,nbPieceNoire,taille);
             couleur = 1;
         }
-
-
-}
+}*/

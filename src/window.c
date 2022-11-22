@@ -3,9 +3,9 @@
 #include <stdbool.h>
 #include "window.h"
 #include "init_Plateau.h"
-#include "play.h"
+//#include "play.h"
 
-#define WIN_SIZE 684
+#define WIN_SIZE 700
 #define TAILLE 9
 
 int Update(SDL_Renderer *renderer, int taille, SDL_Rect cases[]) {
@@ -58,7 +58,7 @@ void PlacePieces(SDL_Renderer *renderer, SDL_Rect cases[], int TableauNoir[], in
         for(int k=0; k<nbPieceNoire; k++){
             if(i==TableauNoir[k]){
                 DrawPiece(renderer, cases[i], color);
-                printf("%d\n", TableauNoir[k]);
+                printf("%d - ", TableauNoir[k]);
             }
         }
         color.r = 150; color.g = 150; color.b = 150;
@@ -76,12 +76,22 @@ void PlacePieces(SDL_Renderer *renderer, SDL_Rect cases[], int TableauNoir[], in
 }
 
 void DrawPiece(SDL_Renderer *renderer, SDL_Rect rect, SDL_Color color){
-    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
-    SDL_Rect fillRect;
-    fillRect.x = rect.x + (WIN_SIZE/TAILLE)*0.1;
-    fillRect.y = rect.y + (WIN_SIZE/TAILLE)*0.1;
-    fillRect.w = fillRect.h = (WIN_SIZE/TAILLE)*0.8;
-    SDL_RenderFillRect(renderer,&fillRect);
+    if(color.r == 150){
+        SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
+        SDL_Rect fillRect;
+        fillRect.x = rect.x;
+        fillRect.y = rect.y;
+        fillRect.w = fillRect.h = (WIN_SIZE/TAILLE);
+        SDL_RenderFillRect(renderer,&fillRect);
+    }
+    else{
+        SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
+        SDL_Rect fillRect;
+        fillRect.x = rect.x + (WIN_SIZE/TAILLE)*0.1;
+        fillRect.y = rect.y + (WIN_SIZE/TAILLE)*0.1;
+        fillRect.w = fillRect.h = (WIN_SIZE/TAILLE)*0.8;
+        SDL_RenderFillRect(renderer,&fillRect);
+    }
 }
 
 int windowCreation() {
@@ -97,6 +107,9 @@ int windowCreation() {
     int *TableauBlanc[TAILLE-1];
     int *TableauForteresses[4];
     int Roi = init_Plateau(TAILLE, TableauBlanc, TableauNoir, TableauForteresses);
+
+    for(int k=0; k<(TAILLE-1)*2; k++){printf("%d - ", TableauNoir[k]);}
+    printf("\n");
 
     //Boucle principale
     bool quit = false;
@@ -196,5 +209,5 @@ void MouseInteraction(int IndexDepart, SDL_Rect cases[], int nb_cases, SDL_Rende
 
 int DragPiece(int IndexDepart, int IndexArrive) {
     printf("[DEBUG] : Dragged From %d to %d th quadrant\n", IndexDepart, IndexArrive);
-    play(IndexArrive,IndexDepart);
+    //play(IndexArrive,IndexDepart);
 }

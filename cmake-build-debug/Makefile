@@ -47,19 +47,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2022.2.3\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2022.2.1\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2022.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f
+RM = "C:\Program Files\JetBrains\CLion 2022.2.1\bin\cmake\win\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\UTBM\IF\projet_IF2
+CMAKE_SOURCE_DIR = C:\Users\fanig\Documents\GitHub\projet_IF2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\UTBM\IF\projet_IF2\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\fanig\Documents\GitHub\projet_IF2\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -67,7 +67,7 @@ CMAKE_BINARY_DIR = D:\UTBM\IF\projet_IF2\cmake-build-debug
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	"C:\Program Files\JetBrains\CLion 2022.2.3\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
+	"C:\Program Files\JetBrains\CLion 2022.2.1\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -77,7 +77,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	"C:\Program Files\JetBrains\CLion 2022.2.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	"C:\Program Files\JetBrains\CLion 2022.2.1\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\UTBM\IF\projet_IF2\cmake-build-debug\CMakeFiles D:\UTBM\IF\projet_IF2\cmake-build-debug\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\fanig\Documents\GitHub\projet_IF2\cmake-build-debug\CMakeFiles C:\Users\fanig\Documents\GitHub\projet_IF2\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\UTBM\IF\projet_IF2\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\fanig\Documents\GitHub\projet_IF2\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -176,6 +176,30 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/play.obj: src/play.c.obj
+.PHONY : src/play.obj
+
+# target to build an object file
+src/play.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/play.c.obj
+.PHONY : src/play.c.obj
+
+src/play.i: src/play.c.i
+.PHONY : src/play.i
+
+# target to preprocess a source file
+src/play.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/play.c.i
+.PHONY : src/play.c.i
+
+src/play.s: src/play.c.s
+.PHONY : src/play.s
+
+# target to generate assembly for a file
+src/play.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_IF2.dir\build.make CMakeFiles/projet_IF2.dir/src/play.c.s
+.PHONY : src/play.c.s
+
 src/window.obj: src/window.c.obj
 .PHONY : src/window.obj
 
@@ -215,6 +239,9 @@ help:
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/play.obj
+	@echo ... src/play.i
+	@echo ... src/play.s
 	@echo ... src/window.obj
 	@echo ... src/window.i
 	@echo ... src/window.s

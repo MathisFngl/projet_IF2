@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Update_at_22_11_2022_16_32_[Changes]" date="1669131196410" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_11_2022_16_32_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 22/11/2022 16:32 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="cmake-build-debug/CMakeFiles/projet_IF2.dir/src/window.c.obj" />
+    <option name="AFTER_PATH" value="cmake-build-debug/CMakeFiles/projet_IF2.dir/src/window.c.obj" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_11_2022_16_32_[Changes]/window.c.obj" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cmake-build-debug/projet_IF2.exe" />
+    <option name="AFTER_PATH" value="cmake-build-debug/projet_IF2.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_11_2022_16_32_[Changes]/projet_IF2.exe" />
+  </binary>
+</changelist>

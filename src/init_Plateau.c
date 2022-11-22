@@ -17,31 +17,30 @@ int init_Plateau(int N, int *tableauBlancs[], int *tableauNoir[], int *tableauFo
     int nbPieceNoire = (N-1)*2;
     //création coordonné piece blanche : on part du haut puis sens aiguille d'une montre
     int nbBlancheCote = nbPieceBlanche/4;
-    int pieceBlanche[nbPieceBlanche];
     int pos = 0;
     i = 0;
     while (i < nbPieceBlanche){
         if(pos==0){
             for (k=1;k<=nbBlancheCote;k++){
-                pieceBlanche[i] = king-k*N;
+                tableauBlancs[i] = king-k*N;
                 i++;
             }
             pos ++;}
         if(pos==1){
             for (k=1;k<=nbBlancheCote;k++){
-                pieceBlanche[i] = king+k;
+                tableauBlancs[i] = king+k;
                 i++;
             }
             pos = 2;}
         if(pos==2){
             for (k=1;k<=nbBlancheCote;k++){
-                pieceBlanche[i] = king+k*N;
+                tableauBlancs[i] = king+k*N;
                 i++;
             }
             pos = 3;}
         if(pos==3) {
             for (k = 1; k <=nbBlancheCote; k++) {
-                pieceBlanche[i] = king - k;
+                tableauBlancs[i] = king - k;
                 i++;
             }
         }
@@ -52,7 +51,6 @@ int init_Plateau(int N, int *tableauBlancs[], int *tableauNoir[], int *tableauFo
 
     //création coordonné piece noire
     int nbNoireCote = nbPieceNoire/4;
-    int pieceNoire[nbPieceNoire];
     pos = 0;
     i = 0;
     int nbNoireRest,nbNoireLigne,j,l;
@@ -66,60 +64,60 @@ int init_Plateau(int N, int *tableauBlancs[], int *tableauNoir[], int *tableauFo
     while (i<nbPieceNoire){
         if(pos==0){ // pareil que pour les pieces blanches
             for(l=1; l<=nbNoireLigne;l++){// tant qu'on n'a pas atteind le bord du haut
-                pieceNoire[i] = king-(nbBlancheCote+l)*N;
+                tableauNoir[i] = king-(nbBlancheCote+l)*N;
                 i++;
             }
             for (j=1; j<=nbNoireRest/2;j++){ // on part dans le sens inverse aiguille d'une montre
-                pieceNoire[i] = (king-(nbBlancheCote+l-1)*N)-j; // -j donc vers la gauche
+                tableauNoir[i] = (king-(nbBlancheCote+l-1)*N)-j; // -j donc vers la gauche
                 i++;
             }
             for (j=1; j<=nbNoireRest/2;j++){
-                pieceNoire[i] = (king-(nbBlancheCote+l-1)*N)+j; //+j donc vers la droite
+                tableauNoir[i] = (king-(nbBlancheCote+l-1)*N)+j; //+j donc vers la droite
                 i++;
             }
             pos  ++;
         }
         if (pos==1){
             for(l=1;l<=nbNoireLigne;l++){// tant qu'on n'a pas atteind le bord de droite
-                pieceNoire[i] = king+nbBlancheCote+l;
+                tableauNoir[i] = king+nbBlancheCote+l;
                 i++;
             }
             for (j=1; j<=nbNoireRest/2;j++){
-                pieceNoire[i] = (king+nbBlancheCote+l-1)-(N*j); // -j donc vers la gauche
+                tableauNoir[i] = (king+nbBlancheCote+l-1)-(N*j); // -j donc vers la gauche
                 i++;
             }
             for (j=1; j<=nbNoireRest/2;j++){
-                pieceNoire[i] = (king+nbBlancheCote+l-1)+(N*j); //+j donc vers la droite
+                tableauNoir[i] = (king+nbBlancheCote+l-1)+(N*j); //+j donc vers la droite
                 i++;
             }
             pos ++;
         }
         if (pos==2){
             for(l=1; l<=nbNoireLigne;l++){// tant qu'on n'a pas atteind le bord du bas
-                pieceNoire[i] = king+(nbBlancheCote+l)*N;
+                tableauNoir[i] = king+(nbBlancheCote+l)*N;
                 i++;
             }
             for (j=1; j<=nbNoireRest/2;j++){
-                pieceNoire[i] = (king+(nbBlancheCote+l-1)*N)+j; // +j donc vers la droite
+                tableauNoir[i] = (king+(nbBlancheCote+l-1)*N)+j; // +j donc vers la droite
                 i++;
             }
             for (j=1; j<=nbNoireRest/2;j++){
-                pieceNoire[i] = (king+(nbBlancheCote+l-1)*N)-j; //-j donc vers la gauche
+                tableauNoir[i] = (king+(nbBlancheCote+l-1)*N)-j; //-j donc vers la gauche
                 i++;
             }
             pos ++;
         }
         if (pos==3){
             for(l=1; l<=nbNoireLigne;l++){// tant qu'on n'a pas atteind le bord de gauche
-                pieceNoire[i] = king-nbBlancheCote-l;
+                tableauNoir[i] = king-nbBlancheCote-l;
                 i++;
             }
             for (j=1; j<=nbNoireRest/2;j++){
-                pieceNoire[i] = (king-nbBlancheCote-l-1)+(N*j); // -j donc vers la gauche
+                tableauNoir[i] = (king-nbBlancheCote-l-1)+(N*j); // -j donc vers la gauche
                 i++;
             }
             for (j=1; j<=nbNoireRest/2;j++){
-                pieceNoire[i] = (king-nbBlancheCote-l-1)-(N*j); //+j donc vers la droite
+                tableauNoir[i] = (king-nbBlancheCote-l-1)-(N*j); //+j donc vers la droite
                 i++;
             }
         }
@@ -138,23 +136,19 @@ int init_Plateau(int N, int *tableauBlancs[], int *tableauNoir[], int *tableauFo
         forteresse[2] = (N-1)+(N-1)*N;
         forteresse[3] = (N-1)*N;
     }*/
-    forteresse[0] = 0;
-    forteresse[1] = N-1;
-    forteresse[2] = (N-1)+(N-1)*N;
-    forteresse[3] = (N-1)*N;
+    tableauForteresse[0] = 0;
+    tableauForteresse[1] = N-1;
+    tableauForteresse[2] = (N-1)+(N-1)*N;
+    tableauForteresse[3] = (N-1)*N;
 
     for (i=0;i<nbPieceBlanche;i++){
         //printf("%d\t",pieceBlanche[i]);
-        tableauBlancs[i] = pieceBlanche[i];
     }
     for (i=0;i<nbPieceNoire;i++){
         //printf("%d\t",pieceNoire[i]);
-        tableauNoir[i] = pieceNoire[i];
-        //printf("%d\n", tableauNoir[i]);
     }
     for (i=0;i<4;i++){
         //printf("%d\t",forteresse[i]);
-        tableauForteresse[i] = forteresse[i];
     }
     printf("\n");
     return king;

@@ -9,6 +9,6 @@ set(SDL2_LIB_DIR SDL/lib/x64)
 include_directories(${SDL2_INCLUDE_DIR} ${SDL2_TTF_INCLUDE_DIR})
 link_directories(${SDL2_LIB_DIR} ${SDL2_LIB_DIR} )
 
-add_executable(projet_IF2 src/main.c src/main.h src/init_Plateau.c src/init_Plateau.h src/window.c src/window.h)
+add_executable(projet_IF2 src/main.c src/main.h src/init_Plateau.c src/init_Plateau.h src/window.c src/window.h src/play.c src/play.h)
 
 target_link_libraries(projet_IF2 SDL2main SDL2 SDL2test)
