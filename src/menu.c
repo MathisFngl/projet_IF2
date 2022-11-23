@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "window.h"
+#include "parsing.h"
 
 void GameMenu(){
     int taille = -1;
@@ -15,6 +16,7 @@ void GameMenu(){
         fflush(stdin);
     }
     windowCreation(taille);
+    parsing_write();
 };
 
 void MainMenu(){

@@ -3,7 +3,7 @@
 int parsing_write(){
 
     //Ouvre le fichier
-    char *save = "save.txt";
+    char *save = "save.csv";
     FILE *fp = fopen(save, "w");
     if (fp == NULL) {
         printf("Error opening the file %s", save);
