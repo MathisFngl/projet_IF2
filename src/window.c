@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include "window.h"
 #include "init_Plateau.h"
+#include "parsing.h"
 //#include "play.h"
 
 #define WIN_SIZE 800
@@ -116,16 +117,17 @@ int windowCreation(int taille) {
         SDL_WaitEvent(&e);
         switch (e.type) {
             case SDL_QUIT:
-                QuitEvent(renderer, window);
+                QuitEvent(renderer, window, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
                 quit = true;
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 DepartQuad = GetQuadrant(cases, nb_cases);
                 break;
             case SDL_MOUSEBUTTONUP:
-                Update(renderer, taille, cases);
-                PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
                 MouseInteraction(DepartQuad, cases, nb_cases, renderer);
+
+                PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
+
                 break;
         }
         //FrameUpdate(e, renderer, nb_cases, cases, King, White, Black);
@@ -162,9 +164,10 @@ void HoverEffect(SDL_Renderer* renderer, SDL_Point mouse_point, SDL_Rect cases[]
     }
 }*/
 
-void QuitEvent(SDL_Renderer *renderer, SDL_Window *window) {
+void QuitEvent(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int Roi, int taille) {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    parsing_write(TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
     printf("[DEBUG] : Closed Window");
     SDL_Quit();
 }

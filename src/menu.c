@@ -16,7 +16,6 @@ void GameMenu(){
         fflush(stdin);
     }
     windowCreation(taille);
-    parsing_write();
 };
 
 void MainMenu(){
