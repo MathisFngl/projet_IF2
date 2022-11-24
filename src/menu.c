@@ -15,7 +15,7 @@ void GameMenu(){
         scanf("%d",&taille);
         fflush(stdin);
     }
-    windowCreation(taille);
+    windowCreation(taille, false);
 };
 
 void MainMenu(){
@@ -23,14 +23,21 @@ void MainMenu(){
     printf("============\n");
     printf("Menu Principal du Tablut\n");
     printf("============\n\n");
-    printf("Jouer (Appuyez sur 0)\n");
+    printf("Jouer (Appuyez sur 0) / Reprendre la partie precedente (Appuyer sur 1)\n");
     scanf("%d",&jeu);
     fflush(stdin);
-    while(jeu != 0){
-        printf("Vous devez appuyer sur 0 pour jouer !\n");
+    while(jeu != 0 && jeu != 1){
+        printf("Vous devez appuyer sur 0 pour jouer et 1 pour reprendre !\n");
         scanf("%d",&jeu);
+        printf("%d", jeu);
         fflush(stdin);
     }
     printf("\n");
-    GameMenu();
+    if(jeu == 0){
+        GameMenu();
+    }
+    else{
+        windowCreation(parsing_get_size(), true);
+    }
+    //windowCreation(taille, false);
 };

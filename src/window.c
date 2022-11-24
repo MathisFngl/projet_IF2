@@ -93,7 +93,7 @@ void DrawPiece(SDL_Renderer *renderer, SDL_Rect rect, SDL_Color color, int taill
     }
 }
 
-int windowCreation(int taille) {
+int windowCreation(int taille, bool restart) {
     int nb_cases = taille*taille;
     SDL_Rect cases[nb_cases];
 
@@ -104,7 +104,14 @@ int windowCreation(int taille) {
     int *TableauNoir = (int*) malloc(((taille-1)*2)*sizeof(int));
     int *TableauBlanc = (int*) malloc((taille-1)*sizeof(int));
     int TableauForteresses[4];
-    int Roi = init_Plateau(taille, TableauBlanc, TableauNoir, TableauForteresses);
+    int Roi;
+
+    if(restart == false){
+        Roi = init_Plateau(taille, TableauBlanc, TableauNoir, TableauForteresses);
+    }
+    else{
+        Roi = parsing_open(TableauBlanc, TableauNoir, TableauForteresses);
+    }
 
     //Boucle principale
     bool quit = false;
@@ -127,7 +134,6 @@ int windowCreation(int taille) {
                 MouseInteraction(DepartQuad, cases, nb_cases, renderer);
 
                 PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
-
                 break;
         }
         //FrameUpdate(e, renderer, nb_cases, cases, King, White, Black);
