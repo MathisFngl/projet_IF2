@@ -50,7 +50,6 @@ bool mouvement(int IndexArrive, int IndexDepart,int taille,int couleur,int *piec
             mov = true;
         }
         else{
-            mov = false;
             printf("mov pas ok\n");
         }
     }
@@ -58,15 +57,16 @@ bool mouvement(int IndexArrive, int IndexDepart,int taille,int couleur,int *piec
         mov = false;
         printf("mov  pas ok car pos milieu\n");
     }
-    i=0;
-    while((IndexDepart-taille*i)/taille !=0 || (IndexDepart+taille*i)/taille != taille-1 || (IndexDepart+i)%taille != taille-1 || (IndexDepart-i)%taille !=0 ){ // verif tant qu'on a pas atteind le bord
+    /*for(i=0;i<taille-1;i++){
         for(k=0;k<nbPieceBlanche;k++){ // plus de piece noire que blanche donc on verifie pour toute les piece nois
             if(IndexDepart-taille*i == pieceBlanche[k] || IndexDepart+taille*i == pieceBlanche[k] ||
                IndexDepart+i == pieceBlanche[k] || IndexDepart-i == pieceBlanche[k]){ // verif pas de pion sur le passage
-                printf("mov pas ok car pion sur le passage \n");
+                printf("mov pas ok car pion sur le passage 1 \n");
                 mov = false;
             }
         }
+    }
+    for(i=0;i<taille-1;i++){
         for(k=0;k<nbPieceNoire;k++){
             if(IndexDepart-taille*i == pieceNoire[k] || IndexDepart+taille*i == pieceNoire[k] || IndexDepart+i == pieceNoire[k]
                || IndexDepart-i == pieceNoire[k]){
@@ -74,8 +74,7 @@ bool mouvement(int IndexArrive, int IndexDepart,int taille,int couleur,int *piec
                 mov = false;
             }
         }
-        i++;
-    }
+    }*/
     return mov;
 }
 int pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, int* pieceNoire, int nbPieceBlanche, int nbPieceNoire,int taille,int king){
@@ -193,9 +192,14 @@ int pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, i
 
 int movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanche, int king,int couleur, int nbPieceBlanche, int nbPieceNoire){
     int index,i;
+    for(i=0;i<nbPieceBlanche;i++){
+        printf("%d \t",pieceBlanche[i]);
+    }
+    printf("\n");
     if (couleur == 0){
         if(IndexDepart == king){
             king = IndexArrive;
+            return king;
         }
         for (i=0;i<nbPieceBlanche;i++){
             if(pieceBlanche[i]==IndexDepart){
@@ -203,7 +207,11 @@ int movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanch
             }
         }
         pieceBlanche[index]=IndexArrive;
+        for(i=0;i<nbPieceBlanche;i++){
+            printf("%d \t",pieceBlanche[i]);
+        }
     }
+
     if (couleur == 1){
         for (i=0;i<nbPieceNoire;i++){
             if(pieceNoire[i]==IndexDepart){
@@ -212,10 +220,13 @@ int movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanch
         }
         pieceNoire[index]=IndexArrive;
     }
+
 }
 
 int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceBlanche,int *forteresse, int king, int couleur){
-    int i,indexBlanc,indexNoir; //si couleur=0 alors c'est au blanc de jouer si =1 c'est au noir
+    //si couleur=0 alors c'est au blanc de jouer si =1 c'est au noir
+    printf("depart = %d\n",IndexDepart);
+    printf("arrive = %d\n",IndexArrive);
     bool same,win=false,mov;
     int nbPieceBlanche = taille -1;
     int nbPieceNoire =  (taille-1)*2;
@@ -228,7 +239,13 @@ int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceB
     if(same ==false && mov == true){
         pionMange(IndexArrive,IndexDepart, couleur, pieceBlanche, pieceNoire, nbPieceBlanche,nbPieceNoire,taille,king);
     }
-
-
+    int k =couleur;
+    if(k==0){
+        couleur = 1;
+    }
+    if(k==1){
+        couleur = 0;
+    }
+    return couleur;
 }
 // couleur, taille, king , tab blanc, tab noir, forteresse, indexarrive, indexdepart

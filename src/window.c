@@ -125,9 +125,12 @@ int windowCreation(int taille, bool restart,int debut) {
     SDL_RenderPresent(renderer);
     int DepartQuad = -1;
     int ArriveQuad = -1;
+    int couleur = 0;
     while(quit != true) {
         SDL_Event e;
         SDL_WaitEvent(&e);
+        SDL_RenderClear(renderer);
+        Update(renderer,taille,cases);
         switch (e.type) {
             case SDL_QUIT:
                 QuitEvent(renderer, window, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
@@ -139,7 +142,7 @@ int windowCreation(int taille, bool restart,int debut) {
             case SDL_MOUSEBUTTONUP:
                 ArriveQuad = GetQuadrant(cases, nb_cases);
                 MouseInteraction(DepartQuad, cases, nb_cases, renderer);
-
+                play(ArriveQuad, DepartQuad, taille, TableauNoir, TableauBlanc,TableauForteresses, Roi, couleur);
                 PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
                 break;
         }
