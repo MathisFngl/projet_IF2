@@ -4,6 +4,7 @@
 
 void GameMenu(){
     int taille = -1;
+    int debut = 0;
     printf("============\n");
     printf("Menu de Jeu du Tablut\n");
     printf("============\n\n");
@@ -15,7 +16,7 @@ void GameMenu(){
         scanf("%d",&taille);
         fflush(stdin);
     }
-    windowCreation(taille, false);
+    windowCreation(taille, false,debut);
 };
 
 void MainMenu(){

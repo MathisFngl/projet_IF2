@@ -2,7 +2,7 @@
 #include <stdbool.h>
 
 //int FrameUpdate(SDL_Event, SDL_Renderer*, int, SDL_Rect[], SDL_Surface*, SDL_Surface*, SDL_Surface*);
-int windowCreation(int, bool);
+int windowCreation(int, bool,int);
 void QuitEvent(SDL_Renderer*, SDL_Window*, int* , int* , int[], int, int);
 int Update(SDL_Renderer*, int, SDL_Rect[]);
 void OnButtonClick(SDL_Rect[], int, SDL_Renderer*);

@@ -4,7 +4,7 @@
 #include "window.h"
 #include "init_Plateau.h"
 #include "parsing.h"
-//#include "play.h"
+#include "play.h"
 
 #define WIN_SIZE 800
 
@@ -93,25 +93,30 @@ void DrawPiece(SDL_Renderer *renderer, SDL_Rect rect, SDL_Color color, int taill
     }
 }
 
-int windowCreation(int taille, bool restart) {
+int windowCreation(int taille, bool restart,int debut) {
     int nb_cases = taille*taille;
     SDL_Rect cases[nb_cases];
 
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window *window = SDL_CreateWindow("Tablut", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIN_SIZE, WIN_SIZE, SDL_WINDOW_SHOWN);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
     int *TableauNoir = (int*) malloc(((taille-1)*2)*sizeof(int));
     int *TableauBlanc = (int*) malloc((taille-1)*sizeof(int));
     int TableauForteresses[4];
+    int tableauPiege[2];
     int Roi;
-
+    int mode=0;
     if(restart == false){
-        Roi = init_Plateau(taille, TableauBlanc, TableauNoir, TableauForteresses);
+        Roi = init_Plateau(taille, TableauBlanc, TableauNoir, TableauForteresses,tableauPiege,mode);
     }
     else{
         Roi = parsing_open(TableauBlanc, TableauNoir, TableauForteresses);
     }
+    Update(renderer, taille, cases);
+    PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
+    SDL_RenderPresent(renderer);
+    debut = 1;
+
 
     //Boucle principale
     bool quit = false;
@@ -212,5 +217,4 @@ void MouseInteraction(int IndexDepart, SDL_Rect cases[], int nb_cases, SDL_Rende
 
 int DragPiece(int IndexDepart, int IndexArrive) {
     printf("[DEBUG] : Dragged From %d to %d th quadrant\n", IndexDepart, IndexArrive);
-    //play(IndexArrive,IndexDepart);
 }

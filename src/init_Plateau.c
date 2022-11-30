@@ -1,7 +1,9 @@
 #include "init_Plateau.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *tableauForteresse){
+int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForteresse, int *tableauPiege,int mode){
     int i,k;
     int king;
     king=N/2+(N/2)*N;
@@ -126,30 +128,35 @@ int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *tableauForter
         }
     }
     //initialisation des forteresse
-    int forteresse[4];
-    /*if(mode = avance){
-        ...
+    if(mode == 0){
+        TableauForteresse[0] = 0;
+        TableauForteresse[1] = N-1;
+        TableauForteresse[2] = (N-1)+(N-1)*N;
+        TableauForteresse[3] = (N-1)*N;
     }
-    else{
-        forteresse[0] = 0;
-        forteresse[1] = N-1;
-        forteresse[2] = (N-1)+(N-1)*N;
-        forteresse[3] = (N-1)*N;
-    }*/
-    tableauForteresse[0] = 0;
-    tableauForteresse[1] = N-1;
-    tableauForteresse[2] = (N-1)+(N-1)*N;
-    tableauForteresse[3] = (N-1)*N;
+    if(mode==1){
+        srand(time(0));
+        TableauForteresse[0] = rand()%81;
+        TableauForteresse[1] = rand()%81;
+        TableauForteresse[2] = rand()%81;
+        TableauForteresse[3] = rand()%81;
 
-    for (i=0;i<nbPieceBlanche;i++){
-        //printf("%d\t",pieceBlanche[i]);
+        for(i=0;i<4;i++){
+            for(k=0;k<nbPieceNoire;k++){
+                if(TableauForteresse[i] == tableauNoir[k])
+                    TableauForteresse[i] = rand()%81;
+                    k=0;
+            }
+            for(k=0;k<nbPieceBlanche;k++){
+                if(TableauForteresse[i]==tableauBlancs[k]){
+                    TableauForteresse[i] = rand()%81;
+                    k=0;
+                }
+            }
+        }
+        tableauPiege[0]= rand()%81;
+        tableauPiege[1]= rand()%81;
     }
-    for (i=0;i<nbPieceNoire;i++){
-        //printf("%d\t",pieceNoire[i]);
-    }
-    for (i=0;i<4;i++){
-        //printf("%d\t",forteresse[i]);
-    }
-    printf("\n");
+
     return king;
 }
