@@ -124,6 +124,7 @@ int windowCreation(int taille, bool restart,int debut) {
     PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
     SDL_RenderPresent(renderer);
     int DepartQuad = -1;
+    int ArriveQuad = -1;
     while(quit != true) {
         SDL_Event e;
         SDL_WaitEvent(&e);
@@ -136,6 +137,7 @@ int windowCreation(int taille, bool restart,int debut) {
                 DepartQuad = GetQuadrant(cases, nb_cases);
                 break;
             case SDL_MOUSEBUTTONUP:
+                ArriveQuad = GetQuadrant(cases, nb_cases);
                 MouseInteraction(DepartQuad, cases, nb_cases, renderer);
 
                 PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
