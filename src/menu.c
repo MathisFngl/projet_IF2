@@ -16,7 +16,7 @@ void GameMenu(){
         scanf("%d",&taille);
         fflush(stdin);
     }
-    windowCreation(taille, false,debut);
+    windowCreation(taille, false);
 };
 
 void MainMenu(){
