@@ -128,7 +128,6 @@ int windowCreation(int taille, bool restart) {
     PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
     SDL_RenderPresent(renderer);
     int DepartQuad = -1;
-    int ArriveQuad = -1;
     int couleur = 0;
     while(quit != true) {
         SDL_Event e;

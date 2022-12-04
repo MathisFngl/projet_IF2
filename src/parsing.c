@@ -38,15 +38,16 @@ int parsing_write(int* TableauNoir, int* TableauBlanc, int TableauForteresses[],
 }
 
 int parsing_get_size(){
-    char buff[2];
+    char buff[16];
     char *save = "save.txt";
     FILE *fp = fopen(save, "r");
     if (fp == NULL) {
         printf("Error opening the file %s", save);
         return -1;
     }
-    fgets(buff, 2, fp);
+    fgets(buff, 3, fp);
     int size = atoi(buff);
+    printf("%d", size);
     return size;
 }
 
@@ -80,6 +81,7 @@ int parsing_open(int* TableauBlanc, int* TableauNoir, int* TableauForteresses) {
             switch (compteur) {
                 case 0:
                     taille = atoi(value);
+                    printf("%d", taille);
                     break;
                 case 1:
                     TableauBlanc[i] = atoi(value);

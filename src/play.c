@@ -43,7 +43,7 @@ bool mouvement(int IndexArrive, int IndexDepart,int taille,int couleur,int *piec
     if(IndexDepart == IndexArrive){
         printf("bouger une piece\n");
     }
-    for(i=0;i<taille-1;i++){// au max 8 pour une taille de 9 par exemple
+    for(i=0;i<taille;i++){
         if(IndexDepart-taille*i == IndexArrive || IndexDepart+taille*i == IndexArrive || IndexDepart+i == IndexArrive
            || IndexDepart-i == IndexArrive){
             printf("mov ok\n");
