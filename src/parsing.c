@@ -4,7 +4,13 @@
 #include <stdlib.h>
 
 int parsing_write(int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int Roi, int taille){
-    int tailleBlanc = (taille-1);
+    int tailleBlanc;
+    if(taille == 11){
+        tailleBlanc = 8;
+    }
+    else{
+        tailleBlanc = taille-1;
+    }
     int tailleNoir =  (taille-1)*2;
 
     //Ouvre le fichier

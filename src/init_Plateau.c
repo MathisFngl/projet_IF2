@@ -15,7 +15,13 @@ int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForter
         plateau[i] = i;
     }
 
-    int nbPieceBlanche = N-1;
+    int nbPieceBlanche;
+    if(N == 11){
+        nbPieceBlanche = 8;
+    }
+    else{
+        nbPieceBlanche = N-1;
+    }
     int nbPieceNoire = (N-1)*2;
     //création coordonné piece blanche : on part du haut puis sens aiguille d'une montre
     int nbBlancheCote = nbPieceBlanche/4;
