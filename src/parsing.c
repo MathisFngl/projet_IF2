@@ -47,7 +47,6 @@ int parsing_get_size(){
     }
     fgets(buff, 3, fp);
     int size = atoi(buff);
-    printf("%d", size);
     return size;
 }
 

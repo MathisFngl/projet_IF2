@@ -113,6 +113,7 @@ int windowCreation(int taille, bool restart) {
     if(restart == false){
         // Selon le mode de restart, il place les pièces selon les positions de départ...
         Roi = init_Plateau(taille, TableauBlanc, TableauNoir, TableauForteresses,tableauPiege,mode);
+        printf("[DEBUG] : Commence a %d\n", taille);
     }
     else{
         //... Ou il les place comme ça l'était dans la partie précédente (charge les positions sauvegardées)
