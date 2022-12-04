@@ -1,0 +1,108 @@
+Index: src/play.c
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\n#include \"play.h\"\r\n#include <stdbool.h>\r\n#include <stdio.h>\r\n#include \"window.h\"\r\n\r\nbool sameCase(int king, int *pieceBlanche, int *pieceNoire, int *forteresse,int nbPieceBlanche, int nbPieceNoire,int IndexArrive){\r\n    bool same=false;\r\n    int i;\r\n    for(i=0;i<nbPieceNoire;i++) {\r\n        if (pieceNoire[i] == IndexArrive) {\r\n            same = true;\r\n        }\r\n    }\r\n    for(i=0;i<nbPieceBlanche;i++){\r\n        if(pieceBlanche[i]==IndexArrive){\r\n            same = true;\r\n        }\r\n    }\r\n    for (i=0;i<4;i++){\r\n        if(forteresse[i]==IndexArrive){\r\n            same = true;\r\n        }\r\n    }\r\n    if(IndexArrive == king){\r\n        same = true;\r\n    }\r\n    if(same == true){\r\n        printf(\"La case est deja prise\\n\");\r\n    }\r\n    /*\r\n    for (i=0;i<2;i++){\r\n        if (piege[i]==quadrant){\r\n            pieceBlanche[piece]=Null}\r\n    }*/\r\n\r\n    return same;\r\n}\r\n\r\nbool mouvement(int IndexArrive, int IndexDepart,int taille,int couleur,int *pieceBlanche,int *pieceNoire,int nbPieceBlanche, int nbPieceNoire, int *forteresse){\r\n    bool mov = false;\r\n    int i,k;\r\n    if(IndexDepart == IndexArrive){\r\n        printf(\"bouger une piece\\n\");\r\n    }\r\n    for(i=0;i<taille-1;i++){// au max 8 pour une taille de 9 par exemple\r\n        if(IndexDepart-taille*i == IndexArrive || IndexDepart+taille*i == IndexArrive || IndexDepart+i == IndexArrive\r\n           || IndexDepart-i == IndexArrive){\r\n            printf(\"mov ok\\n\");\r\n            mov = true;\r\n        }\r\n        else{\r\n            printf(\"mov pas ok\\n\");\r\n        }\r\n    }\r\n    if(IndexArrive == taille/2+(taille/2)*taille){ // position case du milieu\r\n        mov = false;\r\n        printf(\"mov  pas ok car pos milieu\\n\");\r\n    }\r\n    /*for(i=0;i<taille-1;i++){\r\n        for(k=0;k<nbPieceBlanche;k++){ // plus de piece noire que blanche donc on verifie pour toute les piece nois\r\n            if(IndexDepart-taille*i == pieceBlanche[k] || IndexDepart+taille*i == pieceBlanche[k] ||\r\n               IndexDepart+i == pieceBlanche[k] || IndexDepart-i == pieceBlanche[k]){ // verif pas de pion sur le passage\r\n                printf(\"mov pas ok car pion sur le passage 1 \\n\");\r\n                mov = false;\r\n            }\r\n        }\r\n    }\r\n    for(i=0;i<taille-1;i++){\r\n        for(k=0;k<nbPieceNoire;k++){\r\n            if(IndexDepart-taille*i == pieceNoire[k] || IndexDepart+taille*i == pieceNoire[k] || IndexDepart+i == pieceNoire[k]\r\n               || IndexDepart-i == pieceNoire[k]){\r\n                printf(\"mov pas ok car pion sur le passage \\n\");\r\n                mov = false;\r\n            }\r\n        }\r\n    }*/\r\n    return mov;\r\n}\r\nint pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, int* pieceNoire, int nbPieceBlanche, int nbPieceNoire,int taille,int king){\r\n    int i,k,index;\r\n    if (couleur == 0){\r\n        for (i=0;i<nbPieceBlanche;i++){\r\n            if(pieceBlanche[i]==IndexDepart){\r\n                index = i;\r\n            }\r\n        }\r\n        for(i=0;i<nbPieceNoire;i++){\r\n            if(IndexArrive-taille == pieceNoire[i]){ // pion en haut\r\n                for(k=0;k<nbPieceBlanche;k++){\r\n                    if(IndexArrive-2*taille==pieceBlanche[k] || IndexArrive-2*taille == king){\r\n                        printf(\"pion noir mange en haut:%d\\n\",pieceNoire[i]);\r\n                        pieceNoire[i] = -1;\r\n                    }\r\n                }\r\n            }\r\n            if(IndexArrive+taille == pieceNoire[i]){ // pion en bas\r\n                for(k=0;k<nbPieceBlanche;k++){\r\n                    if(IndexArrive+2*taille==pieceBlanche[k] || IndexArrive+2*taille == king){\r\n                        printf(\"pion noir mange en bas:%d\\n\",pieceNoire[i]);\r\n                        pieceNoire[i] = -1;\r\n                    }\r\n                }\r\n            }\r\n            if(IndexArrive+1 == pieceNoire[i] && IndexArrive%taille <= taille-3){ // pion a droite + verif assez de case sur le cote\r\n                for(k=0;k<nbPieceBlanche;k++){\r\n                    if(IndexArrive+2==pieceBlanche[k] || IndexArrive+2 == king)\r\n                        printf(\"pion noir mange a droite:%d\\n\",pieceNoire[i]);\r\n                        pieceNoire[i] = -1;\r\n                    }\r\n                }\r\n            }\r\n            if(IndexArrive-1 == pieceNoire[i] && IndexArrive%taille >= 2){ // pion a gauche + verif assez de cases sur le cote\r\n                for(k=0;k<nbPieceBlanche;k++){\r\n                    if(IndexArrive-2==pieceBlanche[k] || IndexArrive-2 == king){\r\n                        printf(\"pion noir mange à gauche:%d\\n\",pieceNoire[i]);\r\n                        pieceNoire[i] = -1;\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    if (couleur == 1){\r\n        if(IndexArrive-taille == king){ // roi mangé par le haut\r\n            for(k=0;k<nbPieceNoire;k++){\r\n                if(IndexArrive-2*taille == pieceNoire[k]){\r\n                    printf(\"roi blanc mange en haut:%d\\n\",king);\r\n                    king = -1;\r\n                }\r\n            }\r\n        }\r\n        if(IndexArrive+taille == king){ // roi mangé par le bas\r\n            for(k=0;k<nbPieceNoire;k++){\r\n                if(IndexArrive+2*taille == pieceNoire[k]){\r\n                    printf(\"roi blanc mange en bas:%d\\n\",king);\r\n                    king = -1;\r\n                }\r\n            }\r\n        }\r\n        if(IndexArrive-1 == king){ // roi mangé par la gauche\r\n            for(k=0;k<nbPieceNoire;k++){\r\n                if(IndexArrive-2 == pieceNoire[k]){\r\n                    printf(\"roi blanc mange a gauche:%d\\n\",king);\r\n                    king = -1;\r\n                }\r\n            }\r\n        }\r\n        if(IndexArrive+1 == king){ // roi mangé par la droite\r\n            for(k=0;k<nbPieceNoire;k++){\r\n                if(IndexArrive+2 == pieceNoire[k]){\r\n                    printf(\"roi blanc mange a droite:%d\\n\",king);\r\n                    king = -1;\r\n                }\r\n            }\r\n        }\r\n        for(i=0;i<nbPieceBlanche;i++){ // parcours tout le tab blanc\r\n            if(IndexArrive-taille == pieceBlanche[i]){ // pion en haut\r\n                for(k=0;k<nbPieceNoire;k++){\r\n                    if(IndexArrive-2*taille==pieceNoire[k]){\r\n                        printf(\"pion blanc mange en haut:%d\\n\",pieceBlanche[i]);\r\n                        pieceBlanche[i] = -1;\r\n                    }\r\n                }\r\n            }\r\n            if(IndexArrive+taille == pieceBlanche[i]){ // pion en bas\r\n                for(k=0;k<nbPieceNoire;k++){\r\n                    if(IndexArrive+2*taille==pieceNoire[k]){\r\n                        printf(\"pion blanc mange en bas:%d\\n\",pieceBlanche[i]);\r\n                        pieceBlanche[i] = -1;\r\n                    }\r\n                }\r\n            }\r\n            if(IndexArrive+1 == pieceBlanche[i] && IndexArrive%taille <= taille-3){ // pion a droite + verif assez de case sur le cote\r\n                for(k=0;k<nbPieceNoire;k++){\r\n                    if(IndexArrive+2==pieceNoire[k]){\r\n                        printf(\"pion blanc mange à droite:%d\\n\",pieceBlanche[i]);\r\n                        pieceBlanche[i] = -1;\r\n                    }\r\n                }\r\n            }\r\n            if(IndexArrive-1 == pieceBlanche[i] && IndexArrive%taille >= 2){ // pion a gauche + verif assez de cases sur le cote\r\n                for(k=0;k<nbPieceNoire;k++){\r\n                    if(IndexArrive-2==pieceNoire[k]){\r\n                        printf(\"pion blanc mange gauche:%d\\n\",pieceBlanche[i]);\r\n                        pieceBlanche[i] = -1;\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n    movPieces(IndexDepart,IndexArrive,pieceNoire,pieceBlanche,king,couleur,nbPieceBlanche,nbPieceNoire);\r\n}\r\n\r\nint movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanche, int king,int couleur, int nbPieceBlanche, int nbPieceNoire){\r\n    int index,i;\r\n    for(i=0;i<nbPieceBlanche;i++){\r\n        printf(\"%d \\t\",pieceBlanche[i]);\r\n    }\r\n    printf(\"\\n\");\r\n    if (couleur == 0){\r\n        if(IndexDepart == king){\r\n            king = IndexArrive;\r\n            return king;\r\n        }\r\n        for (i=0;i<nbPieceBlanche;i++){\r\n            if(pieceBlanche[i]==IndexDepart){\r\n                index = i;\r\n            }\r\n        }\r\n        pieceBlanche[index]=IndexArrive;\r\n        for(i=0;i<nbPieceBlanche;i++){\r\n            printf(\"%d \\t\",pieceBlanche[i]);\r\n        }\r\n    }\r\n\r\n    if (couleur == 1){\r\n        for (i=0;i<nbPieceNoire;i++){\r\n            if(pieceNoire[i]==IndexDepart){\r\n                index = i;\r\n            }\r\n        }\r\n        pieceNoire[index]=IndexArrive;\r\n    }\r\n\r\n}\r\n\r\nint play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceBlanche,int *forteresse, int king, int couleur){\r\n    //si couleur=0 alors c'est au blanc de jouer si =1 c'est au noir\r\n    printf(\"depart = %d\\n\",IndexDepart);\r\n    printf(\"arrive = %d\\n\",IndexArrive);\r\n    bool same,win=false,mov;\r\n    int nbPieceBlanche = taille -1;\r\n    int nbPieceNoire =  (taille-1)*2;\r\n    // test si'il n'y a pas déja un pion\r\n    same = sameCase(king, pieceBlanche, pieceNoire, forteresse,nbPieceBlanche,nbPieceNoire,IndexArrive);\r\n    //test movement\r\n    if(same==false){\r\n        mov = mouvement(IndexArrive,IndexDepart,taille, couleur,pieceBlanche, pieceNoire, nbPieceBlanche, nbPieceNoire, forteresse );\r\n    }\r\n    if(same ==false && mov == true){\r\n        pionMange(IndexArrive,IndexDepart, couleur, pieceBlanche, pieceNoire, nbPieceBlanche,nbPieceNoire,taille,king);\r\n    }\r\n    int k =couleur;\r\n    if(k==0){\r\n        couleur = 1;\r\n    }\r\n    if(k==1){\r\n        couleur = 0;\r\n    }\r\n    return couleur;\r\n}\r\n// couleur, taille, king , tab blanc, tab noir, forteresse, indexarrive, indexdepart\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/play.c b/src/play.c
+--- a/src/play.c	(revision 4bc901882e0e2ff35905a23a41953ba2e2bc6d6b)
++++ b/src/play.c	(date 1669802729629)
+@@ -57,10 +57,13 @@
+         mov = false;
+         printf("mov  pas ok car pos milieu\n");
+     }
+-    /*for(i=0;i<taille-1;i++){
+-        for(k=0;k<nbPieceBlanche;k++){ // plus de piece noire que blanche donc on verifie pour toute les piece nois
+-            if(IndexDepart-taille*i == pieceBlanche[k] || IndexDepart+taille*i == pieceBlanche[k] ||
+-               IndexDepart+i == pieceBlanche[k] || IndexDepart-i == pieceBlanche[k]){ // verif pas de pion sur le passage
++    for(i=0;i<taille-1;i++){
++        for(k=0;k<nbPieceBlanche;k++){
++            if(IndexDepart-taille*i == pieceBlanche[k]){ // verif pas de pion sur le passage
++                printf("mov pas ok car pion sur le passage 1 \n");
++                mov = false;
++            }
++            if(IndexDepart+taille*i == pieceBlanche[k]) {
+                 printf("mov pas ok car pion sur le passage 1 \n");
+                 mov = false;
+             }
+@@ -74,17 +77,12 @@
+                 mov = false;
+             }
+         }
+-    }*/
++    }
+     return mov;
+ }
+ int pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, int* pieceNoire, int nbPieceBlanche, int nbPieceNoire,int taille,int king){
+-    int i,k,index;
++    int i,k;
+     if (couleur == 0){
+-        for (i=0;i<nbPieceBlanche;i++){
+-            if(pieceBlanche[i]==IndexDepart){
+-                index = i;
+-            }
+-        }
+         for(i=0;i<nbPieceNoire;i++){
+             if(IndexArrive-taille == pieceNoire[i]){ // pion en haut
+                 for(k=0;k<nbPieceBlanche;k++){
+@@ -94,7 +92,7 @@
+                     }
+                 }
+             }
+-            if(IndexArrive+taille == pieceNoire[i]){ // pion en bas
++            else if(IndexArrive+taille == pieceNoire[i]){ // pion en bas
+                 for(k=0;k<nbPieceBlanche;k++){
+                     if(IndexArrive+2*taille==pieceBlanche[k] || IndexArrive+2*taille == king){
+                         printf("pion noir mange en bas:%d\n",pieceNoire[i]);
+@@ -102,15 +100,14 @@
+                     }
+                 }
+             }
+-            if(IndexArrive+1 == pieceNoire[i] && IndexArrive%taille <= taille-3){ // pion a droite + verif assez de case sur le cote
+-                for(k=0;k<nbPieceBlanche;k++){
+-                    if(IndexArrive+2==pieceBlanche[k] || IndexArrive+2 == king)
+-                        printf("pion noir mange a droite:%d\n",pieceNoire[i]);
+-                        pieceNoire[i] = -1;
+-                    }
++            else if(IndexArrive+1 == pieceNoire[i] && IndexArrive%taille <= taille-3) { // pion a droite + verif assez de case sur le cote
++                for (k = 0; k < nbPieceBlanche; k++) {
++                    if (IndexArrive + 2 == pieceBlanche[k] || IndexArrive + 2 == king)
++                        printf("pion noir mange a droite:%d\n", pieceNoire[i]);
++                    pieceNoire[i] = -1;
+                 }
+             }
+-            if(IndexArrive-1 == pieceNoire[i] && IndexArrive%taille >= 2){ // pion a gauche + verif assez de cases sur le cote
++            else if(IndexArrive-1 == pieceNoire[i] && IndexArrive%taille >= 2){ // pion a gauche + verif assez de cases sur le cote
+                 for(k=0;k<nbPieceBlanche;k++){
+                     if(IndexArrive-2==pieceBlanche[k] || IndexArrive-2 == king){
+                         printf("pion noir mange à gauche:%d\n",pieceNoire[i]);
+@@ -119,6 +116,8 @@
+                 }
+             }
+         }
++
++    }
+     if (couleur == 1){
+         if(IndexArrive-taille == king){ // roi mangé par le haut
+             for(k=0;k<nbPieceNoire;k++){
+@@ -192,9 +191,6 @@
+ 
+ int movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanche, int king,int couleur, int nbPieceBlanche, int nbPieceNoire){
+     int index,i;
+-    for(i=0;i<nbPieceBlanche;i++){
+-        printf("%d \t",pieceBlanche[i]);
+-    }
+     printf("\n");
+     if (couleur == 0){
+         if(IndexDepart == king){
+@@ -207,9 +203,6 @@
+             }
+         }
+         pieceBlanche[index]=IndexArrive;
+-        for(i=0;i<nbPieceBlanche;i++){
+-            printf("%d \t",pieceBlanche[i]);
+-        }
+     }
+ 
+     if (couleur == 1){
