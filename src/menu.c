@@ -40,5 +40,4 @@ void MainMenu(){
     else{
         windowCreation(parsing_get_size(), true);
     }
-    //windowCreation(taille, false);
 };
