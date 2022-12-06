@@ -37,7 +37,7 @@ bool sameCase(int king, int *pieceBlanche, int *pieceNoire, int *forteresse,int 
     return same;
 }
 
-bool mouvement(int IndexArrive, int IndexDepart,int taille,int couleur,int *pieceBlanche,int *pieceNoire,int nbPieceBlanche, int nbPieceNoire, int *forteresse,int king){
+bool mouvement(int IndexArrive, int IndexDepart,int taille,int *pieceBlanche,int *pieceNoire,int nbPieceBlanche, int nbPieceNoire, int *forteresse,int king){
     bool mov = false;
     int i,k,orientation;
     if(IndexDepart == IndexArrive){
@@ -65,7 +65,7 @@ bool mouvement(int IndexArrive, int IndexDepart,int taille,int couleur,int *piec
             orientation = 4;
         }
     }
-    if(IndexArrive == taille/2+(taille/2)*taille){ // position case du milieu
+    if(IndexArrive == taille/2+(taille/2)*taille && IndexDepart != king){ // position case du milieu
         mov = false;
     }
     if(orientation == 1){
@@ -310,23 +310,25 @@ int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceB
         }
     }
     // test si'il n'y a pas déja un pion
+    if(piece !=0){
+        return -2;
+    }
     if(piece==0){
         same = sameCase(king, pieceBlanche, pieceNoire, forteresse,nbPieceBlanche,nbPieceNoire,IndexArrive);
     }
     //test movement
+    if(same==true){
+        return -2;
+    }
     if(same==false){
-        mov = mouvement(IndexArrive,IndexDepart,taille, couleur,pieceBlanche, pieceNoire, nbPieceBlanche, nbPieceNoire, forteresse, king);
+        mov = mouvement(IndexArrive,IndexDepart,taille,pieceBlanche, pieceNoire, nbPieceBlanche, nbPieceNoire, forteresse, king);
+    }
+    if(same ==false && mov == false && piece==0){
+        return -2;
     }
     if(same ==false && mov == true && piece==0){
         pionMange(IndexArrive,IndexDepart, couleur, pieceBlanche, pieceNoire, nbPieceBlanche,nbPieceNoire,taille,king);
     }
-    int k =couleur;
-    if(k==0){
-        couleur = 1;
-    }
-    if(k==1){
-        couleur = 0;
-    }
-    return couleur;
+    return king;
 }
-// couleur, taille, king , tab blanc, tab noir, forteresse, indexarrive, indexdepart
+
