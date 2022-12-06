@@ -37,7 +37,7 @@ bool sameCase(int king, int *pieceBlanche, int *pieceNoire, int *forteresse,int 
     return same;
 }
 
-bool mouvement(int IndexArrive, int IndexDepart,int taille,int c,int *pieceBlanche,int *pieceNoire,int nbPieceBlanche, int nbPieceNoire, int *forteresse,int king){
+bool mouvement(int IndexArrive, int IndexDepart,int taille,int couleur,int *pieceBlanche,int *pieceNoire,int nbPieceBlanche, int nbPieceNoire, int *forteresse,int king){
     bool mov = false;
     int i,k,orientation;
     if(IndexDepart == IndexArrive){
@@ -286,9 +286,8 @@ int movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanch
 
 }
 
-int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceBlanche,int *forteresse, int king, int* c){
+int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceBlanche,int *forteresse, int king, int couleur){
     //si couleur=0 alors c'est au blanc de jouer si =1 c'est au noir
-    int couleur = *c;
     printf("depart = %d\n",IndexDepart);
     printf("arrive = %d\n",IndexArrive);
     printf("couleur = %d\n",couleur);
@@ -314,22 +313,20 @@ int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceB
     if(piece==0){
         same = sameCase(king, pieceBlanche, pieceNoire, forteresse,nbPieceBlanche,nbPieceNoire,IndexArrive);
     }
-    else{
-        return -2;
-    }
     //test movement
     if(same==false){
         mov = mouvement(IndexArrive,IndexDepart,taille, couleur,pieceBlanche, pieceNoire, nbPieceBlanche, nbPieceNoire, forteresse, king);
     }
-    else{
-        return -2;
-    }
     if(same ==false && mov == true && piece==0){
         pionMange(IndexArrive,IndexDepart, couleur, pieceBlanche, pieceNoire, nbPieceBlanche,nbPieceNoire,taille,king);
-        return king;
     }
-    else{
-        return -2;
+    int k =couleur;
+    if(k==0){
+        couleur = 1;
     }
+    if(k==1){
+        couleur = 0;
+    }
+    return couleur;
 }
 // couleur, taille, king , tab blanc, tab noir, forteresse, indexarrive, indexdepart
