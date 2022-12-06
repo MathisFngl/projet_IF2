@@ -1,0 +1,39 @@
+Index: cmake-build-debug/Testing/Temporary/LastTest.log
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>Start testing: Nov 30 11:04 Paris, Madrid\r\n----------------------------------------------------------\r\nEnd testing: Nov 30 11:04 Paris, Madrid\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/Testing/Temporary/LastTest.log b/cmake-build-debug/Testing/Temporary/LastTest.log
+--- a/cmake-build-debug/Testing/Temporary/LastTest.log	(revision e368d76a1ae490b6c69304127903ca70a36c7928)
++++ b/cmake-build-debug/Testing/Temporary/LastTest.log	(date 1670339292815)
+@@ -1,3 +1,3 @@
+-Start testing: Nov 30 11:04 Paris, Madrid
++Start testing: Dec 06 16:08 Paris, Madrid
+ ----------------------------------------------------------
+-End testing: Nov 30 11:04 Paris, Madrid
++End testing: Dec 06 16:08 Paris, Madrid
+Index: cmake-build-debug/CMakeFiles/clion-log.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\"C:\\Program Files\\JetBrains\\CLion 2022.2.1\\bin\\cmake\\win\\bin\\cmake.exe\" -DCMAKE_BUILD_TYPE=Debug -G \"CodeBlocks - MinGW Makefiles\" -S C:\\Users\\fanig\\Documents\\GitHub\\projet_IF2 -B C:\\Users\\fanig\\Documents\\GitHub\\projet_IF2\\cmake-build-debug\r\n-- The C compiler identification is GNU 11.2.0\r\n-- Detecting C compiler ABI info\r\n-- Detecting C compiler ABI info - done\r\n-- Check for working C compiler: C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/gcc.exe - skipped\r\n-- Detecting C compile features\r\n-- Detecting C compile features - done\r\n-- Configuring done\r\n-- Generating done\r\n-- Build files have been written to: C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/CMakeFiles/clion-log.txt b/cmake-build-debug/CMakeFiles/clion-log.txt
+--- a/cmake-build-debug/CMakeFiles/clion-log.txt	(revision e368d76a1ae490b6c69304127903ca70a36c7928)
++++ b/cmake-build-debug/CMakeFiles/clion-log.txt	(date 1670339288157)
+@@ -1,10 +1,4 @@
+-"C:\Program Files\JetBrains\CLion 2022.2.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S C:\Users\fanig\Documents\GitHub\projet_IF2 -B C:\Users\fanig\Documents\GitHub\projet_IF2\cmake-build-debug
+--- The C compiler identification is GNU 11.2.0
+--- Detecting C compiler ABI info
+--- Detecting C compiler ABI info - done
+--- Check for working C compiler: C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/gcc.exe - skipped
+--- Detecting C compile features
+--- Detecting C compile features - done
++"C:\Program Files\JetBrains\CLion 2022.2.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S D:\UTBM\IF\projet_IF2 -B D:\UTBM\IF\projet_IF2\cmake-build-debug
+ -- Configuring done
+ -- Generating done
+--- Build files have been written to: C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug
++-- Build files have been written to: D:/UTBM/IF/projet_IF2/cmake-build-debug
