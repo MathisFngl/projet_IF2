@@ -28,11 +28,6 @@ bool sameCase(int king, int *pieceBlanche, int *pieceNoire, int *forteresse,int 
     if(same == true){
         printf("La case est deja prise\n");
     }
-    /*
-    for (i=0;i<2;i++){
-        if (piege[i]==quadrant){
-            pieceBlanche[piece]=Null}
-    }*/
 
     return same;
 }
@@ -148,41 +143,33 @@ bool mouvement(int IndexArrive, int IndexDepart,int taille,int *pieceBlanche,int
     return mov;
 }
 int pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, int* pieceNoire, int nbPieceBlanche, int nbPieceNoire,int taille,int king){
-    int i,k,index;
+    int i,k;
     if (couleur == 0){
         for(i=0;i<nbPieceNoire;i++){
             if(IndexArrive-taille == pieceNoire[i]){ // pion en haut
-                printf("pion noir en haut:%d\n",pieceNoire[i]);
                 for(k=0;k<nbPieceBlanche;k++){
                     if(IndexArrive-2*taille==pieceBlanche[k] || IndexArrive-2*taille == king){
-                        printf("pion noir mange en haut:%d\n",pieceNoire[i]);
                         pieceNoire[i] = -1;
                     }
                 }
             }
             if(IndexArrive+taille == pieceNoire[i]){ // pion en bas
-                printf("pion noir en bas:%d\n",pieceNoire[i]);
                 for(k=0;k<nbPieceBlanche;k++){
                     if(IndexArrive+2*taille==pieceBlanche[k] || IndexArrive+2*taille == king){
-                        printf("pion noir mange en bas:%d\n",pieceNoire[i]);
                         pieceNoire[i] = -1;
                     }
                 }
             }
             if(IndexArrive+1 == pieceNoire[i] && (IndexArrive+2)%taille!=1 && (IndexArrive+2)%taille!=0 ){ // pion a droite + verif assez de case sur le cote
-                printf("pion noir a droite:%d\n",pieceNoire[i]);
                 for(k=0;k<nbPieceBlanche;k++){
                     if(IndexArrive+2==pieceBlanche[k] || IndexArrive+2 == king){
-                        printf("pion noir mange a droite:%d\n",pieceNoire[i]);
                         pieceNoire[i] = -1;
                     }
                 }
             }
             if(IndexArrive-1 == pieceNoire[i] && (IndexArrive-2)%taille!=taille-1 && (IndexArrive-2)%taille!=taille-2 ){ // pion a gauche + verif assez de cases sur le cote
-                printf("pion noir a gauche:%d\n",pieceNoire[i]);
                 for(k=0;k<nbPieceBlanche;k++){
                     if(IndexArrive-2==pieceBlanche[k] || IndexArrive-2 == king){
-                        printf("pion noir mange à gauche:%d\n",pieceNoire[i]);
                         pieceNoire[i] = -1;
                     }
                 }
@@ -193,7 +180,6 @@ int pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, i
         if(IndexArrive-taille == king){ // roi mangé par le haut
             for(k=0;k<nbPieceNoire;k++){
                 if(IndexArrive-2*taille == pieceNoire[k]){
-                    printf("roi blanc mange en haut:%d\n",king);
                     king = -1;
                 }
             }
@@ -201,7 +187,6 @@ int pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, i
         if(IndexArrive+taille == king){ // roi mangé par le bas
             for(k=0;k<nbPieceNoire;k++){
                 if(IndexArrive+2*taille == pieceNoire[k]){
-                    printf("roi blanc mange en bas:%d\n",king);
                     king = -1;
                 }
             }
@@ -209,7 +194,6 @@ int pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, i
         if(IndexArrive-1 == king){ // roi mangé par la gauche
             for(k=0;k<nbPieceNoire;k++){
                 if(IndexArrive-2 == pieceNoire[k]){
-                    printf("roi blanc mange a gauche:%d\n",king);
                     king = -1;
                 }
             }
@@ -217,7 +201,6 @@ int pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, i
         if(IndexArrive+1 == king){ // roi mangé par la droite
             for(k=0;k<nbPieceNoire;k++){
                 if(IndexArrive+2 == pieceNoire[k]){
-                    printf("roi blanc mange a droite:%d\n",king);
                     king = -1;
                 }
             }
@@ -226,7 +209,6 @@ int pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, i
             if(IndexArrive-taille == pieceBlanche[i]){ // pion en haut
                 for(k=0;k<nbPieceNoire;k++){
                     if(IndexArrive-2*taille==pieceNoire[k]){
-                        printf("pion blanc mange en haut:%d\n",pieceBlanche[i]);
                         pieceBlanche[i] = -1;
                     }
                 }
@@ -234,7 +216,6 @@ int pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, i
             if(IndexArrive+taille == pieceBlanche[i]){ // pion en bas
                 for(k=0;k<nbPieceNoire;k++){
                     if(IndexArrive+2*taille==pieceNoire[k]){
-                        printf("pion blanc mange en bas:%d\n",pieceBlanche[i]);
                         pieceBlanche[i] = -1;
                     }
                 }
@@ -242,7 +223,6 @@ int pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, i
             if(IndexArrive+1 == pieceBlanche[i] && (IndexArrive+2)%taille!=1 && (IndexArrive+2)%taille!=0){ // pion a droite + verif assez de case sur le cote
                 for(k=0;k<nbPieceNoire;k++){
                     if(IndexArrive+2==pieceNoire[k]){
-                        printf("pion blanc mange à droite:%d\n",pieceBlanche[i]);
                         pieceBlanche[i] = -1;
                     }
                 }
@@ -250,7 +230,6 @@ int pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, i
             if(IndexArrive-1 == pieceBlanche[i] && (IndexArrive+2)%taille!=1 && (IndexArrive+2)%taille!=0){ // pion a gauche + verif assez de cases sur le cote
                 for(k=0;k<nbPieceNoire;k++){
                     if(IndexArrive-2==pieceNoire[k]){
-                        printf("pion blanc mange gauche:%d\n",pieceBlanche[i]);
                         pieceBlanche[i] = -1;
                     }
                 }

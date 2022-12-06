@@ -3,6 +3,78 @@
 #include <stdlib.h>
 #include <time.h>
 
+int modeCompliqueForteresse(int N, int *tableauBlancs, int *tableauNoir, int *TableauForteresse){
+    int i,k;
+    int nbPieceBlanche;
+    if(N == 11){
+        nbPieceBlanche = 8;
+    }
+    else{
+        nbPieceBlanche = N-1;
+    }
+    int nbPieceNoire = (N-1)*2;
+    srand(time(0));
+    TableauForteresse[0] = rand()%81;
+    TableauForteresse[1] = rand()%81;
+    TableauForteresse[2] = rand()%81;
+    TableauForteresse[3] = rand()%81;
+
+    for(i=0;i<4;i++){
+        for(k=0;k<nbPieceNoire;k++){
+            if(TableauForteresse[i] == tableauNoir[k])
+                modeCompliqueForteresse(N,tableauBlancs, tableauNoir,TableauForteresse);
+
+        }
+        for(k=0;k<nbPieceBlanche;k++){
+            if(TableauForteresse[i]==tableauBlancs[k]){
+                modeCompliqueForteresse(N,tableauBlancs, tableauNoir,TableauForteresse);
+            }
+        }
+        for(k=0;k<4;k++){
+            if(TableauForteresse[i]==TableauForteresse[k]){
+                modeCompliqueForteresse(N,tableauBlancs, tableauNoir,TableauForteresse);
+            }
+        }
+    }
+}
+//fonction recursive pour les replacer aléatoirement jusqu'à ce que ça soit bon
+int modeCompliquePiege(int N, int *tableauBlancs, int *tableauNoir, int *tableauPiege,int *TableauForteresse){
+    int i,k;
+    int nbPieceBlanche;
+    if(N == 11){
+        nbPieceBlanche = 8;
+    }
+    else{
+        nbPieceBlanche = N-1;
+    }
+    int nbPieceNoire = (N-1)*2;
+    srand(time(0));
+    tableauPiege[0]=rand()%81;
+    tableauPiege[1]=rand()%81;
+    for(i=0;i<2;i++){
+        for(k=0;k<nbPieceNoire;k++){
+            if(tableauPiege[i] == tableauNoir[k])
+                modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse);
+
+        }
+        for(k=0;k<nbPieceBlanche;k++){
+            if(tableauPiege[i]==tableauBlancs[k]){
+                modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse);
+            }
+        }
+        for(k=0;k<2;k++){
+            if(tableauPiege[i]==tableauPiege[k]){
+                modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse);
+            }
+        }
+        for(k=0;k<4;k++){
+            if(tableauPiege[i]==TableauForteresse[k]){
+                modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse);
+            }
+        }
+    }
+}
+
 int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForteresse, int *tableauPiege,int mode){
     int i,k;
     int king;
@@ -141,27 +213,8 @@ int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForter
         TableauForteresse[3] = (N-1)*N;
     }
     if(mode==1){
-        srand(time(0));
-        TableauForteresse[0] = rand()%81;
-        TableauForteresse[1] = rand()%81;
-        TableauForteresse[2] = rand()%81;
-        TableauForteresse[3] = rand()%81;
-
-        for(i=0;i<4;i++){
-            for(k=0;k<nbPieceNoire;k++){
-                if(TableauForteresse[i] == tableauNoir[k])
-                    TableauForteresse[i] = rand()%81;
-                    k=0;
-            }
-            for(k=0;k<nbPieceBlanche;k++){
-                if(TableauForteresse[i]==tableauBlancs[k]){
-                    TableauForteresse[i] = rand()%81;
-                    k=0;
-                }
-            }
-        }
-        tableauPiege[0]= rand()%81;
-        tableauPiege[1]= rand()%81;
+        modeCompliqueForteresse(N,tableauBlancs, tableauNoir,TableauForteresse);
+        modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse);
     }
 
     return king;
