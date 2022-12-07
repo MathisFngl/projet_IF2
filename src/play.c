@@ -37,7 +37,7 @@ bool sameCase(int king, int *pieceBlanche, int *pieceNoire, int *forteresse,int 
     return same;
 }
 
-bool mouvement(int IndexArrive, int IndexDepart,int taille,int couleur,int *pieceBlanche,int *pieceNoire,int nbPieceBlanche, int nbPieceNoire, int *forteresse,int king){
+bool mouvement(int IndexArrive, int IndexDepart,int taille,int *pieceBlanche,int *pieceNoire,int nbPieceBlanche, int nbPieceNoire, int *forteresse,int king){
     bool mov = false;
     int i,k,orientation;
     if(IndexDepart == IndexArrive){
@@ -147,9 +147,9 @@ bool mouvement(int IndexArrive, int IndexDepart,int taille,int couleur,int *piec
 
     return mov;
 }
-int pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, int* pieceNoire, int nbPieceBlanche, int nbPieceNoire,int taille,int king){
+int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pieceNoire, int nbPieceBlanche, int nbPieceNoire,int taille,int king){
     int i,k,index;
-    if (couleur == 0){
+    if (c == 0){
         for(i=0;i<nbPieceNoire;i++){
             if(IndexArrive-taille == pieceNoire[i]){ // pion en haut
                 printf("pion noir en haut:%d\n",pieceNoire[i]);
@@ -189,7 +189,7 @@ int pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, i
             }
         }
     }
-    if (couleur == 1){
+    if (c == 1){
         if(IndexArrive-taille == king){ // roi mangé par le haut
             for(k=0;k<nbPieceNoire;k++){
                 if(IndexArrive-2*taille == pieceNoire[k]){
@@ -257,12 +257,12 @@ int pionMange(int IndexArrive,int IndexDepart, int couleur, int* pieceBlanche, i
             }
         }
     }
-    movPieces(IndexDepart,IndexArrive,pieceNoire,pieceBlanche,king,couleur,nbPieceBlanche,nbPieceNoire);
+    movPieces(IndexDepart,IndexArrive,pieceNoire,pieceBlanche,king,c,nbPieceBlanche,nbPieceNoire);
 }
 
-int movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanche, int king,int couleur, int nbPieceBlanche, int nbPieceNoire){
+int movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanche, int king,int c, int nbPieceBlanche, int nbPieceNoire){
     int index,i;
-    if (couleur == 0){
+    if (c == 0){
         if(IndexDepart == king){
             king = IndexArrive;
             return king;
@@ -275,7 +275,7 @@ int movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanch
         pieceBlanche[index]=IndexArrive;
     }
 
-    if (couleur == 1){
+    if (c == 1){
         for (i=0;i<nbPieceNoire;i++){
             if(pieceNoire[i]==IndexDepart){
                 index = i;
@@ -286,23 +286,24 @@ int movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanch
 
 }
 
-int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceBlanche,int *forteresse, int king, int couleur){
+int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceBlanche,int *forteresse, int king, int* couleur){
     //si couleur=0 alors c'est au blanc de jouer si =1 c'est au noir
+    int c = *couleur;
     printf("depart = %d\n",IndexDepart);
     printf("arrive = %d\n",IndexArrive);
-    printf("couleur = %d\n",couleur);
+    printf("couleur = %d\n",c);
     int i,piece=1;
     bool same,win=false,mov;
     int nbPieceBlanche = taille -1;
     int nbPieceNoire =  (taille-1)*2;
-    if(couleur==0){
+    if(c==0){
         for(i=0;i<nbPieceBlanche;i++){
             if(pieceBlanche[i]==IndexDepart){
-                piece = 0; // verif que on bouge bien une piece
+                piece = 0; // verif que l'on bouge bien une piece
             }
         }
     }
-    if(couleur==1){
+    if(c==1){
         for(i=0;i<nbPieceNoire;i++){
             if(pieceNoire[i]==IndexDepart){
                 piece = 0; // verif que on bouge bien une piece
@@ -313,20 +314,22 @@ int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceB
     if(piece==0){
         same = sameCase(king, pieceBlanche, pieceNoire, forteresse,nbPieceBlanche,nbPieceNoire,IndexArrive);
     }
+    else{
+        return -2;
+    }
     //test movement
     if(same==false){
-        mov = mouvement(IndexArrive,IndexDepart,taille, couleur,pieceBlanche, pieceNoire, nbPieceBlanche, nbPieceNoire, forteresse, king);
+        mov = mouvement(IndexArrive,IndexDepart,taille,pieceBlanche, pieceNoire, nbPieceBlanche, nbPieceNoire, forteresse, king);
+    }else{
+        return -2;
     }
     if(same ==false && mov == true && piece==0){
-        pionMange(IndexArrive,IndexDepart, couleur, pieceBlanche, pieceNoire, nbPieceBlanche,nbPieceNoire,taille,king);
+        pionMange(IndexArrive,IndexDepart, c, pieceBlanche, pieceNoire, nbPieceBlanche,nbPieceNoire,taille,king);
+        return king;
     }
-    int k =couleur;
-    if(k==0){
-        couleur = 1;
+    else{
+        return -2;
     }
-    if(k==1){
-        couleur = 0;
-    }
-    return couleur;
+
 }
-// couleur, taille, king , tab blanc, tab noir, forteresse, indexarrive, indexdepart
+
