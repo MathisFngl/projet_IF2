@@ -6,13 +6,19 @@
 int modeCompliqueForteresse(int N, int *tableauBlancs, int *tableauNoir, int *TableauForteresse){
     int i,k;
     int nbPieceBlanche;
-    if(N == 11){
-        nbPieceBlanche = 8;
+    int nbPieceNoire;
+    if(N == 5){ // taille mini et après on se base dessus
+        nbPieceBlanche = 4;
+        nbPieceNoire = 4;
     }
-    else{
+    if(N%4==1){ // nb piece minimum = 4 pour les deux
         nbPieceBlanche = N-1;
+        nbPieceNoire = (N-1)*2;
     }
-    int nbPieceNoire = (N-1)*2;
+    if(N%4 == 3){
+        nbPieceBlanche = N-3;
+        nbPieceNoire = (N-1)*2;
+    }
     srand(time(0));
     TableauForteresse[0] = rand()%81;
     TableauForteresse[1] = rand()%81;
@@ -41,13 +47,19 @@ int modeCompliqueForteresse(int N, int *tableauBlancs, int *tableauNoir, int *Ta
 int modeCompliquePiege(int N, int *tableauBlancs, int *tableauNoir, int *tableauPiege,int *TableauForteresse){
     int i,k;
     int nbPieceBlanche;
-    if(N == 11){
-        nbPieceBlanche = 8;
+    int nbPieceNoire;
+    if(N == 5){ // taille mini et après on se base dessus
+        nbPieceBlanche = 4;
+        nbPieceNoire = 4;
     }
-    else{
+    if(N%4==1){ // nb piece minimum = 4 pour les deux
         nbPieceBlanche = N-1;
+        nbPieceNoire = (N-1)*2;
     }
-    int nbPieceNoire = (N-1)*2;
+    if(N%4 == 3){
+        nbPieceBlanche = N-3;
+        nbPieceNoire = (N-1)*2;
+    }
     srand(time(0));
     tableauPiege[0]=rand()%81;
     tableauPiege[1]=rand()%81;
@@ -88,13 +100,20 @@ int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForter
     }
 
     int nbPieceBlanche;
-    if(N == 11){
-        nbPieceBlanche = 8;
+    int nbPieceNoire;
+    if(N == 5){ // taille mini et après on se base dessus
+        nbPieceBlanche = 4;
+        nbPieceNoire = 4;
     }
-    else{
+    if(N%4==1){ // nb piece minimum = 4 pour les deux
         nbPieceBlanche = N-1;
+        nbPieceNoire = (N-1)*2;
     }
-    int nbPieceNoire = (N-1)*2;
+    if(N%4 == 3){
+        nbPieceBlanche = N-3;
+        nbPieceNoire = (N-1)*2;
+    }
+
     //création coordonné piece blanche : on part du haut puis sens aiguille d'une montre
     int nbBlancheCote = nbPieceBlanche/4;
     int pos = 0;
