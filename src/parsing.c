@@ -107,3 +107,99 @@ int parsing_open(int* TableauBlanc, int* TableauNoir, int* TableauForteresses) {
         }
     }
 }
+
+
+int parsing_open_stats(int* partiesJoues, int* victoiresDesBlancs, int* victoireDesNoirs, int* pionsNoirsManges, int* pionsBlancsManges){
+
+    char *save = "stats.txt";
+    FILE *fp = fopen(save, "r");
+
+    if (fp == NULL) {
+        printf("Error opening the file %s for OPEN", save);
+        return -1;
+    }
+
+    char buffer[1024];
+    int compteur = 0;
+    fgets(buffer, 1024, fp);
+    fclose(fp);
+    char* value;
+    value = strtok(buffer,";");
+    while(strcmp(value, "*") != 0){
+        printf("Compteur init = %d\n", compteur);
+        value = strtok(NULL, ";");
+        if(strcmp(value, "/") == 0){
+            compteur++;
+        }
+        else{
+            switch (compteur) {
+                case 1:
+                    printf("Value : %d", *value);
+                    *partiesJoues = atoi(value);
+                    break;
+                case 2:
+                    *victoiresDesBlancs = atoi(value);
+                    break;
+                case 3:
+                    *victoireDesNoirs = atoi(value);
+                    break;
+                case 4:
+                    *pionsNoirsManges = atoi(value);
+                    break;
+                case 5:
+                    *pionsBlancsManges = atoi(value);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    fclose(fp);
+    return 1;
+}
+
+int parsing_write_stats(int toIncrement) {
+
+    int partiesJoues, victoiresDesBlancs, victoireDesNoirs, pionsNoirsManges, pionsBlancsManges;
+    int *P_partiesJoues = &partiesJoues;
+    int *P_victoiresDesBlancs = &victoiresDesBlancs;
+    int *P_victoireDesNoirs = &victoireDesNoirs;
+    int *P_pionsNoirsManges = &pionsNoirsManges;
+    int *P_pionsBlancsManges = &pionsBlancsManges;
+
+    //Modifie les valeurs depuis les pointeurs.
+    parsing_open_stats(P_partiesJoues, P_victoiresDesBlancs, P_victoireDesNoirs, P_pionsNoirsManges,
+                       P_pionsBlancsManges);
+
+    // Ouverture du Fichier
+    char *save = "stats.txt";
+    FILE *fp = fopen(save, "w");
+    if (fp == NULL) {
+        printf("Error opening the file %s", save);
+        return -1;
+    }
+
+    // Ecriture des stats
+    switch (toIncrement) {
+        case 0:
+            fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues+1, victoiresDesBlancs, victoireDesNoirs, pionsNoirsManges, pionsBlancsManges);
+            break;
+        case 1:
+            fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues, victoiresDesBlancs+1, victoireDesNoirs, pionsNoirsManges, pionsBlancsManges);
+            break;
+        case 2:
+            fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues, victoiresDesBlancs, victoireDesNoirs+1, pionsNoirsManges, pionsBlancsManges);
+            break;
+        case 3:
+            fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues, victoiresDesBlancs, victoireDesNoirs, pionsNoirsManges+1, pionsBlancsManges);
+            break;
+        case 4:
+            fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues, victoiresDesBlancs, victoireDesNoirs, pionsNoirsManges, pionsBlancsManges+1);
+            break;
+        default:
+            fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues, victoiresDesBlancs, victoireDesNoirs, pionsNoirsManges, pionsBlancsManges);
+            break;
+    };
+    fclose(fp);
+    return 1;
+}
