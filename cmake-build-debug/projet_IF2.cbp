@@ -8,113 +8,113 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="D:/UTBM/IF/projet_IF2/cmake-build-debug"/>
+				<Option working_dir="C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="projet_IF2">
-				<Option output="D:/UTBM/IF/projet_IF2/cmake-build-debug/projet_IF2.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="D:/UTBM/IF/projet_IF2/cmake-build-debug"/>
+				<Option output="C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/projet_IF2.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="D:/UTBM/IF/projet_IF2/SDL/include"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
+					<Add directory="C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 projet_IF2"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 projet_IF2"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="projet_IF2/fast">
-				<Option output="D:/UTBM/IF/projet_IF2/cmake-build-debug/projet_IF2.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="D:/UTBM/IF/projet_IF2/cmake-build-debug"/>
+				<Option output="C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/projet_IF2.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="D:/UTBM/IF/projet_IF2/SDL/include"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
+					<Add directory="C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 projet_IF2/fast"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 projet_IF2/fast"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="D:/UTBM/IF/projet_IF2/cmake-build-debug"/>
+				<Option working_dir="C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="D:/UTBM/IF/projet_IF2/cmake-build-debug"/>
+				<Option working_dir="C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;D:/UTBM/IF/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/fanig/Documents/GitHub/projet_IF2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/UTBM/IF/projet_IF2/src/init_Plateau.c">
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/init_Plateau.c">
 			<Option target="projet_IF2"/>
 		</Unit>
-		<Unit filename="D:/UTBM/IF/projet_IF2/src/init_Plateau.h">
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/init_Plateau.h">
 			<Option target="projet_IF2"/>
 		</Unit>
-		<Unit filename="D:/UTBM/IF/projet_IF2/src/main.c">
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/main.c">
 			<Option target="projet_IF2"/>
 		</Unit>
-		<Unit filename="D:/UTBM/IF/projet_IF2/src/main.h">
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/main.h">
 			<Option target="projet_IF2"/>
 		</Unit>
-		<Unit filename="D:/UTBM/IF/projet_IF2/src/menu.c">
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/menu.c">
 			<Option target="projet_IF2"/>
 		</Unit>
-		<Unit filename="D:/UTBM/IF/projet_IF2/src/menu.h">
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/menu.h">
 			<Option target="projet_IF2"/>
 		</Unit>
-		<Unit filename="D:/UTBM/IF/projet_IF2/src/parsing.c">
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/parsing.c">
 			<Option target="projet_IF2"/>
 		</Unit>
-		<Unit filename="D:/UTBM/IF/projet_IF2/src/parsing.h">
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/parsing.h">
 			<Option target="projet_IF2"/>
 		</Unit>
-		<Unit filename="D:/UTBM/IF/projet_IF2/src/play.c">
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/play.c">
 			<Option target="projet_IF2"/>
 		</Unit>
-		<Unit filename="D:/UTBM/IF/projet_IF2/src/play.h">
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/play.h">
 			<Option target="projet_IF2"/>
 		</Unit>
-		<Unit filename="D:/UTBM/IF/projet_IF2/src/window.c">
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/window.c">
 			<Option target="projet_IF2"/>
 		</Unit>
-		<Unit filename="D:/UTBM/IF/projet_IF2/src/window.h">
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/src/window.h">
 			<Option target="projet_IF2"/>
 		</Unit>
-		<Unit filename="D:/UTBM/IF/projet_IF2/CMakeLists.txt">
+		<Unit filename="C:/Users/fanig/Documents/GitHub/projet_IF2/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

@@ -126,7 +126,6 @@ int parsing_open_stats(int* partiesJoues, int* victoiresDesBlancs, int* victoire
     char* value;
     value = strtok(buffer,";");
     while(strcmp(value, "*") != 0){
-        printf("Compteur init = %d\n", compteur);
         value = strtok(NULL, ";");
         if(strcmp(value, "/") == 0){
             compteur++;
@@ -134,7 +133,6 @@ int parsing_open_stats(int* partiesJoues, int* victoiresDesBlancs, int* victoire
         else{
             switch (compteur) {
                 case 1:
-                    printf("Value : %d", *value);
                     *partiesJoues = atoi(value);
                     break;
                 case 2:

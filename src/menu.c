@@ -31,11 +31,13 @@ void StatsMenu(){
     parsing_open_stats(P_partiesJoues, P_victoiresDesBlancs, P_victoireDesNoirs, P_pionsNoirsManges,
                        P_pionsBlancsManges);
 
-    printf("Nombre de parties Jouees : %d .\n", partiesJoues);
-    printf("Nombre de victoires des Blancs : %d .\n", victoiresDesBlancs);
-    printf("Nombre de victoires des Noirs : %d .\n", victoireDesNoirs);
-    printf("Nombre de pions Noirs Manges : %d .\n", pionsNoirsManges);
-    printf("Nombre de pions Blancs Manges : %d .\n\n", pionsBlancsManges);
+    printf("Statistiques : \n\n");
+
+    printf("Nombre de parties Jouees : %d\n", partiesJoues);
+    printf("Nombre de victoires des Blancs : %d\n", victoiresDesBlancs);
+    printf("Nombre de victoires des Noirs : %d\n", victoireDesNoirs);
+    printf("Nombre de pions Noirs Manges : %d\n", pionsNoirsManges);
+    printf("Nombre de pions Blancs Manges : %d\n\n", pionsBlancsManges);
 
     MainMenu();
 }
@@ -45,11 +47,11 @@ void MainMenu(){
     printf("============\n");
     printf("Menu Principal du Tablut\n");
     printf("============\n\n");
-    printf("Jouer (Appuyez sur 0) / Reprendre la partie precedente (Appuyer sur 1)\n");
+    printf("Jouer (Appuyez sur 0) / Reprendre la partie precedente (Appuyer sur 1) / Voir les statistiques (Appuyer sur 2)\n");
     scanf("%d",&jeu);
     fflush(stdin);
     while(jeu != 0 && jeu != 1 && jeu != 2){
-        printf("Vous devez appuyer sur 0 pour jouer et 1 pour reprendre !\n");
+        printf("Vous devez appuyer sur 0 pour jouer, 1 pour reprendre et 2 pour voir les statistiques !\n");
         scanf("%d",&jeu);
         printf("%d", jeu);
         fflush(stdin);
