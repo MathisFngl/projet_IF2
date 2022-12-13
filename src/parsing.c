@@ -68,7 +68,7 @@ int parsing_open(int* TableauBlanc, int* TableauNoir, int* TableauForteresses) {
     FILE *fp = fopen(save, "r");
 
     if (fp == NULL) {
-        printf("Error opening the file %s for OPEN", save);
+        printf("Error opening the file %s", save);
         return -1;
     }
 
@@ -169,6 +169,8 @@ int parsing_write_stats(int toIncrement) {
     parsing_open_stats(P_partiesJoues, P_victoiresDesBlancs, P_victoireDesNoirs, P_pionsNoirsManges,
                        P_pionsBlancsManges);
 
+
+
     // Ouverture du Fichier
     char *save = "stats.txt";
     FILE *fp = fopen(save, "w");
@@ -179,14 +181,11 @@ int parsing_write_stats(int toIncrement) {
 
     // Ecriture des stats
     switch (toIncrement) {
-        case 0:
-            fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues+1, victoiresDesBlancs, victoireDesNoirs, pionsNoirsManges, pionsBlancsManges);
-            break;
         case 1:
-            fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues, victoiresDesBlancs+1, victoireDesNoirs, pionsNoirsManges, pionsBlancsManges);
+            fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues+1, victoiresDesBlancs+1, victoireDesNoirs, pionsNoirsManges, pionsBlancsManges);
             break;
         case 2:
-            fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues, victoiresDesBlancs, victoireDesNoirs+1, pionsNoirsManges, pionsBlancsManges);
+            fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues+1, victoiresDesBlancs, victoireDesNoirs+1, pionsNoirsManges, pionsBlancsManges);
             break;
         case 3:
             fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues, victoiresDesBlancs, victoireDesNoirs, pionsNoirsManges+1, pionsBlancsManges);

@@ -179,4 +179,5 @@ CMakeFiles/projet_IF2.dir/src/window.c.obj: \
  C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_render.h \
  C:\Users\fanig\Documents\GitHub\projet_IF2\src\init_Plateau.h \
  C:\Users\fanig\Documents\GitHub\projet_IF2\src\parsing.h \
- C:\Users\fanig\Documents\GitHub\projet_IF2\src\play.h
+ C:\Users\fanig\Documents\GitHub\projet_IF2\src\play.h \
+ C:\Users\fanig\Documents\GitHub\projet_IF2\src\menu.h

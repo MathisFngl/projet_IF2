@@ -38,4 +38,5 @@ CMakeFiles/projet_IF2.dir/src/play.c.obj: \
  C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_rwops.h \
  C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_video.h \
  C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_surface.h \
- C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_blendmode.h
+ C:/Users/fanig/Documents/GitHub/projet_IF2/SDL/include/SDL_blendmode.h \
+ C:\Users\fanig\Documents\GitHub\projet_IF2\src\parsing.h

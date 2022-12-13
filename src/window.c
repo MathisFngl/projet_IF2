@@ -5,6 +5,7 @@
 #include "init_Plateau.h"
 #include "parsing.h"
 #include "play.h"
+#include "menu.h"
 
 #define WIN_SIZE 800
 
@@ -141,19 +142,20 @@ int windowCreation(int taille, bool restart) {
         SDL_WaitEvent(&e);
         switch (e.type) {
             case SDL_QUIT:
-                QuitEvent(renderer, window, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
+                QuitEvent(0, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
                 quit = true;
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 DepartQuad = GetQuadrant(cases, nb_cases);
                 break;
             case SDL_MOUSEBUTTONUP:
-                MouseInteraction(DepartQuad, cases, nb_cases, renderer, taille, TableauBlanc, TableauNoir, TableauForteresses, Roi, &couleur);
+                MouseInteraction(DepartQuad, window, cases, nb_cases, renderer, taille, TableauBlanc, TableauNoir, TableauForteresses, Roi, &couleur);
 
                 SDL_RenderClear(renderer);
                 Update(renderer,taille,cases, couleur);
                 PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
                 SDL_RenderPresent(renderer);
+                isWin(renderer, window, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
                 break;
         }
         //FrameUpdate(e, renderer, nb_cases, cases, King, White, Black);
@@ -190,14 +192,55 @@ void HoverEffect(SDL_Renderer* renderer, SDL_Point mouse_point, SDL_Rect cases[]
     }
 }*/
 
-void QuitEvent(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int Roi, int taille) {
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    parsing_write(TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
-    free(TableauNoir);
-    free(TableauBlanc);
-    printf("[DEBUG] : Closed Window");
-    SDL_Quit();
+void isWin(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int Roi, int taille){
+    bool restePiecesNoires = false;
+    for(int i = 0; i<*TableauNoir; i++){
+        if(TableauNoir[i] != -1){
+            restePiecesNoires = true;
+        }
+    }
+    if(Roi == -1){
+        QuitEvent(2, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
+    }
+    if(restePiecesNoires == false){
+        QuitEvent(1, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
+    }
+}
+
+void QuitEvent(int EndState, SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int Roi, int taille) {
+    switch (EndState) {
+        case 0:
+            SDL_DestroyRenderer(renderer);
+            SDL_DestroyWindow(window);
+            parsing_write(TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
+            free(TableauNoir);
+            free(TableauBlanc);
+            printf("[DEBUG] : Closed Window\n");
+            SDL_Quit();
+            break;
+        case 1:
+            SDL_DestroyRenderer(renderer);
+            SDL_DestroyWindow(window);
+            free(TableauBlanc);
+            free(TableauNoir);
+            SDL_Quit();
+            parsing_write_stats(1);
+            StatsMenu();
+            printf("Les blancs ont gagné !\n");
+            printf("[DEBUG] : Closed Window\n");
+            break;
+        case 2:
+            SDL_DestroyRenderer(renderer);
+            SDL_DestroyWindow(window);
+            free(TableauBlanc);
+            free(TableauNoir);
+            SDL_Quit();
+            printf("Les noirs ont gagné !\n");
+            printf("[DEBUG] : Closed Window\n");
+            parsing_write_stats(2);
+            StatsMenu();
+            break;
+    }
 }
 
 // Lorsque l'on clique sur une case dans un quadrant.
@@ -224,7 +267,7 @@ int GetQuadrant(SDL_Rect cases[], int nb_cases){
 }
 
 // Regarde si l'intéraction de la sourie est un click ou un click maintenu (dans le cas échéant, jusqu'à quand et où ?
-void MouseInteraction(int IndexDepart, SDL_Rect cases[], int nb_cases, SDL_Renderer *renderer, int taille, int* TableauBlanc, int* TableauNoir, int* TableauForteresses, int Roi, int* pCouleur){
+void MouseInteraction(int IndexDepart, SDL_Window *window, SDL_Rect cases[], int nb_cases, SDL_Renderer *renderer, int taille, int* TableauBlanc, int* TableauNoir, int* TableauForteresses, int Roi, int* pCouleur){
     int IndexArrive;
     IndexArrive = GetQuadrant(cases, nb_cases);
     if(IndexDepart != IndexArrive){
@@ -232,22 +275,20 @@ void MouseInteraction(int IndexDepart, SDL_Rect cases[], int nb_cases, SDL_Rende
     }
     else{
         OnButtonClick(cases, nb_cases, renderer);
+        QuitEvent(1, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
     }
 }
 
 int DragPiece(int IndexDepart, int IndexArrive, int taille, int* TableauBlanc, int* TableauNoir, int* TableauForteresses, int Roi, int* pCouleur) {
     printf("[DEBUG] : Dragged From %d to %d th quadrant\n", IndexDepart, IndexArrive);
-    printf("couleur aaaaaaaaaaaaah = %d",*pCouleur);
     int returned_value = play(IndexArrive, IndexDepart, taille, TableauNoir, TableauBlanc, TableauForteresses, Roi, pCouleur);
-    printf("returned value : %d", returned_value);
+    printf("returned value : %d\n", returned_value);
     if(returned_value != -2){
-        printf("couleur mmmmmmmmfzfzfz : %d\n", *pCouleur);
         if(*pCouleur == 0){
             *pCouleur = 1;
         }
         else{
             *pCouleur = 0;
         }
-        printf("couleur mmmmmmmmfzfzfz : %d", *pCouleur);
     };
 }

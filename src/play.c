@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "window.h"
+#include "parsing.h"
 
 bool sameCase(int king, int *pieceBlanche, int *pieceNoire, int *forteresse,int nbPieceBlanche, int nbPieceNoire,int IndexArrive){
     bool same=false;
@@ -157,6 +158,7 @@ int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pi
                     if(IndexArrive-2*taille==pieceBlanche[k] || IndexArrive-2*taille == king){
                         printf("pion noir mange en haut:%d\n",pieceNoire[i]);
                         pieceNoire[i] = -1;
+                        parsing_write_stats(3);
                     }
                 }
             }
@@ -166,6 +168,7 @@ int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pi
                     if(IndexArrive+2*taille==pieceBlanche[k] || IndexArrive+2*taille == king){
                         printf("pion noir mange en bas:%d\n",pieceNoire[i]);
                         pieceNoire[i] = -1;
+                        parsing_write_stats(3);
                     }
                 }
             }
@@ -175,6 +178,7 @@ int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pi
                     if(IndexArrive+2==pieceBlanche[k] || IndexArrive+2 == king){
                         printf("pion noir mange a droite:%d\n",pieceNoire[i]);
                         pieceNoire[i] = -1;
+                        parsing_write_stats(3);
                     }
                 }
             }
@@ -184,6 +188,7 @@ int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pi
                     if(IndexArrive-2==pieceBlanche[k] || IndexArrive-2 == king){
                         printf("pion noir mange à gauche:%d\n",pieceNoire[i]);
                         pieceNoire[i] = -1;
+                        parsing_write_stats(3);
                     }
                 }
             }
@@ -195,6 +200,7 @@ int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pi
                 if(IndexArrive-2*taille == pieceNoire[k]){
                     printf("roi blanc mange en haut:%d\n",king);
                     king = -1;
+                    parsing_write_stats(4);
                 }
             }
         }
@@ -203,6 +209,7 @@ int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pi
                 if(IndexArrive+2*taille == pieceNoire[k]){
                     printf("roi blanc mange en bas:%d\n",king);
                     king = -1;
+                    parsing_write_stats(4);
                 }
             }
         }
@@ -211,6 +218,7 @@ int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pi
                 if(IndexArrive-2 == pieceNoire[k]){
                     printf("roi blanc mange a gauche:%d\n",king);
                     king = -1;
+                    parsing_write_stats(4);
                 }
             }
         }
@@ -219,6 +227,7 @@ int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pi
                 if(IndexArrive+2 == pieceNoire[k]){
                     printf("roi blanc mange a droite:%d\n",king);
                     king = -1;
+                    parsing_write_stats(4);
                 }
             }
         }
@@ -228,6 +237,7 @@ int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pi
                     if(IndexArrive-2*taille==pieceNoire[k]){
                         printf("pion blanc mange en haut:%d\n",pieceBlanche[i]);
                         pieceBlanche[i] = -1;
+                        parsing_write_stats(4);
                     }
                 }
             }
@@ -236,6 +246,7 @@ int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pi
                     if(IndexArrive+2*taille==pieceNoire[k]){
                         printf("pion blanc mange en bas:%d\n",pieceBlanche[i]);
                         pieceBlanche[i] = -1;
+                        parsing_write_stats(4);
                     }
                 }
             }
@@ -244,6 +255,7 @@ int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pi
                     if(IndexArrive+2==pieceNoire[k]){
                         printf("pion blanc mange à droite:%d\n",pieceBlanche[i]);
                         pieceBlanche[i] = -1;
+                        parsing_write_stats(4);
                     }
                 }
             }
@@ -252,6 +264,7 @@ int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pi
                     if(IndexArrive-2==pieceNoire[k]){
                         printf("pion blanc mange gauche:%d\n",pieceBlanche[i]);
                         pieceBlanche[i] = -1;
+                        parsing_write_stats(4);
                     }
                 }
             }

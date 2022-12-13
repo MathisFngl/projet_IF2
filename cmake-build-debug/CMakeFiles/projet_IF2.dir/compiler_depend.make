@@ -321,7 +321,8 @@ CMakeFiles/projet_IF2.dir/src/play.c.obj: ../src/play.c \
   ../SDL/include/SDL_rwops.h \
   ../SDL/include/SDL_video.h \
   ../SDL/include/SDL_surface.h \
-  ../SDL/include/SDL_blendmode.h
+  ../SDL/include/SDL_blendmode.h \
+  ../src/parsing.h
 
 CMakeFiles/projet_IF2.dir/src/window.c.obj: ../src/window.c \
   C:/Program\ Files/JetBrains/CLion\ 2022.2.1/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
@@ -503,7 +504,8 @@ CMakeFiles/projet_IF2.dir/src/window.c.obj: ../src/window.c \
   ../SDL/include/SDL_render.h \
   ../src/init_Plateau.h \
   ../src/parsing.h \
-  ../src/play.h
+  ../src/play.h \
+  ../src/menu.h
 
 
 ../src/menu.c:
