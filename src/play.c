@@ -55,17 +55,19 @@ bool mouvement(int IndexArrive, int IndexDepart,int taille,int *pieceBlanche,int
             mov = true;
             orientation = 3;
         }
-        if (IndexDepart + i == IndexArrive) {
+        if ((IndexDepart + i == IndexArrive && i <taille-1) || (IndexDepart +i == IndexArrive && IndexDepart%taille == 0)) {
             printf("mov ok\n");
             mov = true;
             orientation = 2;
         }
-        if (IndexDepart - i == IndexArrive) {
+        if ((IndexDepart - i == IndexArrive && i<taille-1) || (IndexDepart -i == IndexArrive && IndexDepart%taille == taille-1)) {
+            printf("i = %d , arrive - i = %d\n",i,IndexDepart-i);
             printf("mov ok\n");
             mov = true;
             orientation = 4;
         }
     }
+
     if(IndexArrive == taille/2+(taille/2)*taille){ // position case du milieu
         mov = false;
     }
@@ -82,7 +84,7 @@ bool mouvement(int IndexArrive, int IndexDepart,int taille,int *pieceBlanche,int
                     mov = false;
                 }
             }
-            if(IndexDepart-taille*i==king){
+            if(IndexDepart-taille*i==king && IndexDepart != king){
                 mov = false;
             }
             i++;
@@ -101,7 +103,7 @@ bool mouvement(int IndexArrive, int IndexDepart,int taille,int *pieceBlanche,int
                     mov = false;
                 }
             }
-            if(IndexDepart+i==king){
+            if(IndexDepart+i==king && IndexDepart != king){
                 mov = false;
             }
             i++;
@@ -120,7 +122,7 @@ bool mouvement(int IndexArrive, int IndexDepart,int taille,int *pieceBlanche,int
                     mov = false;
                 }
             }
-            if(IndexDepart+taille*i==king){
+            if(IndexDepart+taille*i==king && IndexDepart != king){
                 mov = false;
             }
             i++;
@@ -139,17 +141,21 @@ bool mouvement(int IndexArrive, int IndexDepart,int taille,int *pieceBlanche,int
                     mov = false;
                 }
             }
-            if(IndexDepart-i==king){
+            if(IndexDepart-i==king && IndexDepart != king){
                 mov = false;
             }
             i++;
         }
     }
-
+    printf("orientation = %d\n",orientation);
+    if (orientation > 4 ){
+        printf("orientation = %d\n",orientation);
+        mov = false;
+    }
     return mov;
 }
 int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pieceNoire, int nbPieceBlanche, int nbPieceNoire,int taille,int king){
-    int i,k,index;
+    int i,k;
     if (c == 0){
         for(i=0;i<nbPieceNoire;i++){
             if(IndexArrive-taille == pieceNoire[i]){ // pion en haut
@@ -276,8 +282,10 @@ int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pi
 int movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanche, int king,int c, int nbPieceBlanche, int nbPieceNoire){
     int index,i;
     if (c == 0){
+        printf("king depart = %d\n",king);
         if(IndexDepart == king){
             king = IndexArrive;
+            printf("king = %d\n",king);
             return king;
         }
         for (i=0;i<nbPieceBlanche;i++){
@@ -296,6 +304,7 @@ int movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanch
         }
         pieceNoire[index]=IndexArrive;
     }
+    return king;
 
 }
 
@@ -314,6 +323,9 @@ int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceB
             if(pieceBlanche[i]==IndexDepart){
                 piece = 0; // verif que l'on bouge bien une piece
             }
+        }
+        if(king==IndexDepart){
+            piece = 0;
         }
     }
     if(c==1){
@@ -337,7 +349,7 @@ int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceB
         return -2;
     }
     if(same ==false && mov == true && piece==0){
-        pionMange(IndexArrive,IndexDepart, c, pieceBlanche, pieceNoire, nbPieceBlanche,nbPieceNoire,taille,king);
+        king = pionMange(IndexArrive,IndexDepart, c, pieceBlanche, pieceNoire, nbPieceBlanche,nbPieceNoire,taille,king);
         return king;
     }
     else{
