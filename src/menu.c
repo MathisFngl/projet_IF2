@@ -13,7 +13,7 @@ void GameMenu(){
     printf("Selectionnez une taille pour le tableau (Doit etre un entier positif impair)\n");
     scanf("%d",&taille);
     fflush(stdin);
-    while(taille<3 | taille%2 == 0 | taille>17){
+    while(taille<3 | taille%2 == 0 ){
         printf("Le nombre doit etre un entier positif impair !\n");
         scanf("%d",&taille);
         fflush(stdin);

@@ -4,22 +4,9 @@
 #include <time.h>
 #include <stdbool.h>
 
-int modeCompliqueForteresse(int N, int *tableauBlancs, int *tableauNoir, int *TableauForteresse){
+int modeCompliqueForteresse(int N, int *tableauBlancs, int *tableauNoir, int *TableauForteresse,int nbPieceBlanche, int nbPieceNoire){
     int i,k;
-    int nbPieceBlanche;
-    int nbPieceNoire;
-    if(N == 5){ // taille mini et après on se base dessus
-        nbPieceBlanche = 4;
-        nbPieceNoire = 4;
-    }
-    if(N%4==1){ // nb piece minimum = 4 pour les deux
-        nbPieceBlanche = N-1;
-        nbPieceNoire = (N-1)*2;
-    }
-    if(N%4 == 3){
-        nbPieceBlanche = N-3;
-        nbPieceNoire = (N-1)*2;
-    }
+
     srand(time(0));
     TableauForteresse[0] = rand()%81;
     TableauForteresse[1] = rand()%81;
@@ -29,60 +16,47 @@ int modeCompliqueForteresse(int N, int *tableauBlancs, int *tableauNoir, int *Ta
     for(i=0;i<4;i++){
         for(k=0;k<nbPieceNoire;k++){
             if(TableauForteresse[i] == tableauNoir[k])
-                modeCompliqueForteresse(N,tableauBlancs, tableauNoir,TableauForteresse);
+                modeCompliqueForteresse(N,tableauBlancs, tableauNoir,TableauForteresse,nbPieceBlanche,nbPieceNoire);
 
         }
         for(k=0;k<nbPieceBlanche;k++){
             if(TableauForteresse[i]==tableauBlancs[k]){
-                modeCompliqueForteresse(N,tableauBlancs, tableauNoir,TableauForteresse);
+                modeCompliqueForteresse(N,tableauBlancs, tableauNoir,TableauForteresse,nbPieceBlanche,nbPieceNoire);
             }
         }
         for(k=0;k<4;k++){
             if(TableauForteresse[i]==TableauForteresse[k]){
-                modeCompliqueForteresse(N,tableauBlancs, tableauNoir,TableauForteresse);
+                modeCompliqueForteresse(N,tableauBlancs, tableauNoir,TableauForteresse,nbPieceBlanche,nbPieceNoire);
             }
         }
     }
 }
 //fonction recursive pour les replacer aléatoirement jusqu'à ce que ça soit bon
-int modeCompliquePiege(int N, int *tableauBlancs, int *tableauNoir, int *tableauPiege,int *TableauForteresse){
+int modeCompliquePiege(int N, int *tableauBlancs, int *tableauNoir, int *tableauPiege,int *TableauForteresse,int nbPieceBlanche, int nbPieceNoire){
     int i,k;
-    int nbPieceBlanche;
-    int nbPieceNoire;
-    if(N == 5){ // taille mini et après on se base dessus
-        nbPieceBlanche = 4;
-        nbPieceNoire = 4;
-    }
-    if(N%4==1){ // nb piece minimum = 4 pour les deux
-        nbPieceBlanche = N-1;
-        nbPieceNoire = (N-1)*2;
-    }
-    if(N%4 == 3){
-        nbPieceBlanche = N-3;
-        nbPieceNoire = (N-1)*2;
-    }
+
     srand(time(0));
     tableauPiege[0]=rand()%81;
     tableauPiege[1]=rand()%81;
     for(i=0;i<2;i++){
         for(k=0;k<nbPieceNoire;k++){
             if(tableauPiege[i] == tableauNoir[k])
-                modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse);
+                modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse,nbPieceBlanche,nbPieceNoire);
 
         }
         for(k=0;k<nbPieceBlanche;k++){
             if(tableauPiege[i]==tableauBlancs[k]){
-                modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse);
+                modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse,nbPieceBlanche,nbPieceNoire);
             }
         }
         for(k=0;k<2;k++){
             if(tableauPiege[i]==tableauPiege[k]){
-                modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse);
+                modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse, nbPieceBlanche, nbPieceNoire);
             }
         }
         for(k=0;k<4;k++){
             if(tableauPiege[i]==TableauForteresse[k]){
-                modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse);
+                modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse,nbPieceBlanche,nbPieceNoire);
             }
         }
     }
@@ -100,23 +74,28 @@ int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForter
         plateau[i] = i;
     }
 
-    int nbPieceBlanche;
-    int nbPieceNoire;
-    if(N == 5){ // taille mini et après on se base dessus
-        nbPieceBlanche = 4;
-        nbPieceNoire = 4;
+    int nbPieceBlanche = ((N-1)/4)*4;
+    int nbPieceNoire = ((N-1)/2)*4;
+    int nbNoireCote = nbPieceNoire/4;
+    int nbBlancheCote = nbPieceBlanche/4;
+    int nbNoireRest,nbNoireLigne,l;
+    nbNoireLigne = 1;
+    l=1;
+    while((king+nbBlancheCote+l)%N != N-1){
+        nbNoireLigne++;
+        l++;
     }
-    if(N%4==1){ // nb piece minimum = 4 pour les deux
-        nbPieceBlanche = N-1;
-        nbPieceNoire = (N-1)*2;
-    }
-    if(N%4 == 3){
-        nbPieceBlanche = N-3;
-        nbPieceNoire = (N-1)*2;
+    nbNoireRest = nbNoireCote - nbNoireLigne;
+    printf("nb noire reste = %d\n",nbNoireRest);
+    if(nbNoireRest%2 != 0){
+        nbPieceNoire = nbPieceNoire -4;
     }
 
+    printf("nb piece blanche = %d\n",nbPieceBlanche);
+    printf("nb piece noire = %d\n",nbPieceNoire);
+
     //création coordonné piece blanche : on part du haut puis sens aiguille d'une montre
-    int nbBlancheCote = nbPieceBlanche/4;
+
     int pos = 0;
     i = 0;
     while (i < nbPieceBlanche){
@@ -150,10 +129,10 @@ int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForter
     }
 
     //création coordonné piece noire
-    int nbNoireCote = nbPieceNoire/4;
+
     pos = 0;
     i = 0;
-    int nbNoireRest,nbNoireLigne,j,l;
+    int j;
     nbNoireLigne = 1;
     l=1;
     while((king+nbBlancheCote+l)%N != N-1){
@@ -232,9 +211,9 @@ int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForter
         TableauForteresse[2] = (N-1)+(N-1)*N;
         TableauForteresse[3] = (N-1)*N;
     }
-    else{
-        modeCompliqueForteresse(N,tableauBlancs, tableauNoir,TableauForteresse);
-        modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse);
+    if(mode==1){
+        modeCompliqueForteresse(N,tableauBlancs, tableauNoir,TableauForteresse,nbPieceBlanche,nbPieceNoire);
+        modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse,nbPieceBlanche,nbPieceNoire);
     }
 
     return king;
