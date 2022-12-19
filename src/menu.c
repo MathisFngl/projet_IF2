@@ -5,7 +5,8 @@
 
 void GameMenu(){
     int taille = -1;
-    int debut = 0;
+    bool difficile;
+    int difficile_saisie = -1;
     printf("============\n");
     printf("Menu de Jeu du Tablut\n");
     printf("============\n\n");
@@ -17,7 +18,20 @@ void GameMenu(){
         scanf("%d",&taille);
         fflush(stdin);
     }
-    windowCreation(taille, false);
+    printf("Selectionnez une difficulté (1 = Difficile, 0 = Facile)\n");
+    scanf("%d",&difficile_saisie);
+    fflush(stdin);
+    while(difficile_saisie != 0 && difficile_saisie != 1){
+        printf("Saisie invalide : (1 = Difficile, 0 = Facile)\n");
+        scanf("%d",&difficile_saisie);
+        fflush(stdin);
+    }
+    if(difficile_saisie == 1){
+        windowCreation(taille, true, false);
+    }
+    else{
+        windowCreation(taille, false, false);
+    }
 };
 
 void StatsMenu(){
@@ -61,7 +75,7 @@ void MainMenu(){
         GameMenu();
     }
     else if(jeu == 1){
-        windowCreation(parsing_get_size(), true);
+        windowCreation(parsing_get_size(), true,false);
     }
     else{
         StatsMenu();

@@ -42,7 +42,7 @@ int FrameUpdate(SDL_Event e, SDL_Renderer *renderer, int nb_cases, SDL_Rect case
 }
 */
  // Passe en revue toutes les pièces du tableau et vérifie si un index correspond pour les trois tableaux ou le Roi.
-void PlacePieces(SDL_Renderer *renderer, SDL_Rect cases[], int TableauNoir[], int TableauBlanc[], int TableauForteresses[], int Roi, int taille){
+void PlacePieces(SDL_Renderer *renderer, SDL_Rect cases[], int TableauNoir[], int TableauBlanc[], int TableauForteresses[], int TableauPiege[] , int Roi, int taille){
     int nbPieceBlanche = taille-1;
     int nbPieceNoire = (taille-1)*2;
     int nb_cases = taille*taille;
@@ -67,7 +67,12 @@ void PlacePieces(SDL_Renderer *renderer, SDL_Rect cases[], int TableauNoir[], in
                 DrawPiece(renderer, cases[i], color, taille);
             }
         }
-        color.r = 255; color.g = 220; color.b = 125;
+        for(int m=0; m<2; m++){
+            if(i==TableauPiege[m]){
+                DrawPiece(renderer, cases[i], color, taille);
+            }
+        }
+        color.r = 210; color.g = 210; color.b = 210;
         if(i==Roi){
             DrawPiece(renderer, cases[i], color, taille);
         }
@@ -95,7 +100,7 @@ void DrawPiece(SDL_Renderer *renderer, SDL_Rect rect, SDL_Color color, int taill
     }
 }
 
-int windowCreation(int taille, bool restart) {
+int windowCreation(int taille, bool difficile, bool restart) {
     // Fonction Principale : Créé la fenêtre en premier lieu, initialise les tableaux d'index des blancs, noirs et des forteresses
     int nb_cases = taille*taille;
     SDL_Rect cases[nb_cases];
@@ -114,19 +119,16 @@ int windowCreation(int taille, bool restart) {
     else{
         TableauBlanc = (int*) malloc((taille-1)*sizeof(int));
     }
-
     int TableauForteresses[4];
-    int tableauPiege[2];
+    int TableauPieges[2];
     int Roi;
-    int mode=0;
-    if(restart == false){
-        // Selon le mode de restart, il place les pièces selon les positions de départ...
-        Roi = init_Plateau(taille, TableauBlanc, TableauNoir, TableauForteresses,tableauPiege,mode);
-        printf("[DEBUG] : Commence a %d\n", taille);
+    if(restart == false) {
+        Roi = init_Plateau(taille, TableauBlanc, TableauNoir, TableauForteresses, TableauPieges, difficile);
+        printf("[DEBUG] : Commence a %d\n", taille); // commence en mode facile
     }
     else{
         //... Ou il les place comme ça l'était dans la partie précédente (charge les positions sauvegardées)
-        Roi = parsing_open(TableauBlanc, TableauNoir, TableauForteresses);
+        Roi = parsing_open(TableauBlanc, TableauNoir, TableauForteresses, TableauPieges, &difficile);
     }
     int couleur = 0;
     int* pCouleur = &couleur;
@@ -134,7 +136,7 @@ int windowCreation(int taille, bool restart) {
 
     bool quit = false;
     Update(renderer, taille, cases, couleur);
-    PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
+    PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses,TableauPieges, Roi, taille);
     SDL_RenderPresent(renderer);
     int DepartQuad = -1;
     while(quit != true) {
@@ -142,20 +144,20 @@ int windowCreation(int taille, bool restart) {
         SDL_WaitEvent(&e);
         switch (e.type) {
             case SDL_QUIT:
-                QuitEvent(0, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
+                QuitEvent(0, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille);
                 quit = true;
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 DepartQuad = GetQuadrant(cases, nb_cases);
                 break;
             case SDL_MOUSEBUTTONUP:
-                MouseInteraction(DepartQuad, window, cases, nb_cases, renderer, taille, TableauBlanc, TableauNoir, TableauForteresses, Roi, &couleur);
+                MouseInteraction(DepartQuad, window, cases, nb_cases, renderer, taille, TableauBlanc, TableauNoir, TableauForteresses, TableauPieges, difficile, Roi, &couleur);
 
                 SDL_RenderClear(renderer);
                 Update(renderer,taille,cases, couleur);
-                PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
+                PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, Roi, taille);
                 SDL_RenderPresent(renderer);
-                isWin(renderer, window, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
+                isWin(renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille);
                 break;
         }
         //FrameUpdate(e, renderer, nb_cases, cases, King, White, Black);
@@ -192,7 +194,7 @@ void HoverEffect(SDL_Renderer* renderer, SDL_Point mouse_point, SDL_Rect cases[]
     }
 }*/
 
-void isWin(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int Roi, int taille){
+void isWin(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[], bool difficile, int Roi, int taille){
     bool restePiecesNoires = false;
     for(int i = 0; i<*TableauNoir; i++){
         if(TableauNoir[i] != -1){
@@ -200,19 +202,19 @@ void isWin(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* Ta
         }
     }
     if(Roi == -1){
-        QuitEvent(2, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
+        QuitEvent(2, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille);
     }
     if(restePiecesNoires == false){
-        QuitEvent(1, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
+        QuitEvent(1, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille);
     }
 }
 
-void QuitEvent(int EndState, SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int Roi, int taille) {
+void QuitEvent(int EndState, SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[],bool difficile, int Roi, int taille) {
     switch (EndState) {
         case 0:
             SDL_DestroyRenderer(renderer);
             SDL_DestroyWindow(window);
-            parsing_write(TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
+            parsing_write(TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi ,taille);
             free(TableauNoir);
             free(TableauBlanc);
             printf("[DEBUG] : Closed Window\n");
@@ -267,7 +269,7 @@ int GetQuadrant(SDL_Rect cases[], int nb_cases){
 }
 
 // Regarde si l'intéraction de la sourie est un click ou un click maintenu (dans le cas échéant, jusqu'à quand et où ?
-void MouseInteraction(int IndexDepart, SDL_Window *window, SDL_Rect cases[], int nb_cases, SDL_Renderer *renderer, int taille, int* TableauBlanc, int* TableauNoir, int* TableauForteresses, int Roi, int* pCouleur){
+void MouseInteraction(int IndexDepart, SDL_Window *window, SDL_Rect cases[], int nb_cases, SDL_Renderer *renderer, int taille, int* TableauBlanc, int* TableauNoir, int* TableauForteresses, int* TableauPieges, bool difficile, int Roi, int* pCouleur){
     int IndexArrive;
     IndexArrive = GetQuadrant(cases, nb_cases);
     if(IndexDepart != IndexArrive){
@@ -275,7 +277,7 @@ void MouseInteraction(int IndexDepart, SDL_Window *window, SDL_Rect cases[], int
     }
     else{
         OnButtonClick(cases, nb_cases, renderer);
-        QuitEvent(1, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, Roi, taille);
+        QuitEvent(1, renderer, window, TableauNoir, TableauBlanc, TableauForteresses,TableauPieges, difficile, Roi, taille);
     }
 }
 

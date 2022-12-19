@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
 
 int modeCompliqueForteresse(int N, int *tableauBlancs, int *tableauNoir, int *TableauForteresse){
     int i,k;
@@ -87,7 +88,7 @@ int modeCompliquePiege(int N, int *tableauBlancs, int *tableauNoir, int *tableau
     }
 }
 
-int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForteresse, int *tableauPiege,int mode){
+int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForteresse, int *tableauPiege, bool mode){
     int i,k;
     int king;
     king=N/2+(N/2)*N;
@@ -225,13 +226,13 @@ int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForter
         }
     }
     //initialisation des forteresse
-    if(mode == 0){
+    if(mode){
         TableauForteresse[0] = 0;
         TableauForteresse[1] = N-1;
         TableauForteresse[2] = (N-1)+(N-1)*N;
         TableauForteresse[3] = (N-1)*N;
     }
-    if(mode==1){
+    else{
         modeCompliqueForteresse(N,tableauBlancs, tableauNoir,TableauForteresse);
         modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse);
     }
