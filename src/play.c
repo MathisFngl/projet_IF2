@@ -5,7 +5,7 @@
 #include "window.h"
 #include "parsing.h"
 
-bool sameCase(int king, int *pieceBlanche, int *pieceNoire, int *forteresse,int nbPieceBlanche, int nbPieceNoire,int IndexArrive){
+bool sameCase(int king, int *pieceBlanche, int *pieceNoire, int *forteresse,int nbPieceBlanche, int nbPieceNoire,int IndexArrive, int IndexDepart){
     bool same=false;
     int i;
     for(i=0;i<nbPieceNoire;i++) {
@@ -19,7 +19,7 @@ bool sameCase(int king, int *pieceBlanche, int *pieceNoire, int *forteresse,int 
         }
     }
     for (i=0;i<4;i++){
-        if(forteresse[i]==IndexArrive){
+        if(forteresse[i]==IndexArrive && IndexDepart != king){
             same = true;
         }
     }
@@ -337,7 +337,7 @@ int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceB
     }
     // test si'il n'y a pas déja un pion
     if(piece==0){
-        same = sameCase(king, pieceBlanche, pieceNoire, forteresse,nbPieceBlanche,nbPieceNoire,IndexArrive);
+        same = sameCase(king, pieceBlanche, pieceNoire, forteresse,nbPieceBlanche,nbPieceNoire,IndexArrive,IndexDepart);
     }
     else{
         return -2;
