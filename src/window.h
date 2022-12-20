@@ -1,11 +1,10 @@
 #include "SDL_render.h"
 #include <stdbool.h>
 
-//int FrameUpdate(SDL_Event, SDL_Renderer*, int, SDL_Rect[], SDL_Surface*, SDL_Surface*, SDL_Surface*);
 int windowCreation(int, bool, bool);
 void QuitEvent(int, SDL_Renderer*, SDL_Window*, int* , int* , int[], int[], bool, int, int);
 int Update(SDL_Renderer*, int, SDL_Rect[], int);
-void OnButtonClick(SDL_Rect[], int, SDL_Renderer*);
+void OnButtonClick(SDL_Rect[], int);
 //void HoverEffect(SDL_Renderer*, SDL_Point, SDL_Rect[], int);
 void PlacePieces(SDL_Renderer *, SDL_Rect[], int[], int[], int[], int[], int, int);
 int DragPiece(int , int , int , int* , int* , int* , int* , int*);

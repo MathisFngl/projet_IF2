@@ -62,7 +62,7 @@ int modeCompliquePiege(int N, int *tableauBlancs, int *tableauNoir, int *tableau
     }
 }
 
-int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForteresse, int *tableauPiege, bool mode){
+int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForteresse, int *TableauPiege, bool mode){
     int i,k;
     int king;
     king=N/2+(N/2)*N;
@@ -205,15 +205,18 @@ int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForter
         }
     }
     //initialisation des forteresse
-    if(mode){
+    if(mode == false){
         TableauForteresse[0] = 0;
         TableauForteresse[1] = N-1;
         TableauForteresse[2] = (N-1)+(N-1)*N;
         TableauForteresse[3] = (N-1)*N;
+
+        TableauPiege[0] = -1;
+        TableauPiege[1] = -1;
     }
-    if(mode==1){
+    else{
         modeCompliqueForteresse(N,tableauBlancs, tableauNoir,TableauForteresse,nbPieceBlanche,nbPieceNoire);
-        modeCompliquePiege(N,tableauBlancs,tableauNoir,tableauPiege,TableauForteresse,nbPieceBlanche,nbPieceNoire);
+        modeCompliquePiege(N,tableauBlancs,tableauNoir,TableauPiege,TableauForteresse,nbPieceBlanche,nbPieceNoire);
     }
 
     return king;
