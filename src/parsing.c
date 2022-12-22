@@ -116,7 +116,6 @@ int parsing_open(int* TableauBlanc, int* TableauNoir, int* TableauForteresses, i
     }
 }
 
-
 int parsing_open_stats(int* partiesJoues, int* victoiresDesBlancs, int* victoireDesNoirs, int* pionsNoirsManges, int* pionsBlancsManges){
 
     char *save = "stats.txt";

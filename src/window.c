@@ -63,7 +63,7 @@ void PlacePieces(SDL_Renderer *renderer, SDL_Rect cases[], int TableauNoir[], in
                 DrawPiece(renderer, cases[i], color, taille);
             }
         }
-        color.r = 210; color.g = 210; color.b = 210;
+        color.r = 210; color.g = 189; color.b = 41;
         if(i==Roi){
             DrawPiece(renderer, cases[i], color, taille);
         }
@@ -157,15 +157,27 @@ int windowCreation(int taille, bool difficile, bool restart) {
 
 void isWin(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[], bool difficile, int Roi, int taille){
     bool restePiecesNoires = false;
+    bool roiSurForteresse = false;
     for(int i = 0; i<*TableauNoir; i++){
         if(TableauNoir[i] != -1){
             restePiecesNoires = true;
         }
     }
+    for(int i = 0; i<4; i++){
+        if(Roi == TableauForteresses[i]){
+            roiSurForteresse = true;
+        }
+    }
     if(Roi == -1){
         QuitEvent(2, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille);
+        printf("\n======================\n");
+        printf("Victoire des Noirs !\n");
+        printf("======================\n\n");
     }
-    if(restePiecesNoires == false){
+    if(restePiecesNoires == false || roiSurForteresse == true){
+        printf("\n======================\n");
+        printf("Victoire des Blancs !\n");
+        printf("======================\n\n");
         QuitEvent(1, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille);
     }
 }
@@ -237,18 +249,15 @@ void MouseInteraction(int IndexDepart, SDL_Window *window, SDL_Rect cases[], int
     IndexArrive = GetQuadrant(cases, nb_cases);
     if(IndexDepart != IndexArrive) {
         DragPiece(IndexDepart, IndexArrive, taille, TableauBlanc, TableauNoir, TableauForteresses, Roi, pCouleur);
-        printf("Roi = %d", *Roi);
     }
     else{
         OnButtonClick(cases, nb_cases);
-        QuitEvent(1, renderer, window, TableauNoir, TableauBlanc, TableauForteresses,TableauPieges, difficile, *Roi, taille);
     }
 }
 
 int DragPiece(int IndexDepart, int IndexArrive, int taille, int* TableauBlanc, int* TableauNoir, int* TableauForteresses, int* Roi, int* pCouleur) {
     printf("[DEBUG] : Dragged From %d to %d th quadrant\n", IndexDepart, IndexArrive);
     int returned_value = play(IndexArrive, IndexDepart, taille, TableauNoir, TableauBlanc, TableauForteresses, *Roi, pCouleur);
-    printf("returned value : %d\n", returned_value);
     if(returned_value != -2){
         *Roi = returned_value;
         if(*pCouleur == 0){
