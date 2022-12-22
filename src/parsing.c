@@ -41,14 +41,7 @@ int parsing_write(int* TableauNoir, int* TableauBlanc, int TableauForteresses[],
         fprintf(fp, "%d;", TableauPieges[i]);
     fprintf(fp, "/;");
 
-    int diffEcriture = 0;
-    if(Difficile == true){
-        diffEcriture = 1;
-    }
-
-    fprintf(fp, "%d;/;", diffEcriture); // La difficulté du jeu
-
-    fprintf(fp, "%d;*;", Roi); // La position du Roi
+    fprintf(fp, "%d;/;*;", Roi); // La position du Roi
 
     // Ferme le fichier
     fclose(fp);
@@ -63,11 +56,7 @@ int parsing_get_size(){
 
     fgets(buff, 16, fp);
     fclose(fp);
-    char *value = strtok(buff,";");
-    value = strtok(NULL, ";");
-    taille = atoi(value);
-    printf("taille = %d\n", taille);
-    printf("value = %s", value);
+    taille = atoi(strtok(&buff[0], ";"));
     return taille;
 }
 
@@ -120,14 +109,6 @@ int parsing_open(int* TableauBlanc, int* TableauNoir, int* TableauForteresses, i
                     i++;
                     break;
                 case 5:
-                    difficile_v = atoi(value);
-                    if(difficile_v == 1){
-                        *difficile = true;
-                    }
-                    else{
-                        *difficile = false;
-                    }
-                case 6:
                     King = atoi(value);
                     return King;
             }

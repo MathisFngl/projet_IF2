@@ -75,7 +75,7 @@ void MainMenu(){
         GameMenu();
     }
     else if(jeu == 1){
-        windowCreation(parsing_get_size(), true,false);
+        windowCreation(parsing_get_size(), true,true);
     }
     else{
         StatsMenu();
