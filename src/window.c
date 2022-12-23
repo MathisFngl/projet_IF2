@@ -158,7 +158,7 @@ int windowCreation(int taille, bool difficile, bool restart) {
 void isWin(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[], bool difficile, int Roi, int taille){
     bool restePiecesNoires = false;
     bool roiSurForteresse = false;
-    for(int i = 0; i<*TableauNoir; i++){
+    for(int i = 0; i<((taille-1)/2)*4; i++){
         if(TableauNoir[i] != -1){
             restePiecesNoires = true;
         }
@@ -175,6 +175,8 @@ void isWin(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* Ta
         printf("======================\n\n");
     }
     if(restePiecesNoires == false || roiSurForteresse == true){
+        if(roiSurForteresse == true){ printf("Oui");}
+        if(restePiecesNoires == false){ printf("Oui noir");}
         printf("\n======================\n");
         printf("Victoire des Blancs !\n");
         printf("======================\n\n");
@@ -201,7 +203,6 @@ void QuitEvent(int EndState, SDL_Renderer *renderer, SDL_Window *window, int* Ta
             SDL_Quit();
             parsing_write_stats(1);
             StatsMenu();
-            printf("Les blancs ont gagné !\n");
             printf("[DEBUG] : Closed Window\n");
             break;
         case 2:
@@ -210,7 +211,6 @@ void QuitEvent(int EndState, SDL_Renderer *renderer, SDL_Window *window, int* Ta
             free(TableauBlanc);
             free(TableauNoir);
             SDL_Quit();
-            printf("Les noirs ont gagné !\n");
             printf("[DEBUG] : Closed Window\n");
             parsing_write_stats(2);
             StatsMenu();
