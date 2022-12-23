@@ -8,9 +8,9 @@
 #define PROJET_IF2_PLAY_H
 bool sameCase(int king, int *pieceBlanche, int *pieceNoire, int *forteresse,int nbPieceBlanche, int nbPieceNoire,int IndexArrive, int IndexDepart);
 bool mouvement(int IndexArrive, int IndexDepart,int taille,int *pieceBlanche,int *pieceNoire,int nbPieceBlanche, int nbPieceNoire, int *forteresse,int king);
-int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pieceNoire, int nbPieceBlanche, int nbPieceNoire,int taille,int king);
+int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pieceNoire, int nbPieceBlanche, int nbPieceNoire,int *pieges,int taille,int king);
 int movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanche, int king,int c, int nbPieceBlanche, int nbPieceNoire);
-int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceBlanche,int *forteresse, int king, int* c);
+int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceBlanche,int *forteresse, int *pieges, int king, int* c);
 
 #endif //PROJET_IF2_PLAY_H
 
