@@ -102,17 +102,11 @@ int windowCreation(int taille, bool difficile, bool restart) {
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     int *TableauNoir = (int*) malloc(((taille-1)*2)*sizeof(int));
-    int *TableauBlanc;
-
-    if(taille == 11){
-        TableauBlanc = (int*) malloc(8*sizeof(int));
-    }
-    else{
-        TableauBlanc = (int*) malloc((taille-1)*sizeof(int));
-    }
+    int *TableauBlanc = (int*) malloc(((taille-1)/4)*4*sizeof(int));
     int TableauForteresses[4];
     int TableauPieges[2];
     int Roi;
+
    if(restart == false) {
         Roi = init_Plateau(taille, TableauBlanc, TableauNoir, TableauForteresses, TableauPieges, difficile);
         printf("[DEBUG] : Commence a %d\n", taille);
