@@ -117,12 +117,11 @@ int windowCreation(int taille, bool difficile, bool restart) {
         Roi = init_Plateau(taille, TableauBlanc, TableauNoir, TableauForteresses, TableauPieges, difficile);
         printf("[DEBUG] : Commence a %d\n", taille);
     }
-    else{
+   else{
         //... Ou il les place comme ça l'était dans la partie précédente (charge les positions sauvegardées)
         Roi = parsing_open(TableauBlanc, TableauNoir, TableauForteresses, TableauPieges, &difficile);
-    }
+   }
     int couleur = 0;
-    int* pCouleur = &couleur;
     //Boucle principale
 
     bool quit = false;
@@ -142,7 +141,7 @@ int windowCreation(int taille, bool difficile, bool restart) {
                 DepartQuad = GetQuadrant(cases, nb_cases);
                 break;
             case SDL_MOUSEBUTTONUP:
-                MouseInteraction(DepartQuad, window, cases, nb_cases, renderer, taille, TableauBlanc, TableauNoir, TableauForteresses, TableauPieges, difficile, &Roi, &couleur);
+                MouseInteraction(DepartQuad, cases, nb_cases, taille, TableauBlanc, TableauNoir, TableauForteresses, TableauPieges,  &Roi, &couleur);
 
                 SDL_RenderClear(renderer);
                 Update(renderer,taille,cases, couleur);
@@ -244,20 +243,20 @@ int GetQuadrant(SDL_Rect cases[], int nb_cases){
 }
 
 // Regarde si l'intéraction de la souris est un click ou un click maintenu (dans le cas échéant, jusqu'à quand et où ?
-void MouseInteraction(int IndexDepart, SDL_Window *window, SDL_Rect cases[], int nb_cases, SDL_Renderer *renderer, int taille, int* TableauBlanc, int* TableauNoir, int* TableauForteresses, int* TableauPieges, bool difficile, int* Roi, int* pCouleur){
+void MouseInteraction(int IndexDepart, SDL_Rect cases[], int nb_cases, int taille, int* TableauBlanc, int* TableauNoir, int* TableauForteresses, int* TableauPieges, int* Roi, int* pCouleur){
     int IndexArrive;
     IndexArrive = GetQuadrant(cases, nb_cases);
     if(IndexDepart != IndexArrive) {
-        DragPiece(IndexDepart, IndexArrive, taille, TableauBlanc, TableauNoir, TableauForteresses, Roi, pCouleur);
+        DragPiece(IndexDepart, IndexArrive, taille, TableauBlanc, TableauNoir, TableauForteresses, TableauPieges, Roi, pCouleur);
     }
     else{
         OnButtonClick(cases, nb_cases);
     }
 }
 
-int DragPiece(int IndexDepart, int IndexArrive, int taille, int* TableauBlanc, int* TableauNoir, int* TableauForteresses, int* Roi, int* pCouleur) {
+int DragPiece(int IndexDepart, int IndexArrive, int taille, int* TableauBlanc, int* TableauNoir, int* TableauForteresses, int* TableauPieges, int* Roi, int* pCouleur) {
     printf("[DEBUG] : Dragged From %d to %d th quadrant\n", IndexDepart, IndexArrive);
-    int returned_value = play(IndexArrive, IndexDepart, taille, TableauNoir, TableauBlanc, TableauForteresses, *Roi, pCouleur);
+    int returned_value = play(IndexArrive, IndexDepart, taille, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, *Roi, pCouleur);
     if(returned_value != -2){
         *Roi = returned_value;
         if(*pCouleur == 0){
