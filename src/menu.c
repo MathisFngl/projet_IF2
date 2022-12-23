@@ -7,10 +7,10 @@ void GameMenu(){
     int taille = -1;
     bool difficile;
     int difficile_saisie = -1;
-    printf("============\n");
+    printf("=====================\n");
     printf("Menu de Jeu du Tablut\n");
-    printf("============\n\n");
-    printf("Selectionnez une taille pour le tableau (Doit etre un entier positif impair)\n");
+    printf("=====================\n\n");
+    printf("Selectionnez une taille pour le plateau (Doit etre un entier positif impair)\n");
     scanf("%d",&taille);
     fflush(stdin);
     while(taille<3 | taille%2 == 0 ){
@@ -58,9 +58,9 @@ void StatsMenu(){
 
 void MainMenu(){
     int jeu = -1;
-    printf("============\n");
+    printf("========================\n");
     printf("Menu Principal du Tablut\n");
-    printf("============\n\n");
+    printf("========================\n\n");
     printf("Jouer (Appuyez sur 0) / Reprendre la partie precedente (Appuyer sur 1) / Voir les statistiques (Appuyer sur 2)\n");
     scanf("%d",&jeu);
     fflush(stdin);

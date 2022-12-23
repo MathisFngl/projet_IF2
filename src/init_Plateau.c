@@ -6,7 +6,7 @@
 
 
 // Fonction récursive afin de placer les forteresses aléatoirement si le mode est compliqué
-int modeCompliqueForteresse(int *tableauBlancs, int *tableauNoir, int *TableauForteresse,int nbPieceBlanche, int nbPieceNoire){
+int modeCompliqueForteresse(int *tableauBlancs, int *tableauNoir, int *TableauForteresse,int nbPieceBlanche, int nbPieceNoire, int N){
     int i,forteresseOK = 0;
 
     while (forteresseOK != 4){
@@ -42,6 +42,10 @@ int modeCompliqueForteresse(int *tableauBlancs, int *tableauNoir, int *TableauFo
         TableauForteresse[1] == TableauForteresse[3] || TableauForteresse[2] == TableauForteresse[3]){
             k = false;
         }
+        if (TableauForteresse[0] == N/2+(N/2)*N || TableauForteresse[1] == N/2+(N/2)*N ||
+            TableauForteresse[2] == N/2+(N/2)*N || TableauForteresse[3] == N/2+(N/2)*N){
+            k = false;
+        }
         if(k == true){
             forteresseOK ++;
         }
@@ -49,22 +53,20 @@ int modeCompliqueForteresse(int *tableauBlancs, int *tableauNoir, int *TableauFo
             forteresseOK = forteresseOK;
         }
     }
-    for(i=0;i<4;i++){
-        printf("%d\t",TableauForteresse[i]);
-    }
+
 
 }
 
 
 // Fonction récursive afin de placer les pieges aléatoirement si le mode est compliqué
-int modeCompliquePiege(int *tableauBlancs, int *tableauNoir, int *tableauPiege,int *TableauForteresse,int nbPieceBlanche, int nbPieceNoire){
+int modeCompliquePiege(int *tableauBlancs, int *tableauNoir, int *tableauPiege,int *TableauForteresse,int nbPieceBlanche, int nbPieceNoire,int N){
     int i,piegeOK = 0;
 
     while (piegeOK != 2){
         printf("piege ok = %d\n",piegeOK);
         // donne des coordonnées aléatoire aux forteresses
         srand(time(0));
-        for (i = piegeOK;i<4;i++){
+        for (i = piegeOK;i<2;i++){
             tableauPiege[i]= rand()%81;
         }
         bool k = true;
@@ -110,6 +112,10 @@ int modeCompliquePiege(int *tableauBlancs, int *tableauNoir, int *tableauPiege,i
     }
     for(i=0;i<2;i++){
         printf("%d\t",tableauPiege[i]);
+    }
+    printf("\n");
+    for(i=0;i<4;i++){
+        printf("%d\t",TableauForteresse[i]);
     }
 }
 
@@ -263,8 +269,8 @@ int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForter
         tableauPiege[1] = -1;
     }
     else{
-        modeCompliqueForteresse(tableauBlancs, tableauNoir,TableauForteresse,nbPieceBlanche,nbPieceNoire);
-        modeCompliquePiege(tableauBlancs, tableauNoir,tableauPiege,TableauForteresse,nbPieceBlanche,nbPieceNoire);
+        modeCompliqueForteresse(tableauBlancs, tableauNoir,TableauForteresse,nbPieceBlanche,nbPieceNoire,N);
+        modeCompliquePiege(tableauBlancs, tableauNoir,tableauPiege,TableauForteresse,nbPieceBlanche,nbPieceNoire,N);
     }
 
     return king;

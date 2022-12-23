@@ -1,4 +1,3 @@
-
 #include "play.h"
 #include <stdbool.h>
 #include <stdio.h>
@@ -279,7 +278,7 @@ int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pi
     movPieces(IndexDepart,IndexArrive,pieceNoire,pieceBlanche,king,c,nbPieceBlanche,nbPieceNoire);
 }
 
-int movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanche, int king,int c, int nbPieceBlanche, int nbPieceNoire){
+    int movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanche, int king,int c, int nbPieceBlanche, int nbPieceNoire){
     int index,i;
     if (c == 0){
         printf("king depart = %d\n",king);
