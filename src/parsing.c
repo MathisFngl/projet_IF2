@@ -85,7 +85,6 @@ int parsing_open(int* TableauBlanc, int* TableauNoir, int* TableauForteresses, i
             switch (compteur) {
                 case 0:
                     taille = atoi(value);
-                    printf("%d", taille);
                     break;
                 case 1:
                     TableauBlanc[i] = atoi(value);
@@ -118,11 +117,6 @@ int parsing_open_stats(int* partiesJoues, int* victoiresDesBlancs, int* victoire
 
     char *save = "stats.txt";
     FILE *fp = fopen(save, "r");
-
-    if (fp == NULL) {
-        printf("Error opening the file %s for OPEN", save);
-        return -1;
-    }
 
     char buffer[1024];
     int compteur = 0;
@@ -179,10 +173,6 @@ int parsing_write_stats(int toIncrement) {
     // Ouverture du Fichier
     char *save = "stats.txt";
     FILE *fp = fopen(save, "w");
-    if (fp == NULL) {
-        printf("Error opening the file %s", save);
-        return -1;
-    }
 
     // Ecriture des stats
     switch (toIncrement) {

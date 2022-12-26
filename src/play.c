@@ -26,7 +26,7 @@ bool sameCase(int king, int *pieceBlanche, int *pieceNoire, int *forteresse,int 
         same = true;
     }
     if(same == true){
-        printf("La case est deja prise\n");
+        printf("[DEBUG] : DEPLACEMENT ILLEGAL : La case est deja prise\n");
     }
     /*
     for (i=0;i<2;i++){
@@ -155,7 +155,6 @@ bool mouvement(int IndexArrive, int IndexDepart,int taille,int *pieceBlanche,int
 }
 int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pieceNoire, int nbPieceBlanche, int nbPieceNoire,int *pieges, int taille,int king){
     int i,k;
-    printf("\n PIEGEEEEEE 1 %d ET %d 2\n", pieges[0], pieges[1]);
     if (c == 0){
         for(i=0;i<nbPieceNoire;i++){
             if(IndexArrive-taille == pieceNoire[i]){ // pion en haut
@@ -282,10 +281,8 @@ int pionMange(int IndexArrive,int IndexDepart, int c, int* pieceBlanche, int* pi
     int movPieces(int IndexDepart,int IndexArrive, int *pieceNoire, int *pieceBlanche, int king,int c, int nbPieceBlanche, int nbPieceNoire){
     int index,i;
     if (c == 0){
-        printf("king depart = %d\n",king);
         if(IndexDepart == king){
             king = IndexArrive;
-            printf("king = %d\n",king);
             return king;
         }
         for (i=0;i<nbPieceBlanche;i++){
@@ -348,7 +345,7 @@ int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceB
     }else{
         return -2;
     }
-    if(same ==false && mov == true && piece==0){
+    if(same == false && mov == true && piece == 0){
         king = pionMange(IndexArrive,IndexDepart, c, pieceBlanche, pieceNoire, nbPieceBlanche,nbPieceNoire,pieges, taille,king);
         return king;
     }
@@ -357,4 +354,3 @@ int play(int IndexArrive,int IndexDepart,int taille,int *pieceNoire, int *pieceB
     }
 
 }
-
