@@ -27,10 +27,10 @@ void GameMenu(){
         fflush(stdin);
     }
     if(difficile_saisie == 1){
-        windowCreation(taille, true, false);
+        windowCreation(taille, true, false, 0);
     }
     else{
-        windowCreation(taille, false, false);
+        windowCreation(taille, false, false, 0);
     }
 };
 
@@ -75,7 +75,7 @@ void MainMenu(){
         GameMenu();
     }
     else if(jeu == 1){
-        windowCreation(parsing_get_size(), true,true);
+        windowCreation(parsing_get_size(), true,true,0);
     }
     else{
         StatsMenu();

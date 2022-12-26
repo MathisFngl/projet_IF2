@@ -4,15 +4,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-int parsing_write(int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[], bool Difficile, int Roi, int taille){
-    int tailleBlanc;
-    if(taille == 11){
-        tailleBlanc = 8;
-    }
-    else{
-        tailleBlanc = taille-1;
-    }
-    int tailleNoir =  (taille-1)*2;
+int parsing_write(int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[], int Roi, int taille, int couleur){
+    int tailleBlanc = ((taille-1)/4)*4;
+    int tailleNoir =  ((taille-1)*2);
 
     //Ouvre le fichier
     char *save = "save.txt";
@@ -41,6 +35,8 @@ int parsing_write(int* TableauNoir, int* TableauBlanc, int TableauForteresses[],
         fprintf(fp, "%d;", TableauPieges[i]);
     fprintf(fp, "/;");
 
+    fprintf(fp,"%d;/;", couleur); // Couleur
+
     fprintf(fp, "%d;/;*;", Roi); // La position du Roi
 
     // Ferme le fichier
@@ -60,14 +56,13 @@ int parsing_get_size(){
     return taille;
 }
 
-int parsing_open(int* TableauBlanc, int* TableauNoir, int* TableauForteresses, int* TableauPieges, bool* difficile) {
+int parsing_open(int* TableauBlanc, int* TableauNoir, int* TableauForteresses, int* TableauPieges, int* couleur) {
     //Ouvre le fichier
     int taille;
     char buffer[1024];
     int compteur = 0;
     int i = 0;
     int King;
-    int difficile_v;
 
     char *save = "save.txt";
     FILE *fp = fopen(save, "r");
@@ -109,6 +104,9 @@ int parsing_open(int* TableauBlanc, int* TableauNoir, int* TableauForteresses, i
                     i++;
                     break;
                 case 5:
+                    *couleur = atoi(value);
+                    break;
+                case 6:
                     King = atoi(value);
                     return King;
             }

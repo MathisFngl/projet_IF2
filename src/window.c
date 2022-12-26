@@ -91,7 +91,7 @@ void DrawPiece(SDL_Renderer *renderer, SDL_Rect rect, SDL_Color color, int taill
     }
 }
 
-int windowCreation(int taille, bool difficile, bool restart) {
+int windowCreation(int taille, bool difficile, bool restart, int couleur) {
     // Fonction Principale : Créé la fenêtre en premier lieu, initialise les tableaux d'index des blancs, noirs et des forteresses
     int nb_cases = taille*taille;
     SDL_Rect cases[nb_cases];
@@ -113,9 +113,8 @@ int windowCreation(int taille, bool difficile, bool restart) {
     }
    else{
         //... Ou il les place comme ça l'était dans la partie précédente (charge les positions sauvegardées)
-        Roi = parsing_open(TableauBlanc, TableauNoir, TableauForteresses, TableauPieges, &difficile);
+        Roi = parsing_open(TableauBlanc, TableauNoir, TableauForteresses, TableauPieges, &couleur);
    }
-    int couleur = 0;
     //Boucle principale
 
     bool quit = false;
@@ -128,7 +127,7 @@ int windowCreation(int taille, bool difficile, bool restart) {
         SDL_WaitEvent(&e);
         switch (e.type) {
             case SDL_QUIT:
-                QuitEvent(0, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille);
+                QuitEvent(0, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille, couleur);
                 quit = true;
                 break;
             case SDL_MOUSEBUTTONDOWN:
@@ -141,14 +140,14 @@ int windowCreation(int taille, bool difficile, bool restart) {
                 Update(renderer,taille,cases, couleur);
                 PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, Roi, taille);
                 SDL_RenderPresent(renderer);
-                isWin(renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille);
+                isWin(renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille, couleur);
                 break;
         }
     }
     return 0;
 }
 
-void isWin(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[], bool difficile, int Roi, int taille){
+void isWin(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[], bool difficile, int Roi, int taille, int couleur){
     bool restePiecesNoires = false;
     bool roiSurForteresse = false;
     for(int i = 0; i<((taille-1)/2)*4; i++){
@@ -162,7 +161,7 @@ void isWin(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* Ta
         }
     }
     if(Roi == -1){
-        QuitEvent(2, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille);
+        QuitEvent(2, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille, couleur);
         printf("\n======================\n");
         printf("Victoire des Noirs !\n");
         printf("======================\n\n");
@@ -173,16 +172,16 @@ void isWin(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* Ta
         printf("\n======================\n");
         printf("Victoire des Blancs !\n");
         printf("======================\n\n");
-        QuitEvent(1, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille);
+        QuitEvent(1, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille, couleur);
     }
 }
 
-void QuitEvent(int EndState, SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[],bool difficile, int Roi, int taille) {
+void QuitEvent(int EndState, SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[],bool difficile, int Roi, int taille, int couleur) {
     switch (EndState) {
         case 0:
             SDL_DestroyRenderer(renderer);
             SDL_DestroyWindow(window);
-            parsing_write(TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi ,taille);
+            parsing_write(TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, Roi ,taille, couleur);
             free(TableauNoir);
             free(TableauBlanc);
             printf("[DEBUG] : Closed Window\n");
