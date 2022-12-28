@@ -252,11 +252,6 @@ int DragPiece(int IndexDepart, int IndexArrive, int taille, int* TableauBlanc, i
     int returned_value = play(IndexArrive, IndexDepart, taille, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, *Roi, pCouleur);
     if(returned_value != -2){
         *Roi = returned_value;
-        if(*pCouleur == 0){
-            *pCouleur = 1;
-        }
-        else{
-            *pCouleur = 0;
-        }
+        *pCouleur == 0 ? (*pCouleur = 1) : (*pCouleur = 0);
     }
 }
