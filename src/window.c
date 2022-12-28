@@ -127,7 +127,7 @@ int windowCreation(int taille, bool difficile, bool restart, int couleur) {
         SDL_WaitEvent(&e);
         switch (e.type) {
             case SDL_QUIT:
-                QuitEvent(0, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille, couleur);
+                QuitEvent(0, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, Roi, taille, couleur);
                 quit = true;
                 break;
             case SDL_MOUSEBUTTONDOWN:
@@ -140,14 +140,16 @@ int windowCreation(int taille, bool difficile, bool restart, int couleur) {
                 Update(renderer,taille,cases, couleur);
                 PlacePieces(renderer, cases, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, Roi, taille);
                 SDL_RenderPresent(renderer);
-                isWin(renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille, couleur);
+                if (isWin(renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, Roi, taille, couleur) == -1){
+                    quit = true;
+                }
                 break;
         }
     }
     return 0;
 }
 
-void isWin(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[], bool difficile, int Roi, int taille, int couleur){
+int isWin(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[], int Roi, int taille, int couleur){
     bool restePiecesNoires = false;
     bool roiSurForteresse = false;
     for(int i = 0; i<((taille-1)/2)*4; i++){
@@ -161,22 +163,23 @@ void isWin(SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* Ta
         }
     }
     if(Roi == -1){
-        QuitEvent(2, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille, couleur);
         printf("\n======================\n");
         printf("Victoire des Noirs !\n");
         printf("======================\n\n");
+        QuitEvent(2, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges,  Roi, taille, couleur);
+        return -1;
     }
     if(restePiecesNoires == false || roiSurForteresse == true){
-        if(roiSurForteresse == true){ printf("Oui");}
-        if(restePiecesNoires == false){ printf("Oui noir");}
         printf("\n======================\n");
         printf("Victoire des Blancs !\n");
         printf("======================\n\n");
-        QuitEvent(1, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, difficile, Roi, taille, couleur);
+        QuitEvent(1, renderer, window, TableauNoir, TableauBlanc, TableauForteresses, TableauPieges,  Roi, taille, couleur);
+        return -1;
     }
+    return 0;
 }
 
-void QuitEvent(int EndState, SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[],bool difficile, int Roi, int taille, int couleur) {
+void QuitEvent(int EndState, SDL_Renderer *renderer, SDL_Window *window, int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[], int Roi, int taille, int couleur) {
     switch (EndState) {
         case 0:
             SDL_DestroyRenderer(renderer);
@@ -184,7 +187,6 @@ void QuitEvent(int EndState, SDL_Renderer *renderer, SDL_Window *window, int* Ta
             parsing_write(TableauNoir, TableauBlanc, TableauForteresses, TableauPieges, Roi ,taille, couleur);
             free(TableauNoir);
             free(TableauBlanc);
-            printf("[DEBUG] : Closed Window\n");
             SDL_Quit();
             break;
         case 1:
@@ -195,7 +197,6 @@ void QuitEvent(int EndState, SDL_Renderer *renderer, SDL_Window *window, int* Ta
             SDL_Quit();
             parsing_write_stats(1);
             StatsMenu();
-            printf("[DEBUG] : Closed Window\n");
             break;
         case 2:
             SDL_DestroyRenderer(renderer);
@@ -203,7 +204,6 @@ void QuitEvent(int EndState, SDL_Renderer *renderer, SDL_Window *window, int* Ta
             free(TableauBlanc);
             free(TableauNoir);
             SDL_Quit();
-            printf("[DEBUG] : Closed Window\n");
             parsing_write_stats(2);
             StatsMenu();
             break;

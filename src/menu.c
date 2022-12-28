@@ -61,13 +61,12 @@ void MainMenu(){
     printf("========================\n");
     printf("Menu Principal du Tablut\n");
     printf("========================\n\n");
-    printf("Jouer (Appuyez sur 0) / Reprendre la partie precedente (Appuyer sur 1) / Voir les statistiques (Appuyer sur 2)\n");
+    printf("Jouer (Appuyez sur 0) / Reprendre la partie precedente (Appuyer sur 1) / Voir les statistiques (Appuyer sur 2) / Quitter le jeu (Appuyer sur 3)\n");
     scanf("%d",&jeu);
     fflush(stdin);
-    while(jeu != 0 && jeu != 1 && jeu != 2){
-        printf("Vous devez appuyer sur 0 pour jouer, 1 pour reprendre et 2 pour voir les statistiques !\n");
+    while(jeu != 0 && jeu != 1 && jeu != 2 && jeu != 3){
+        printf("Vous devez appuyer sur 0 pour jouer, 1 pour reprendre, 2 pour voir les statistiques et 3 pour quitter le jeu !\n");
         scanf("%d",&jeu);
-        printf("%d", jeu);
         fflush(stdin);
     }
     printf("\n");
@@ -77,7 +76,11 @@ void MainMenu(){
     else if(jeu == 1){
         windowCreation(parsing_get_size(), true,true,0);
     }
-    else{
+    else if(jeu == 2){
         StatsMenu();
     }
-};
+    else{
+        printf("[DEBUG] : Jeu Quitte");
+        return;
+    }
+}
