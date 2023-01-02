@@ -5,7 +5,6 @@
 
 void GameMenu(){
     int taille = -1;
-    bool difficile;
     int difficile_saisie = -1;
     printf("=====================\n");
     printf("Menu de Jeu du Tablut\n");
@@ -13,6 +12,8 @@ void GameMenu(){
     printf("Selectionnez une taille pour le plateau (Doit etre un entier positif impair)\n");
     scanf("%d",&taille);
     fflush(stdin);
+
+    // Jusqu'à ce que le joueur saisisse une valeur supérieure à 3 et impaire.
     while(taille<3 | taille%2 == 0 ){
         printf("Le nombre doit etre un entier positif impair !\n");
         scanf("%d",&taille);
@@ -21,6 +22,8 @@ void GameMenu(){
     printf("Selectionnez une difficulte (1 = Difficile, 0 = Facile)\n");
     scanf("%d",&difficile_saisie);
     fflush(stdin);
+
+    // Jusqu'à ce que le joueur saisisse 0 ou 1.
     while(difficile_saisie != 0 && difficile_saisie != 1){
         printf("Saisie invalide : (1 = Difficile, 0 = Facile)\n");
         scanf("%d",&difficile_saisie);
@@ -65,7 +68,7 @@ void MainMenu(){
            "Deux joueurs s'affrontent(les blancs et les noirs).\n"
            "L'objectif des blancs est de placer le roi dans une des 4 forterresses.\n"
            "Celui des noirs est donc de manger le roi blanc.\n"
-           "Afin de se deplacer, selectionner le pion a bouger et deplacer le en restant appuyer.\n"
+           "Afin de se deplacer, selectionnez le pion a bouger et deplacez le en restant appuyer.\n"
            "Un pion (roi compris) est mange s'il se retrouve entre deux pions adverses. Attention, un pion qui se mettrait lui meme entre deux pions adverses ne sera pas mange.\n\n");
     printf("Jouer (Appuyez sur 0) / Reprendre la partie precedente (Appuyer sur 1) / Voir les statistiques (Appuyer sur 2) / Quitter le jeu (Appuyer sur 3)\n");
     scanf("%d",&jeu);

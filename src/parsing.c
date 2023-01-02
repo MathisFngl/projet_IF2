@@ -2,19 +2,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
-int parsing_write(int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[], int Roi, int taille, int couleur){
+void parsing_write(int* TableauNoir, int* TableauBlanc, int TableauForteresses[], int TableauPieges[], int Roi, int taille, int couleur){
     int tailleBlanc = ((taille-1)/4)*4;
     int tailleNoir =  ((taille-1)*2);
 
     //Ouvre le fichier
     char *save = "save.txt";
     FILE *fp = fopen(save, "w");
-    if (fp == NULL) {
-        printf("Error opening the file %s", save);
-        return -1;
-    }
 
     //écrit sur le fichier
     fprintf(fp, "%d;/;", taille); // La taille de la grille
@@ -41,9 +36,9 @@ int parsing_write(int* TableauNoir, int* TableauBlanc, int TableauForteresses[],
 
     // Ferme le fichier
     fclose(fp);
-    return 0;
 }
 
+// Prend uniquement la première valeur du fichier (la taille)
 int parsing_get_size(){
     char buff[16];
     int taille;
@@ -56,6 +51,7 @@ int parsing_get_size(){
     return taille;
 }
 
+// Lit le fichier pour en tirer les informations données en paramètres
 int parsing_open(int* TableauBlanc, int* TableauNoir, int* TableauForteresses, int* TableauPieges, int* couleur) {
     //Ouvre le fichier
     int taille;
@@ -65,12 +61,8 @@ int parsing_open(int* TableauBlanc, int* TableauNoir, int* TableauForteresses, i
     int King;
 
     char *save = "save.txt";
-    FILE *fp = fopen(save, "r");
+    FILE *fp = fopen(save, "r"); // Ouvre en mode lecture
 
-    if (fp == NULL) {
-        printf("Error opening the file %s", save);
-        return -1;
-    }
     //Lecture du fichier
     fgets(buffer, 1024, fp);
     fclose(fp);
@@ -113,7 +105,8 @@ int parsing_open(int* TableauBlanc, int* TableauNoir, int* TableauForteresses, i
     }
 }
 
-int parsing_open_stats(int* partiesJoues, int* victoiresDesBlancs, int* victoireDesNoirs, int* pionsNoirsManges, int* pionsBlancsManges){
+//Permet d'ouvrir le fichier statistiques et renvoie les informations données en paramètre
+void parsing_open_stats(int* partiesJoues, int* victoiresDesBlancs, int* victoireDesNoirs, int* pionsNoirsManges, int* pionsBlancsManges){
 
     char *save = "stats.txt";
     FILE *fp = fopen(save, "r");
@@ -152,10 +145,10 @@ int parsing_open_stats(int* partiesJoues, int* victoiresDesBlancs, int* victoire
         }
     }
     fclose(fp);
-    return 1;
 }
 
-int parsing_write_stats(int toIncrement) {
+// Ecrit les statistiques dans un fichier
+void parsing_write_stats(int toIncrement) {
 
     int partiesJoues, victoiresDesBlancs, victoireDesNoirs, pionsNoirsManges, pionsBlancsManges;
     int *P_partiesJoues = &partiesJoues;
@@ -168,30 +161,37 @@ int parsing_write_stats(int toIncrement) {
     parsing_open_stats(P_partiesJoues, P_victoiresDesBlancs, P_victoireDesNoirs, P_pionsNoirsManges,
                        P_pionsBlancsManges);
 
-
-
     // Ouverture du Fichier
     char *save = "stats.txt";
     FILE *fp = fopen(save, "w");
 
     // Ecriture des stats
     switch (toIncrement) {
+
+        // +1 victoire des blancs
         case 1:
             fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues+1, victoiresDesBlancs+1, victoireDesNoirs, pionsNoirsManges, pionsBlancsManges);
             break;
+
+        // +1 victoire des Noirs
         case 2:
             fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues+1, victoiresDesBlancs, victoireDesNoirs+1, pionsNoirsManges, pionsBlancsManges);
             break;
+
+        // +1 pion noir mangé
         case 3:
             fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues, victoiresDesBlancs, victoireDesNoirs, pionsNoirsManges+1, pionsBlancsManges);
             break;
+
+        // +1 pion blanc mangé
         case 4:
             fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues, victoiresDesBlancs, victoireDesNoirs, pionsNoirsManges, pionsBlancsManges+1);
             break;
+
+        // Ne change rien (Si la valeur de toIncrement n'est pas reconnue
         default:
             fprintf(fp, "0;/;%d;/;%d;/;%d;/;%d;/;%d;/;*;", partiesJoues, victoiresDesBlancs, victoireDesNoirs, pionsNoirsManges, pionsBlancsManges);
             break;
-    };
+    }
     fclose(fp);
-    return 1;
 }
