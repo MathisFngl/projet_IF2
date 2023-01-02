@@ -132,7 +132,6 @@ int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForter
     if(nbNoireRest%2 != 0){ // si cette valeur n'est pas un multiple de 2 -> nb de piece a repartir de chauqe cote impair
         nbPieceNoire = nbPieceNoire -4; // si impair -> on enlève 4 pour les 4 coté -> pair
     }
-    printf("piece noir = %d\n",nbPieceNoire);
     //création coordonné piece blanche : on part du haut puis sens aiguille d'une montre
     int pos = 0; // direction (haut,droite,bas,gauche)
     i = 0;
