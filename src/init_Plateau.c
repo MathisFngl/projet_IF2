@@ -10,38 +10,40 @@ int modeCompliqueForteresse(int *tableauBlancs, int *tableauNoir, int *TableauFo
     int i,forteresseOK = 0;
 
     while (forteresseOK != 4){
-        printf("forteresse ok = %d\n",forteresseOK);
-        // donne des coordonnées aléatoire aux forteresses
+        // donne des coordonnées aléatoire aux forteresses qui ne sont pas correctement placées
         srand(time(0));
         for (i = forteresseOK;i<4;i++){
             TableauForteresse[i]= rand()%81;
         }
+        /* on verifie si il n'y a pas d'autre element sur la case calculé si dessus. Si c'est le cas
+         * le nombre de fortersse correctement placées augment de 1
+         * on fait forteresse par forteresse pour s'assurer qu'elles soient bien placées les unes par rapport aux autres*/
         bool k = true;
+        // verif pas de pièce blanche sur la case
         for(i=0;i<nbPieceBlanche;i++){
             if(TableauForteresse[forteresseOK] == tableauBlancs[i]){
                 k = false;
-                printf("meme position blanc\n");
             }
             if(TableauForteresse[forteresseOK] != tableauBlancs[i] && k != false){
                 k = true;
-                printf("position blanc ok\n");
             }
         }
+        // verif pas de pièce noire sur la case
         for(i=0;i<nbPieceNoire;i++){
             if(TableauForteresse[forteresseOK] == tableauNoir[i]){
                 k = false;
-                printf("meme position noir\n");
             }
             if(TableauForteresse[forteresseOK] != tableauNoir[i] && k != false){
                 k = true;
-                printf("position noir ok\n");
             }
         }
+        // verif pas de forteresse sur la case
         if (TableauForteresse[0] == TableauForteresse[1] || TableauForteresse[0] == TableauForteresse[2] ||
         TableauForteresse[0] == TableauForteresse[3] || TableauForteresse[1] == TableauForteresse[2] ||
         TableauForteresse[1] == TableauForteresse[3] || TableauForteresse[2] == TableauForteresse[3]){
             k = false;
         }
+        // verif pas sur la cas du milieu qui est reserve au roi
         if (TableauForteresse[0] == N/2+(N/2)*N || TableauForteresse[1] == N/2+(N/2)*N ||
             TableauForteresse[2] == N/2+(N/2)*N || TableauForteresse[3] == N/2+(N/2)*N){
             k = false;
@@ -60,11 +62,10 @@ int modeCompliqueForteresse(int *tableauBlancs, int *tableauNoir, int *TableauFo
 
 // Fonction récursive afin de placer les pieges aléatoirement si le mode est compliqué
 int modeCompliquePiege(int *tableauBlancs, int *tableauNoir, int *tableauPiege,int *TableauForteresse,int nbPieceBlanche, int nbPieceNoire,int N){
+   /* on procède exactement comme pour les forteresses mais en testant pour les pièges en plus*/
     int i,piegeOK = 0;
 
     while (piegeOK != 2){
-        printf("piege ok = %d\n",piegeOK);
-        // donne des coordonnées aléatoire aux forteresses
         srand(time(0));
         for (i = piegeOK;i<2;i++){
             tableauPiege[i]= rand()%81;
@@ -73,31 +74,25 @@ int modeCompliquePiege(int *tableauBlancs, int *tableauNoir, int *tableauPiege,i
         for(i=0;i<nbPieceBlanche;i++){
             if(tableauPiege[piegeOK] == tableauBlancs[i]){
                 k = false;
-                printf("meme position blanc\n");
             }
             if(tableauPiege[piegeOK] != tableauBlancs[i] && k != false){
                 k = true;
-                printf("position blanc ok\n");
             }
         }
         for(i=0;i<4;i++){
             if(tableauPiege[piegeOK] == TableauForteresse[i]){
                 k = false;
-                printf("meme position forteresse\n");
             }
             if(tableauPiege[piegeOK] != TableauForteresse[i] && k != false){
                 k = true;
-                printf("position forteresse ok\n");
             }
         }
         for(i=0;i<nbPieceNoire;i++){
             if(tableauPiege[piegeOK] == tableauNoir[i]){
                 k = false;
-                printf("meme position noir\n");
             }
             if(tableauPiege[piegeOK] != tableauNoir[i] && k != false){
                 k = true;
-                printf("position noir ok\n");
             }
         }
         if(tableauPiege[0] == tableauPiege[1]){
@@ -110,21 +105,13 @@ int modeCompliquePiege(int *tableauBlancs, int *tableauNoir, int *tableauPiege,i
             piegeOK = piegeOK;
         }
     }
-    for(i=0;i<2;i++){
-        printf("%d\t",tableauPiege[i]);
-    }
-    printf("\n");
-    for(i=0;i<4;i++){
-        printf("%d\t",TableauForteresse[i]);
-    }
 }
 
 // fonction principale afin de créer + placer les pieces
-
 int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForteresse, int *tableauPiege, bool mode){
     int i,k;
     int king;
-    king=N/2+(N/2)*N; // position du milieu
+    king=N/2+(N/2)*N; // calcul position du milieu
 
     // création des tableaux -> un pour chaques couleurs
     int nbPieceBlanche = ((N-1)/4)*4; // 4 coté donc la formule *4
@@ -145,14 +132,14 @@ int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForter
     if(nbNoireRest%2 != 0){ // si cette valeur n'est pas un multiple de 2 -> nb de piece a repartir de chauqe cote impair
         nbPieceNoire = nbPieceNoire -4; // si impair -> on enlève 4 pour les 4 coté -> pair
     }
-
+    printf("piece noir = %d\n",nbPieceNoire);
     //création coordonné piece blanche : on part du haut puis sens aiguille d'une montre
     int pos = 0; // direction (haut,droite,bas,gauche)
     i = 0;
     while (i < nbPieceBlanche){
         if(pos==0){ // vers le haut
             for (k=1;k<=nbBlancheCote;k++){ // tant qu'on a pas placé toute les pieces par coté
-                tableauBlancs[i] = king-k*N; // part du roi et -taille pour verticale
+                tableauBlancs[i] = king-k*N; // part du roi et -taille*k pour verticale. k augmente
                 i++;
             }
             pos ++;
@@ -183,7 +170,6 @@ int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForter
     }
 
     //création coordonné piece noire
-
     pos = 0;
     i = 0;
     int j;
@@ -259,19 +245,18 @@ int init_Plateau(int N, int *tableauBlancs, int *tableauNoir, int *TableauForter
         }
     }
     //initialisation des forteresse
-    if(mode == false){
+    if(mode == false){ // mode facile
         TableauForteresse[0] = 0;
         TableauForteresse[1] = N-1;
         TableauForteresse[2] = (N-1)+(N-1)*N;
         TableauForteresse[3] = (N-1)*N;
 
-        tableauPiege[0] = -1;
+        tableauPiege[0] = -1; // piege -1 comme ça pas sur le plateau
         tableauPiege[1] = -1;
     }
-    else{
+    else{ //mode compliqué
         modeCompliqueForteresse(tableauBlancs, tableauNoir,TableauForteresse,nbPieceBlanche,nbPieceNoire,N);
         modeCompliquePiege(tableauBlancs, tableauNoir,tableauPiege,TableauForteresse,nbPieceBlanche,nbPieceNoire,N);
     }
-
     return king;
 }

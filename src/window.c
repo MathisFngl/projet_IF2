@@ -33,7 +33,7 @@ int Update(SDL_Renderer *renderer, int taille, SDL_Rect cases[], int couleur) { 
 
  // Passe en revue toutes les pièces du tableau et vérifie si un index correspond pour les trois tableaux ou le Roi.
 void PlacePieces(SDL_Renderer *renderer, SDL_Rect cases[], int TableauNoir[], int TableauBlanc[], int TableauForteresses[], int TableauPiege[] , int Roi, int taille){
-    int nbPieceBlanche = taille-1;
+    int nbPieceBlanche = ((taille-1)/4)*4;
     int nbPieceNoire = (taille-1)*2;
     int nb_cases = taille*taille;
     SDL_Color color;

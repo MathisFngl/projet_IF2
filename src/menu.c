@@ -18,7 +18,7 @@ void GameMenu(){
         scanf("%d",&taille);
         fflush(stdin);
     }
-    printf("Selectionnez une difficulté (1 = Difficile, 0 = Facile)\n");
+    printf("Selectionnez une difficulte (1 = Difficile, 0 = Facile)\n");
     scanf("%d",&difficile_saisie);
     fflush(stdin);
     while(difficile_saisie != 0 && difficile_saisie != 1){
@@ -61,6 +61,12 @@ void MainMenu(){
     printf("========================\n");
     printf("Menu Principal du Tablut\n");
     printf("========================\n\n");
+    printf("Regles du jeu :\n"
+           "Deux joueurs s'affrontent(les blancs et les noirs).\n"
+           "L'objectif des blancs est de placer le roi dans une des 4 forterresses.\n"
+           "Celui des noirs est donc de manger le roi blanc.\n"
+           "Afin de se deplacer, selectionner le pion a bouger et deplacer le en restant appuyer.\n"
+           "Un pion (roi compris) est mange s'il se retrouve entre deux pions adverses. Attention, un pion qui se mettrait lui meme entre deux pions adverses ne sera pas mange.\n\n");
     printf("Jouer (Appuyez sur 0) / Reprendre la partie precedente (Appuyer sur 1) / Voir les statistiques (Appuyer sur 2) / Quitter le jeu (Appuyer sur 3)\n");
     scanf("%d",&jeu);
     fflush(stdin);
